@@ -3,179 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Science Explorer</title>
+<title>Science Fair Web Portal</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
-body{background:#111;color:white;scroll-behavior:smooth;}
-
-.nav{
-position:fixed;top:0;width:100%;
-background:rgba(0,0,0,0.7);
-padding:10px;text-align:center;z-index:1000;
+/* CARD SYSTEM (from your improved design) */
+.science-card{
+transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+cursor:pointer;
+text-decoration:none;
 }
-.nav a{color:white;margin:0 15px;text-decoration:none;}
-
-.section{
-height:100vh;display:flex;
-align-items:center;justify-content:center;
-text-align:center;padding:20px;
+.science-card:hover{
+transform:translateY(-10px);
+filter:brightness(1.1);
+box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);
 }
 
-.physics{background:#1f3b73;}
-.chemistry{background:#7a1f3b;}
-.biology{background:#1f7a3b;}
+/* smooth scroll */
+html{scroll-behavior:smooth;}
 
-.content{max-width:850px;}
-
-h1{font-size:2.8rem;margin-bottom:15px;}
-p{margin:10px 0;line-height:1.6;}
-
-.highlight{color:#ffd166;font-weight:bold;}
-
-.theory{background:#222;padding:60px 20px;}
-.theory h2{text-align:center;margin-bottom:30px;}
-
-.qr{text-align:center;padding:50px;}
-.qr img{background:white;padding:10px;}
-
-.about{padding:50px;text-align:center;}
-
+/* AI BOX */
 .ai-box{
-position:fixed;bottom:20px;right:20px;
-width:260px;background:#222;
-border-radius:10px;padding:10px;
+position:fixed;
+bottom:20px;
+right:20px;
+width:260px;
+background:#1f2937;
+border-radius:10px;
+padding:10px;
+color:white;
 }
-.ai-box input{width:100%;margin-top:5px;}
+.ai-box input{width:100%;margin-top:5px;color:black;}
 .ai-box button{width:100%;margin-top:5px;}
 </style>
 </head>
 
-<body>
+<body class="bg-slate-900 text-white font-sans overflow-x-hidden">
 
-<div class="nav">
-<a href="#">Home</a>
-<a href="#theory">Theory</a>
-<a href="#qr">QR</a>
-<a href="#about">About</a>
+<!-- TOP NAV -->
+<div class="fixed top-0 w-full bg-black/60 backdrop-blur-md z-50 p-3 text-center">
+    <a href="#home" class="mx-3">Home</a>
+    <a href="#theory" class="mx-3">Theory</a>
+    <a href="#qr" class="mx-3">QR</a>
+    <a href="#about" class="mx-3">About</a>
 </div>
 
-<!-- LANGUAGE -->
-<div style="position:fixed;top:50px;right:20px;">
-<button onclick="setLang('en')">EN</button>
-<button onclick="setLang('bn')">BN</button>
+<!-- LANGUAGE TOGGLE -->
+<div class="fixed top-14 right-4 z-50">
+<button onclick="setLang('en')" class="bg-white text-black px-2">EN</button>
+<button onclick="setLang('bn')" class="bg-white text-black px-2">BN</button>
 </div>
+
+<!-- ================= HOME PORTAL ================= -->
+<div id="home" class="flex flex-col md:flex-row min-h-screen w-full pt-10">
 
 <!-- PHYSICS -->
-<section class="section physics">
-<div class="content">
+<a href="#theory"
+class="science-card flex-1 p-10 bg-blue-700 border-b md:border-b-0 md:border-r border-blue-900 flex flex-col">
 
-<h1 data-en="Physics" data-bn="পদার্থবিজ্ঞান">Physics</h1>
+<div class="flex-grow">
+<span class="text-xs opacity-70">Project 01</span>
+<h1 class="text-4xl font-black mb-4">Physics</h1>
 
-<p data-en="Physics is the natural science that studies matter, its fundamental constituents, its motion and behavior through space and time, and the related entities of energy and force."
-data-bn="পদার্থবিজ্ঞান হলো প্রাকৃতিক বিজ্ঞান যা পদার্থ, তার মৌলিক উপাদান, গতি, এবং সময় ও স্থানের মধ্যে তার আচরণ এবং শক্তি ও বল নিয়ে অধ্যয়ন করে।">
+<p data-en="Physics is the natural science that studies matter, energy, motion and forces."
+   data-bn="পদার্থবিজ্ঞান হলো পদার্থ, শক্তি, গতি ও বল নিয়ে অধ্যয়নকারী বিজ্ঞান।">
 </p>
 
-<p>
-Historically, physics evolved from natural philosophy and became a modern science during the Scientific Revolution, with major contributions from Newton, Maxwell, and Einstein.
+<p class="mt-3 text-sm opacity-80">
+Historically developed through Newton, Maxwell and Einstein.
 </p>
 
-<p><strong>Key Figures:</strong> Isaac Newton, Albert Einstein, Galileo Galilei, James Clerk Maxwell</p>
-
-<p class="highlight">Motion is one of the central concepts in physics.</p>
-
+<p class="mt-4 text-blue-200 font-bold">
+Motion is central to physics.
+</p>
 </div>
-</section>
+
+<div class="mt-6 border-t border-white/20 pt-4">
+<p class="font-mono text-xl">F = ma</p>
+<p class="text-xs mt-2 opacity-70">CLICK TO THEORY →</p>
+</div>
+
+</a>
 
 <!-- CHEMISTRY -->
-<section class="section chemistry">
-<div class="content">
+<a href="#theory"
+class="science-card flex-1 p-10 bg-emerald-700 border-b md:border-b-0 md:border-r border-emerald-900 flex flex-col">
 
-<h1 data-en="Chemistry" data-bn="রসায়ন">Chemistry</h1>
+<div class="flex-grow">
+<span class="text-xs opacity-70">Project 02</span>
+<h1 class="text-4xl font-black mb-4">Chemistry</h1>
 
-<p data-en="Chemistry is the scientific discipline that studies elements and compounds composed of atoms, molecules and ions, including their composition, structure, properties and reactions."
-data-bn="রসায়ন হলো বিজ্ঞান যা উপাদান, যৌগ, পরমাণু, অণু এবং আয়নের গঠন, বৈশিষ্ট্য এবং বিক্রিয়া নিয়ে অধ্যয়ন করে।">
+<p data-en="Chemistry studies elements, compounds, structure and reactions."
+   data-bn="রসায়ন পদার্থ, যৌগ, গঠন ও বিক্রিয়া নিয়ে অধ্যয়ন করে।">
 </p>
 
-<p>
-Modern chemistry developed from alchemy, with key advancements from Lavoisier, Dalton, and Mendeleev.
+<p class="mt-3 text-sm opacity-80">
+Developed from alchemy to modern atomic theory.
 </p>
 
-<p><strong>Key Figures:</strong> Dmitri Mendeleev, Marie Curie, Antoine Lavoisier, John Dalton</p>
-
-<p class="highlight">The periodic table is fundamental to understanding chemical behavior.</p>
-
+<p class="mt-4 text-emerald-200 font-bold">
+Periodic table is fundamental.
+</p>
 </div>
-</section>
+
+<div class="mt-6 border-t border-white/20 pt-4">
+<p class="font-mono text-xl">PV = nRT</p>
+<p class="text-xs mt-2 opacity-70">CLICK TO THEORY →</p>
+</div>
+
+</a>
 
 <!-- BIOLOGY -->
-<section class="section biology">
-<div class="content">
+<a href="#theory"
+class="science-card flex-1 p-10 bg-teal-700 flex flex-col">
 
-<h1 data-en="Biology" data-bn="জীববিজ্ঞান">Biology</h1>
+<div class="flex-grow">
+<span class="text-xs opacity-70">Project 03</span>
+<h1 class="text-4xl font-black mb-4">Biology</h1>
 
-<p data-en="Biology is the natural science that studies life and living organisms, including their structure, function, growth, origin, evolution and distribution."
-data-bn="জীববিজ্ঞান হলো প্রাকৃতিক বিজ্ঞান যা জীব এবং তাদের গঠন, কার্য, বৃদ্ধি, উৎপত্তি, বিবর্তন এবং বিস্তৃতি নিয়ে অধ্যয়ন করে।">
+<p data-en="Biology studies life and living organisms."
+   data-bn="জীববিজ্ঞান জীবিত প্রাণী ও জীবন প্রক্রিয়া নিয়ে অধ্যয়ন করে।">
 </p>
 
-<p>
-Biology advanced through major discoveries such as evolution by Darwin, genetics by Mendel, and microbiology by Pasteur.
+<p class="mt-3 text-sm opacity-80">
+Advanced by Darwin, Mendel and Pasteur.
 </p>
 
-<p><strong>Key Figures:</strong> Charles Darwin, Gregor Mendel, Louis Pasteur, Aristotle</p>
+<p class="mt-4 text-teal-200 font-bold">
+Cell theory is fundamental.
+</p>
+</div>
 
-<p class="highlight">Cell theory and evolution are central principles of biology.</p>
+<div class="mt-6 border-t border-white/20 pt-4">
+<p class="font-mono text-xl">DNA → RNA → Protein</p>
+<p class="text-xs mt-2 opacity-70">CLICK TO THEORY →</p>
+</div>
+
+</a>
 
 </div>
-</section>
 
-<!-- THEORY -->
-<section id="theory" class="theory">
+<!-- ================= THEORY ================= -->
+<section id="theory" class="p-10 bg-slate-800">
 
-<h2>📚 Theory & Formulas</h2>
+<h1 class="text-3xl font-bold mb-6">📚 Theory & Formulas</h1>
 
-<p><em>These concepts form the foundation of scientific understanding.</em></p>
+<h2 class="text-xl font-bold mt-6">⚛️ Physics (Motion)</h2>
+<p class="mt-2">Equations of motion under constant acceleration:</p>
+<p class="font-mono">v = u + at</p>
+<p class="font-mono">s = ut + 1/2 at²</p>
+<p class="font-mono">v² = u² + 2as</p>
 
-<h3>⚛️ Physics - Motion</h3>
+<h2 class="text-xl font-bold mt-8">🧪 Chemistry (Periodic Trends)</h2>
+<p>Atomic radius, ionization energy, electronegativity and metallic character trends across the periodic table.</p>
 
-:contentReference[oaicite:0]{index=0}
-:contentReference[oaicite:1]{index=1}
-:contentReference[oaicite:2]{index=2}
-:contentReference[oaicite:3]{index=3}
-
-<p>u = initial velocity, v = final velocity, a = acceleration, t = time</p>
-
-<h3>🧪 Chemistry - Periodic Trends</h3>
-
-<p><strong>Atomic Radius:</strong> decreases across a period, increases down a group</p>
-<p><strong>Ionization Energy:</strong> increases across, decreases down</p>
-<p><strong>Electronegativity:</strong> increases across, decreases down</p>
-<p><strong>Metallic Character:</strong> decreases across, increases down</p>
+<p class="mt-2"><b>Across period:</b> radius ↓, ionization ↑</p>
+<p><b>Down group:</b> radius ↑, ionization ↓</p>
 
 </section>
 
-<!-- QR -->
-<section id="qr" class="qr">
-<h2>📱 Scan Project</h2>
-<p>Access full project here:</p>
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/StounchVicinity65/portal/">
+<!-- ================= QR ================= -->
+<section id="qr" class="text-center p-10 bg-slate-900">
+<h1 class="text-2xl font-bold">📱 QR Access</h1>
+<p class="mb-4">Scan to open project repository</p>
+
+<img class="mx-auto"
+src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/StounchVicinity65/portal/">
 </section>
 
-<!-- ABOUT -->
-<section id="about" class="about">
-<h2>👤 About</h2>
-<p>This project was created to present Physics, Chemistry, and Biology concepts in an interactive format.</p>
-<p>Group members:<p>
-<p>Nafis Islam<p>
-<p>Khandoker Shafowan Wafa<p>
-<p><strong>Batch:</strong> SSC 2027</p>
+<!-- ================= ABOUT ================= -->
+<section id="about" class="p-10 bg-black text-center">
+<h1 class="text-2xl font-bold">👤 About</h1>
+<p class="mt-3">Science Fair Project: Interactive Science Learning Portal</p>
+
+<p class="mt-4">Team Members:</p>
+<p>Nafis Islam</p>
+<p>Khandoker Shafowan Wafa</p>
+
+<p class="mt-4 text-gray-400">SSC 2027 Batch</p>
 </section>
 
-<!-- AI -->
+<!-- ================= AI BOX ================= -->
 <div class="ai-box">
 <div id="chatOutput">Ask AI...</div>
-<input id="chatInput">
-<button onclick="askAI()">Send</button>
+<input id="chatInput" placeholder="Ask science...">
+<button onclick="askAI()" class="bg-white text-black">Send</button>
 </div>
 
 <script>
