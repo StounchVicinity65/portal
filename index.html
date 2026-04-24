@@ -1,42 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Science Fair Web Portal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Fair Web Portal</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-/* CARD SYSTEM (from your improved design) */
-.science-card{
-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-cursor:pointer;
-text-decoration:none;
-}
-.science-card:hover{
-transform:translateY(-10px);
-filter:brightness(1.1);
-box-shadow:0 20px 25px -5px rgba(0,0,0,0.2);
-}
+    <style>
+        /* CARD SYSTEM */
+        .science-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .science-card:hover {
+            transform: translateY(-10px);
+            filter: brightness(1.1);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
+        }
 
-/* smooth scroll */
-html{scroll-behavior:smooth;}
+        /* smooth scroll */
+        html { scroll-behavior: smooth; }
 
-/* AI BOX */
-.ai-box{
-position:fixed;
-bottom:20px;
-right:20px;
-width:260px;
-background:#1f2937;
-border-radius:10px;
-padding:10px;
-color:white;
-}
-.ai-box input{width:100%;margin-top:5px;color:black;}
-.ai-box button{width:100%;margin-top:5px;}
-</style>
+        /* AI BOX ENHANCED STYLING */
+        .ai-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 280px;
+            background: #111827; /* Darker terminal look */
+            border: 2px solid #374151;
+            border-radius: 12px;
+            padding: 15px;
+            color: #10b981; /* Emerald Green */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+
+        #chatOutput {
+            height: 150px;
+            overflow-y: auto;
+            font-size: 12px;
+            background: #000;
+            font-family: 'Courier New', monospace;
+            padding: 10px;
+            border: 1px solid #1f2937;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            white-space: pre-wrap; /* Crucial for \n formatting */
+            color: #34d399;
+        }
+
+        .ai-box input {
+            width: 100%;
+            background: #1f2937;
+            border: 1px solid #374151;
+            color: white;
+            padding: 8px;
+            font-size: 12px;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .ai-box button {
+            width: 100%;
+            margin-top: 6px;
+            background: #10b981;
+            color: white;
+            padding: 6px;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: opacity 0.2s;
+        }
+
+        .ai-box button:hover { opacity: 0.9; }
+
+        /* Blinking Cursor */
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+    </style>
 </head>
 
 <body class="bg-slate-900 text-white font-sans overflow-x-hidden">
@@ -49,200 +92,156 @@ color:white;
 </div>
 
 <div class="fixed top-14 right-4 z-50">
-<button onclick="setLang('en')" class="bg-white text-black px-2">EN</button>
-<button onclick="setLang('bn')" class="bg-white text-black px-2">BN</button>
+    <button onclick="setLang('en')" class="bg-white text-black px-2 text-xs font-bold rounded">EN</button>
+    <button onclick="setLang('bn')" class="bg-white text-black px-2 text-xs font-bold rounded">BN</button>
 </div>
 
 <div id="home" class="flex flex-col md:flex-row min-h-screen w-full pt-10">
 
-<a href="https://stounchvicinity65.github.io/INTERACTIVE-MOTIONS/"
-class="science-card flex-1 p-10 bg-blue-700 border-b md:border-b-0 md:border-r border-blue-900 flex flex-col">
+    <a href="https://stounchvicinity65.github.io/INTERACTIVE-MOTIONS/" 
+       class="science-card flex-1 p-10 bg-blue-700 border-b md:border-b-0 md:border-r border-blue-900 flex flex-col">
+        <div class="flex-grow">
+            <span class="text-xs opacity-70">Project 01</span>
+            <h1 class="text-4xl font-black mb-4">Physics</h1>
+            <p data-en="Physics is the natural science that studies matter, energy, motion and forces." 
+               data-bn="পদার্থবিজ্ঞান হলো পদার্থ, শক্তি, গতি ও বল নিয়ে অধ্যয়নকারী বিজ্ঞান।"></p>
+            <p class="mt-3 text-sm opacity-80">Developed through Newton, Maxwell and Einstein.</p>
+            <p class="mt-4 text-blue-200 font-bold">Motion is central to physics.</p>
+        </div>
+        <div class="mt-6 border-t border-white/20 pt-4">
+            <p class="text-xs mt-2 opacity-70 font-bold uppercase tracking-widest">Open Interactive Lab →</p>
+        </div>
+    </a>
 
-<div class="flex-grow">
-<span class="text-xs opacity-70">Project 01</span>
-<h1 class="text-4xl font-black mb-4">Physics</h1>
+    <a href="https://antidominator.github.io/fair-project/" 
+       class="science-card flex-1 p-10 bg-emerald-700 border-b md:border-b-0 md:border-r border-emerald-900 flex flex-col">
+        <div class="flex-grow">
+            <span class="text-xs opacity-70">Project 02</span>
+            <h1 class="text-4xl font-black mb-4">Chemistry</h1>
+            <p data-en="Chemistry studies elements, compounds, structure and reactions." 
+               data-bn="রসায়ন পদার্থ, যৌগ, গঠন ও বিক্রিয়া নিয়ে অধ্যয়ন করে।"></p>
+            <p class="mt-3 text-sm opacity-80">Developed from alchemy to modern atomic theory.</p>
+            <p class="mt-4 text-emerald-200 font-bold">Periodic table is fundamental.</p>
+        </div>
+        <div class="mt-6 border-t border-white/20 pt-4">
+            <p class="text-xs mt-2 opacity-70 font-bold uppercase tracking-widest">Open Interactive Lab →</p>
+        </div>
+    </a>
 
-<p data-en="Physics is the natural science that studies matter, energy, motion and forces."
-   data-bn="পদার্থবিজ্ঞান হলো পদার্থ, শক্তি, গতি ও বল নিয়ে অধ্যয়নকারী বিজ্ঞান।">
-</p>
-
-<p class="mt-3 text-sm opacity-80">
-Historically developed through Newton, Maxwell and Einstein.
-</p>
-
-<p class="mt-4 text-blue-200 font-bold">
-Motion is central to physics.
-</p>
-</div>
-
-<div class="mt-6 border-t border-white/20 pt-4">
-<p class="text-xs mt-2 opacity-70">OPEN INTERACTIVE LAB →</p>
-</div>
-
-</a>
-
-<a href="https://antidominator.github.io/fair-project/"
-class="science-card flex-1 p-10 bg-emerald-700 border-b md:border-b-0 md:border-r border-emerald-900 flex flex-col">
-
-<div class="flex-grow">
-<span class="text-xs opacity-70">Project 02</span>
-<h1 class="text-4xl font-black mb-4">Chemistry</h1>
-
-<p data-en="Chemistry studies elements, compounds, structure and reactions."
-   data-bn="রসায়ন পদার্থ, যৌগ, গঠন ও বিক্রিয়া নিয়ে অধ্যয়ন করে।">
-</p>
-
-<p class="mt-3 text-sm opacity-80">
-Developed from alchemy to modern atomic theory.
-</p>
-
-<p class="mt-4 text-emerald-200 font-bold">
-Periodic table is fundamental.
-</p>
-</div>
-
-<div class="mt-6 border-t border-white/20 pt-4">
-<p class="text-xs mt-2 opacity-70">OPEN INTERACTIVE LAB →</p>
-</div>
-
-</a>
-
-<a href="#theory"
-class="science-card flex-1 p-10 bg-teal-700 flex flex-col">
-
-<div class="flex-grow">
-<span class="text-xs opacity-70">Project 03</span>
-<h1 class="text-4xl font-black mb-4">Biology</h1>
-
-<p data-en="Biology studies life and living organisms."
-   data-bn="জীববিজ্ঞান জীবিত প্রাণী ও জীবন প্রক্রিয়া নিয়ে অধ্যয়ন করে।">
-</p>
-
-<p class="mt-3 text-sm opacity-80">
-Advanced by Darwin, Mendel and Pasteur.
-</p>
-
-<p class="mt-4 text-teal-200 font-bold">
-Cell theory is fundamental.
-</p>
-</div>
-
-<div class="mt-6 border-t border-white/20 pt-4">
-<p class="text-xs mt-2 opacity-70">CLICK TO THEORY →</p>
-</div>
-
-</a>
-
+    <a href="#theory" class="science-card flex-1 p-10 bg-teal-700 flex flex-col">
+        <div class="flex-grow">
+            <span class="text-xs opacity-70">Project 03</span>
+            <h1 class="text-4xl font-black mb-4">Biology</h1>
+            <p data-en="Biology studies life and living organisms." 
+               data-bn="জীববিজ্ঞান জীবিত প্রাণী ও জীবন প্রক্রিয়া নিয়ে অধ্যয়ন করে।"></p>
+            <p class="mt-3 text-sm opacity-80">Advanced by Darwin, Mendel and Pasteur.</p>
+            <p class="mt-4 text-teal-200 font-bold">Cell theory is fundamental.</p>
+        </div>
+        <div class="mt-6 border-t border-white/20 pt-4">
+            <p class="text-xs mt-2 opacity-70 font-bold uppercase tracking-widest">Click to Theory →</p>
+        </div>
+    </a>
 </div>
 
 <section id="theory" class="p-10 bg-slate-800">
+    <h1 class="text-3xl font-bold mb-6">📚 Theory & Formulas</h1>
+    <h2 class="text-xl font-bold mt-6">⚛️ Physics (Motion)</h2>
+    <p class="mt-2">Equations of motion under constant acceleration:</p>
+    <p class="font-mono text-blue-300">v = u + at</p>
+    <p class="font-mono text-blue-300">s = ut + 1/2 at²</p>
+    <p class="font-mono text-blue-300">v² = u² + 2as</p>
 
-<h1 class="text-3xl font-bold mb-6">📚 Theory & Formulas</h1>
-
-<h2 class="text-xl font-bold mt-6">⚛️ Physics (Motion)</h2>
-<p class="mt-2">Equations of motion under constant acceleration:</p>
-<p class="font-mono">v = u + at</p>
-<p class="font-mono">s = ut + 1/2 at²</p>
-<p class="font-mono">v² = u² + 2as</p>
-
-<h2 class="text-xl font-bold mt-8">🧪 Chemistry (Periodic Trends)</h2>
-<p>Atomic radius, ionization energy, electronegativity and metallic character trends across the periodic table.</p>
-
-<p class="mt-2"><b>Across period:</b> radius ↓, ionization ↑</p>
-<p><b>Down group:</b> radius ↑, ionization ↓</p>
-
+    <h2 class="text-xl font-bold mt-8 text-emerald-300">🧪 Chemistry (Periodic Trends)</h2>
+    <p>Atomic radius, ionization energy, and electronegativity trends:</p>
+    <p class="mt-2"><b>Across period:</b> radius ↓, ionization ↑</p>
+    <p><b>Down group:</b> radius ↑, ionization ↓</p>
 </section>
 
-<section id="qr" class="text-center p-10 bg-slate-900">
-<h1 class="text-2xl font-bold">📱 QR Access</h1>
-<p class="mb-4">Scan to open project repository</p>
-
-<img class="mx-auto"
-src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/StounchVicinity65/portal/">
+<section id="qr" class="text-center p-10 bg-slate-900 border-t border-white/10">
+    <h1 class="text-2xl font-bold mb-4">📱 QR Access</h1>
+    <img class="mx-auto rounded-lg shadow-lg border-4 border-white/10" 
+         src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/StounchVicinity65/portal/">
 </section>
 
 <section id="about" class="p-10 bg-black text-center">
-<h1 class="text-2xl font-bold">👤 About</h1>
-<p class="mt-3">Science Fair Project: Interactive Science Learning Portal</p>
-
-<p class="mt-4">Team Members:</p>
-<p>Nafis Islam</p>
-<p>Khandoker Shafowan Wafa</p>
-
-<p class="mt-4 text-gray-400">SSC 2027 Batch</p>
+    <h1 class="text-2xl font-bold">👤 About</h1>
+    <p class="mt-3">Science Fair Project: Interactive Science Learning Portal</p>
+    <p class="mt-4 font-bold text-emerald-400">Team: Nafis Islam & Khandoker Shafowan Wafa</p>
+    <p class="mt-2 text-gray-400 italic">SSC 2027 Batch</p>
 </section>
 
 <div class="ai-box">
-    <div id="aiMode" style="font-size:12px;opacity:0.7;margin-bottom:5px;">
-        Science Engine Ready
-    </div>
+    <div id="aiMode" style="font-size:10px; opacity:0.7; margin-bottom:5px; font-weight:bold; letter-spacing:1px;">SYSTEM IDLE</div>
+    <div id="chatOutput">Science Engine Ready...</div>
+    <input id="chatInput" placeholder="Ask about Force, DNA, pH...">
+    <button onclick="askAI()">ANALYZE</button>
+</div>
 
-    <div id="chatOutput" style="height:120px;overflow:auto;font-size:12px;">
-        Ask a science question...
-    </div>
 <script>
-let isTyping = false;
-
-function typeWriter(text, i, fnCallback) {
-    if (i < text.length) {
-        document.getElementById("chatOutput").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true" class="blink">_</span>';
-        setTimeout(function() {
-            typeWriter(text, i + 1, fnCallback)
-        }, 15); // Adjust speed here
-    } else if (typeof fnCallback == 'function') {
-        setTimeout(fnCallback, 700);
+    // --- Language Logic ---
+    function setLang(lang) {
+        document.querySelectorAll('[data-en]').forEach(el => {
+            el.innerText = el.getAttribute('data-' + lang);
+        });
     }
-}
+    setLang('en'); // Default
 
-function askAI() {
-    if (isTyping) return; // Prevent spamming
-    
-    let input = document.getElementById("chatInput").value.toLowerCase();
-    let output = "";
-    let mode = "SYSTEM IDLE";
-    let nums = input.match(/\d+(\.\d+)?/g); // Matches decimals too
+    // --- AI Engine Logic ---
+    let isTyping = false;
 
-    // ================= PHYSICS: ADVANCED DYNAMICS =================
-    if (input.includes("force") || input.includes("newton") || input.includes("speed") || input.includes("gravity") || input.includes("energy")) {
-        mode = "⚛️ PHYSICS_CORE_v4";
-        if (nums && nums.length >= 2) {
-            if (input.includes("force")) {
-                output = `[CALCULATION SUCCESS]\nFormula: F = m * a\nMass: ${nums[0]}kg\nAccel: ${nums[1]}m/s²\nResult: ${nums[0] * nums[1]} Newtons\n\nAnalysis: According to Newton's 2nd Law, the force is directly proportional to acceleration.`;
-            } else if (input.includes("speed") || input.includes("velocity")) {
-                output = `[CALCULATION SUCCESS]\nFormula: v = d / t\nDistance: ${nums[0]}m\nTime: ${nums[1]}s\nResult: ${(nums[0] / nums[1]).toFixed(2)} m/s`;
+    function typeWriter(text, i, fnCallback) {
+        if (i < text.length) {
+            document.getElementById("chatOutput").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true" class="blink">_</span>';
+            setTimeout(function() {
+                typeWriter(text, i + 1, fnCallback)
+            }, 15);
+        } else if (typeof fnCallback == 'function') {
+            setTimeout(fnCallback, 700);
+        }
+    }
+
+    function askAI() {
+        if (isTyping) return;
+        
+        let input = document.getElementById("chatInput").value.toLowerCase();
+        let output = "";
+        let mode = "SYSTEM IDLE";
+        let nums = input.match(/\d+(\.\d+)?/g);
+
+        if (input.includes("force") || input.includes("newton") || input.includes("speed") || input.includes("gravity") || input.includes("energy")) {
+            mode = "⚛️ PHYSICS_CORE_v4";
+            if (nums && nums.length >= 2) {
+                if (input.includes("force")) {
+                    output = `[SUCCESS]\nF = m * a\nMass: ${nums[0]}kg | Accel: ${nums[1]}m/s²\nResult: ${nums[0] * nums[1]} N\n\nNewton's 2nd Law applied.`;
+                } else if (input.includes("speed") || input.includes("velocity")) {
+                    output = `[SUCCESS]\nv = d / t\nDist: ${nums[0]}m | Time: ${nums[1]}s\nResult: ${(nums[0] / nums[1]).toFixed(2)} m/s`;
+                }
+            } else {
+                output = `⚛️ PHYSICS DATA:\n- Laws: Inertia, F=ma, Action/Reaction.\n- Gravity: 9.8m/s².\n- Light: 299,792,458 m/s.`;
             }
-        } else {
-            output = `⚛️ PHYSICS RESEARCH NODE\n- Laws of Motion: Inertia, F=ma, Action/Reaction.\n- Gravity: G = 9.8m/s² (Earth standard).\n- Thermodynamics: Energy cannot be created or destroyed.\n- Light Speed: 299,792,458 m/s.`;
         }
-    }
-
-    // ================= CHEMISTRY: MOLECULAR & PERIODIC =================
-    else if (input.includes("atom") || input.includes("ph") || input.includes("reaction") || input.includes("table") || input.includes("water") || input.includes("molar")) {
-        mode = "🧪 CHEM_SYNTAX_v4";
-        if (input.includes("ph")) {
-            output = `🧪 pH SCALE ANALYSIS\n- < 7: Acidic (High H+ concentration)\n- 7: Neutral (Pure Water)\n- > 7: Basic/Alkaline (High OH- concentration)\n- Note: The scale is logarithmic; pH 4 is 10x more acidic than pH 5.`;
-        } else if (input.includes("water") || input.includes("h2o")) {
-            output = `🧪 COMPOUND DATA: H2O\n- Structure: 2 Hydrogen, 1 Oxygen.\n- Property: Universal solvent, polar covalent bonding.\n- Density: 1 g/cm³ at 4°C.`;
-        } else {
-            output = `🧪 CHEMISTRY RESEARCH NODE\n- Atomic Structure: Protons, Neutrons, Electrons.\n- Periodic Trends: Electronegativity increases Top-Right.\n- Bonding: Ionic (Transfer), Covalent (Sharing).`;
+        else if (input.includes("atom") || input.includes("ph") || input.includes("reaction") || input.includes("table") || input.includes("water") || input.includes("molar")) {
+            mode = "🧪 CHEM_SYNTAX_v4";
+            if (input.includes("ph")) {
+                output = `🧪 pH ANALYSIS:\n- Acidic < 7 | Neutral = 7 | Basic > 7.\n- Logarithmic scale: 10x diff per step.`;
+            } else {
+                output = `🧪 CHEMISTRY DATA:\n- Trends: Electronegativity increases Top-Right.\n- Bonding: Ionic (Transfer), Covalent (Share).`;
+            }
         }
-    }
+        else if (input.includes("cell") || input.includes("dna") || input.includes("evolution") || input.includes("plant")) {
+            mode = "🧬 BIO_LOGIC_v4";
+            output = `🧬 BIOLOGY DATA:\n- DNA: Double Helix (A-T, C-G).\n- Mitochondria: ATP production.\n- Photosynthesis: CO2 + H2O -> O2 + C6H12O6.`;
+        }
+        else {
+            mode = "⚠️ UNKNOWN_QUERY";
+            output = "Try: 'Calculate force 10 5', 'pH scale', or 'DNA'.";
+        }
 
-    // ================= BIOLOGY: GENETICS & CELLULAR =================
-    else if (input.includes("cell") || input.includes("dna") || input.includes("evolution") || input.includes("plant") || input.includes("brain")) {
-        mode = "🧬 BIO_LOGIC_v4";
-        output = `🧬 BIOLOGY RESEARCH NODE\n- DNA structure: Double Helix (A-T, C-G).\n- Mitochondria: The powerhouse of the cell (ATP production).\n- Photosynthesis: 6CO2 + 6H2O + Light -> C6H12O6 + 6O2.\n- Central Dogma: DNA replication -> Transcription (RNA) -> Translation (Protein).`;
+        document.getElementById("aiMode").innerText = mode;
+        isTyping = true;
+        typeWriter(output, 0, function() { isTyping = false; });
     }
+</script>
 
-    // ================= DEFAULT =================
-    else {
-        mode = "⚠️ UNKNOWN_QUERY";
-        output = "Query not recognized in Science Database.\n\nTry:\n- 'Calculate force 10 5'\n- 'Explain pH scale'\n- 'Structure of DNA'\n- 'Laws of motion'";
-    }
-
-    document.getElementById("aiMode").innerText = mode;
-    isTyping = true;
-    typeWriter(output, 0, function() { isTyping = false; });
-}
-    
+</body>
 </html>
