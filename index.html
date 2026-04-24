@@ -183,34 +183,117 @@ src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://githu
 
 <!-- ================= AI BOX ================= -->
 <div class="ai-box">
-<div id="chatOutput">Ask AI...</div>
-<input id="chatInput" placeholder="Ask science...">
-<button onclick="askAI()" class="bg-white text-black">Send</button>
-</div>
+    <div id="aiMode" style="font-size:12px;opacity:0.7;margin-bottom:5px;">
+        Science Engine Ready
+    </div>
 
+    <div id="chatOutput" style="height:120px;overflow:auto;font-size:12px;">
+        Ask a science question...
+    </div>
 <script>
-function setLang(lang){
-document.querySelectorAll("[data-en]").forEach(el=>{
-el.innerText = el.getAttribute("data-"+lang);
-});
-}
+function askAI(){
+    let input = document.getElementById("chatInput").value.toLowerCase();
+    let output = "";
+    let mode = "Unknown";
 
-async function askAI(){
-let input=document.getElementById("chatInput").value;
+    // ================= PHYSICS =================
+    if(
+        input.includes("force") ||
+        input.includes("motion") ||
+        input.includes("newton") ||
+        input.includes("acceleration")
+    ){
+        mode = "⚛️ Physics Mode";
 
-const res=await fetch(
-"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=YOUR_API_KEY",
-{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({contents:[{parts:[{text:input}]}]})
-});
+        output =
+`⚛️ PHYSICS ANALYSIS
 
-const data=await res.json();
-document.getElementById("chatOutput").innerText =
-data.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
+Definition:
+Physics is the branch of science that studies matter, energy, motion, and forces.
+
+Core Idea:
+Newton’s Laws describe how objects move and respond to forces.
+
+Key Formula:
+F = ma
+
+Example:
+A heavier object needs more force to accelerate at the same rate.`;
+    }
+
+    // ================= CHEMISTRY =================
+    else if(
+        input.includes("atom") ||
+        input.includes("periodic") ||
+        input.includes("reaction") ||
+        input.includes("molecule")
+    ){
+        mode = "🧪 Chemistry Mode";
+
+        output =
+`🧪 CHEMISTRY ANALYSIS
+
+Definition:
+Chemistry studies substances, their structure, properties, and reactions.
+
+Core Idea:
+Elements are organized in the periodic table based on atomic number.
+
+Trends:
+- Atomic radius decreases across a period
+- Electronegativity increases across a period
+
+Formula:
+PV = nRT`;
+    }
+
+    // ================= BIOLOGY =================
+    else if(
+        input.includes("cell") ||
+        input.includes("dna") ||
+        input.includes("gene") ||
+        input.includes("evolution")
+    ){
+        mode = "🧬 Biology Mode";
+
+        output =
+`🧬 BIOLOGY ANALYSIS
+
+Definition:
+Biology is the study of living organisms and life processes.
+
+Core Idea:
+All living organisms are made of cells.
+
+Genetics:
+DNA → RNA → Protein
+
+Evolution:
+Species change through natural selection.`;
+    }
+
+    // ================= DEFAULT =================
+    else {
+        mode = "🔍 General Science Mode";
+
+        output =
+`Topic not found.
+
+Try:
+- Newton
+- Force
+- Atom
+- Cell
+- DNA
+- Periodic Table`;
+    }
+
+    document.getElementById("aiMode").innerText = mode;
+    document.getElementById("chatOutput").innerText = output;
 }
 </script>
-
-</body>
+    <input id="chatInput" placeholder="e.g. Newton law, atom, cell">
+    <button onclick="askAI()">Analyze</button>
+</div>
+    
 </html>
