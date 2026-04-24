@@ -3,82 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Science Fair Portal</title>
+    <title>Science Fair Web Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom smooth transition for the interactive lift effect */
+        .science-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .science-card:hover {
+            transform: translateY(-10px);
+            filter: brightness(1.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
-<body class="bg-slate-50 font-sans">
+<body class="bg-slate-900 font-sans overflow-x-hidden">
 
-    <div class="flex flex-col md:flex-row min-h-screen">
+    <div class="flex flex-col md:flex-row min-h-screen w-full">
 
-        <div class="flex-1 p-8 bg-blue-600 text-white flex flex-col border-r border-blue-700">
-            <h1 class="text-4xl font-bold mb-6 italic underline">Physics</h1>
+        <a href="https://stounchvicinity65.github.io/INTERACTIVE-MOTIONS/" 
+           class="science-card flex-1 p-10 bg-blue-700 text-white flex flex-col border-b md:border-b-0 md:border-r border-blue-800">
             
             <div class="flex-grow">
-                <h2 class="text-xl font-semibold mb-2">Definition</h2>
-                <p class="mb-6 text-blue-100">The branch of science concerned with the nature and properties of matter and energy.</p>
+                <span class="text-xs uppercase tracking-[0.3em] opacity-70 mb-2 block">Project 01</span>
+                <h1 class="text-5xl font-black mb-6 uppercase tracking-tighter">Physics</h1>
                 
-                <h2 class="text-xl font-semibold mb-2">Important Scientists</h2>
-                <ul class="list-disc ml-5 mb-6 text-blue-100">
-                    <li>Isaac Newton</li>
-                    <li>Albert Einstein</li>
-                    <li>Marie Curie</li>
-                </ul>
-                
-                <p class="font-medium bg-blue-500 p-3 rounded">"Motion is one of the main concepts of Physics."</p>
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-blue-300 text-sm font-bold uppercase mb-1">Definition</h2>
+                        <p class="text-lg leading-relaxed">The study of matter, energy, and the fundamental forces of the universe.</p>
+                    </div>
+                    
+                    <div>
+                        <h2 class="text-blue-300 text-sm font-bold uppercase mb-1">Scientists</h2>
+                        <p class="text-md opacity-90 italic">Newton, Einstein, Curie</p>
+                    </div>
+
+                    <div class="bg-blue-800/50 p-4 rounded-lg border border-blue-500/30">
+                        <p class="text-sm font-medium">"Motion is one of the main concepts of Physics."</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="mt-10 pt-6 border-t border-blue-400">
-                <h3 class="text-lg font-bold uppercase tracking-widest mb-2">Theory & Formula</h3>
-                <p class="font-mono text-sm">Newton's Second Law: $F = ma$</p>
+            <div class="mt-12 pt-6 border-t border-blue-500/40">
+                <h3 class="text-xs font-bold uppercase mb-2 opacity-60">Theory & Formula</h3>
+                <p class="font-mono text-xl">$F = ma$</p>
+                <div class="mt-4 text-xs font-bold bg-white/10 w-fit px-3 py-1 rounded-full text-blue-200">CLICK TO ENTER LAB →</div>
             </div>
-        </div>
+        </a>
 
-        <div class="flex-1 p-8 bg-emerald-600 text-white flex flex-col border-r border-emerald-700">
-            <h1 class="text-4xl font-bold mb-6 italic underline">Chemistry</h1>
+        <a href="https://antidominator.github.io/fair-project/" 
+           class="science-card flex-1 p-10 bg-emerald-700 text-white flex flex-col border-b md:border-b-0 md:border-r border-emerald-800">
             
             <div class="flex-grow">
-                <h2 class="text-xl font-semibold mb-2">Definition</h2>
-                <p class="mb-6 text-emerald-100">The study of matter, its properties, how and why substances combine or separate.</p>
+                <span class="text-xs uppercase tracking-[0.3em] opacity-70 mb-2 block">Project 02</span>
+                <h1 class="text-5xl font-black mb-6 uppercase tracking-tighter">Chemistry</h1>
                 
-                <h2 class="text-xl font-semibold mb-2">Important Scientists</h2>
-                <ul class="list-disc ml-5 mb-6 text-emerald-100">
-                    <li>Dmitri Mendeleev</li>
-                    <li>John Dalton</li>
-                    <li>Antoine Lavoisier</li>
-                </ul>
-                
-                <p class="font-medium bg-emerald-500 p-3 rounded">"The Periodic Table is a fundamental thing."</p>
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-emerald-300 text-sm font-bold uppercase mb-1">Definition</h2>
+                        <p class="text-lg leading-relaxed">The science of substances, their properties, and how they interact.</p>
+                    </div>
+                    
+                    <div>
+                        <h2 class="text-emerald-300 text-sm font-bold uppercase mb-1">Scientists</h2>
+                        <p class="text-md opacity-90 italic">Mendeleev, Dalton, Lavoisier</p>
+                    </div>
+
+                    <div class="bg-emerald-800/50 p-4 rounded-lg border border-emerald-500/30">
+                        <p class="text-sm font-medium">"The periodic table is a fundamental thing."</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="mt-10 pt-6 border-t border-emerald-400">
-                <h3 class="text-lg font-bold uppercase tracking-widest mb-2">Theory & Formula</h3>
-                <p class="font-mono text-sm">Ideal Gas Law: $PV = nRT$</p>
+            <div class="mt-12 pt-6 border-t border-emerald-500/40">
+                <h3 class="text-xs font-bold uppercase mb-2 opacity-60">Theory & Formula</h3>
+                <p class="font-mono text-xl">$PV = nRT$</p>
+                <div class="mt-4 text-xs font-bold bg-white/10 w-fit px-3 py-1 rounded-full text-emerald-200">CLICK TO ENTER LAB →</div>
             </div>
-        </div>
+        </a>
 
-        <div class="flex-1 p-8 bg-teal-600 text-white flex flex-col">
-            <h1 class="text-4xl font-bold mb-6 italic underline">Biology</h1>
+        <a href="#" 
+           class="science-card flex-1 p-10 bg-teal-800 text-white flex flex-col">
             
             <div class="flex-grow">
-                <h2 class="text-xl font-semibold mb-2">Definition</h2>
-                <p class="mb-6 text-teal-100">The natural science that studies life and living organisms, including their physical structure.</p>
+                <span class="text-xs uppercase tracking-[0.3em] opacity-70 mb-2 block">Project 03</span>
+                <h1 class="text-5xl font-black mb-6 uppercase tracking-tighter">Biology</h1>
                 
-                <h2 class="text-xl font-semibold mb-2">Important Scientists</h2>
-                <ul class="list-disc ml-5 mb-6 text-teal-100">
-                    <li>Charles Darwin</li>
-                    <li>Gregor Mendel</li>
-                    <li>Rosalind Franklin</li>
-                </ul>
-                
-                <p class="font-medium bg-teal-500 p-3 rounded">"Cell theory is the foundation of all biology."</p>
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-teal-300 text-sm font-bold uppercase mb-1">Definition</h2>
+                        <p class="text-lg leading-relaxed">The natural science that studies life and living organisms.</p>
+                    </div>
+                    
+                    <div>
+                        <h2 class="text-teal-300 text-sm font-bold uppercase mb-1">Scientists</h2>
+                        <p class="text-md opacity-90 italic">Darwin, Mendel, Franklin</p>
+                    </div>
+
+                    <div class="bg-teal-900/50 p-4 rounded-lg border border-teal-500/30">
+                        <p class="text-sm font-medium">"Cell theory is the foundation of all biology."</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="mt-10 pt-6 border-t border-teal-400">
-                <h3 class="text-lg font-bold uppercase tracking-widest mb-2">Theory & Formula</h3>
-                <p class="font-mono text-sm">Photosynthesis: $6CO_2 + 6H_2O \rightarrow C_6H_{12}O_6 + 6O_2$</p>
+            <div class="mt-12 pt-6 border-t border-teal-500/40">
+                <h3 class="text-xs font-bold uppercase mb-2 opacity-60">Theory & Formula</h3>
+                <p class="font-mono text-xl">$\text{DNA} \rightarrow \text{RNA} \rightarrow \text{Protein}$</p>
+                <div class="mt-4 text-xs font-bold bg-white/10 w-fit px-3 py-1 rounded-full text-teal-200">LAB COMING SOON →</div>
             </div>
-        </div>
+        </a>
 
     </div>
+
 </body>
 </html>
