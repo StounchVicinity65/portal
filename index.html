@@ -1,272 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Science Portal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&family=Share+Tech+Mono&family=Bebas+Neue&family=Exo+2:ital,wght@0,300;0,400;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --nav-bg:rgba(0,0,0,0.72);
-      --blue:#90cdf4;
-      --blue-d:#4a90e2;
-      --pink:#f472b6;
-      --pink-d:#ec4899;
-      --green:#4ade80;
-      --green-d:#22c55e;
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
-    body{font-family:'Exo 2',sans-serif;background:#04080f;color:#e2e8f0;min-height:100vh;overflow-x:hidden;}
-    body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
-    .hidden{display:none!important;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science Fair Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&family=Share+Tech+Mono&family=Bebas+Neue&family=Exo+2:ital,wght@0,300;0,400;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nav-bg:rgba(0,0,0,0.78);
+  --blue:#90cdf4;--blue-d:#4a90e2;
+  --pink:#f472b6;--pink-d:#ec4899;
+  --green:#4ade80;--green-d:#22c55e;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Exo 2',sans-serif;background:#04080f;color:#e2e8f0;min-height:100vh;overflow-x:hidden;}
+body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
+.hidden{display:none!important;}
 
-    /* BG */
-    #bgGif{position:fixed;inset:0;z-index:0;background:url('https://i.pinimg.com/originals/54/f8/e3/54f8e332b488dfdb2d3cc2efce8a536a.gif')no-repeat center/cover;opacity:.14;}
-    #bgOver{position:fixed;inset:0;z-index:0;background:linear-gradient(135deg,rgba(9,32,63,.93) 0%,rgba(4,12,26,.9) 50%,rgba(9,32,63,.93) 100%);}
-    #pCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+/* BG */
+#bgGif{position:fixed;inset:0;z-index:0;background:url('https://i.pinimg.com/originals/54/f8/e3/54f8e332b488dfdb2d3cc2efce8a536a.gif')no-repeat center/cover;opacity:.10;}
+#bgOver{position:fixed;inset:0;z-index:0;background:linear-gradient(135deg,rgba(9,32,63,.95)0%,rgba(4,12,26,.92)50%,rgba(9,32,63,.95)100%);}
+#pCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
-    /* NAV */
-    nav{position:sticky;top:0;z-index:200;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid rgba(144,205,244,.2);display:flex;align-items:center;padding:.7rem 2rem;gap:.4rem;flex-wrap:wrap;}
-    .nLogo{font-size:1.55rem;margin-right:.4rem;filter:drop-shadow(0 0 10px var(--blue-d));animation:logoPulse 2.5s ease-in-out infinite;}
-    @keyframes logoPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
-    .nTitle{font-size:.82rem;color:var(--blue);font-weight:700;letter-spacing:.08em;margin-right:auto;text-transform:uppercase;}
-    nav a{color:#bbb;text-decoration:none;padding:.38rem .72rem;border-radius:4px;font-size:.82rem;transition:all .25s;}
-    nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:translateY(-2px);}
-    .nDiv{width:1px;height:18px;background:rgba(255,255,255,.15);margin:0 .4rem;}
-    .langBtn{background:rgba(0,0,0,.5);color:#fff;border:1px solid rgba(144,205,244,.4);padding:.28rem .75rem;border-radius:20px;font-size:.76rem;font-weight:700;cursor:pointer;transition:all .25s;font-family:inherit;}
-    .langBtn:hover{background:var(--blue-d);border-color:transparent;transform:scale(1.05);}
+/* NAV */
+nav{position:sticky;top:0;z-index:200;background:var(--nav-bg);backdrop-filter:blur(18px);border-bottom:1px solid rgba(144,205,244,.18);display:flex;align-items:center;padding:.65rem 2rem;gap:.35rem;flex-wrap:wrap;}
+.nLogo{font-size:1.5rem;margin-right:.4rem;filter:drop-shadow(0 0 10px var(--blue-d));animation:logoPulse 2.5s ease-in-out infinite;}
+@keyframes logoPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.12);}}
+.nTitle{font-size:.8rem;color:var(--blue);font-weight:700;letter-spacing:.08em;margin-right:auto;text-transform:uppercase;}
+nav a{color:#bbb;text-decoration:none;padding:.35rem .68rem;border-radius:4px;font-size:.8rem;transition:all .22s;}
+nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:translateY(-2px);}
+.nDiv{width:1px;height:18px;background:rgba(255,255,255,.14);margin:0 .35rem;}
+.langBtn{background:rgba(0,0,0,.5);color:#fff;border:1px solid rgba(144,205,244,.35);padding:.25rem .7rem;border-radius:20px;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .22s;font-family:inherit;}
+.langBtn:hover{background:var(--blue-d);border-color:transparent;transform:scale(1.05);}
 
-    /* WRAPPER */
-    .wrap{position:relative;z-index:1;}
+.wrap{position:relative;z-index:1;}
 
-    /* HERO GRID */
-    #home{display:grid;grid-template-columns:repeat(3,1fr);min-height:calc(100vh - 52px);}
+/* HERO GRID */
+#home{display:grid;grid-template-columns:repeat(3,1fr);min-height:calc(100vh - 52px);}
+.sCard{position:relative;overflow:hidden;padding:3rem 2.5rem;display:flex;flex-direction:column;text-decoration:none;color:#e2e8f0;border-right:1px solid rgba(255,255,255,.05);transition:transform .42s cubic-bezier(.175,.885,.32,1.275);animation:fadeUp .65s ease both;cursor:pointer;}
+.sCard:last-child{border-right:none;}
+.sCard:nth-child(1){animation-delay:.08s;}
+.sCard:nth-child(2){animation-delay:.2s;}
+.sCard:nth-child(3){animation-delay:.32s;}
+.sCard:hover{transform:translateY(-8px);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 
-    .sCard{position:relative;overflow:hidden;padding:3rem 2.5rem;display:flex;flex-direction:column;text-decoration:none;color:#e2e8f0;border-right:1px solid rgba(255,255,255,.06);transition:transform .45s cubic-bezier(.175,.885,.32,1.275);animation:fadeUp .65s ease both;cursor:pointer;}
-    .sCard:last-child{border-right:none;}
-    .sCard:nth-child(1){animation-delay:.08s;}
-    .sCard:nth-child(2){animation-delay:.2s;}
-    .sCard:nth-child(3){animation-delay:.32s;}
-    .sCard:hover{transform:translateY(-7px);box-shadow:0 28px 56px rgba(0,0,0,.6);}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
+/* ── PHYSICS: deep navy ── */
+.phCard{background:linear-gradient(155deg,#040d1e 0%,#071830 55%,#050f1e 100%);}
+.phCard:hover{box-shadow:0 28px 56px rgba(0,0,0,.7),0 0 45px rgba(144,205,244,.07);}
 
-    /* PHYSICS CARD */
-    .phCard{background:linear-gradient(155deg,#050e20 0%,#0a1c40 55%,#071428 100%);}
-    .phCard:hover{box-shadow:0 28px 56px rgba(0,0,0,.6),0 0 40px rgba(144,205,244,.08);}
+/* ── CHEMISTRY: true near-black with magenta tinge ── */
+.chCard{background:linear-gradient(155deg,#080008 0%,#0d000d 55%,#060006 100%);}
+.chCard:hover{box-shadow:0 28px 56px rgba(0,0,0,.7),0 0 45px rgba(244,114,182,.07);}
 
-    /* CHEMISTRY CARD */
-    .chCard{background:linear-gradient(155deg,#060006 0%,#0f000f 55%,#08000a 100%);}
-    .chCard:hover{box-shadow:0 28px 56px rgba(0,0,0,.6),0 0 40px rgba(244,114,182,.08);}
+/* ── BIOLOGY: deep forest ── */
+.biCard{background:linear-gradient(155deg,#010a04 0%,#031a08 55%,#020c05 100%);}
+.biCard:hover{box-shadow:0 28px 56px rgba(0,0,0,.7),0 0 45px rgba(74,222,128,.07);}
 
-    /* BIOLOGY CARD */
-    .biCard{background:linear-gradient(155deg,#020f06 0%,#042a10 55%,#031508 100%);}
-    .biCard:hover{box-shadow:0 28px 56px rgba(0,0,0,.6),0 0 40px rgba(74,222,128,.08);}
+/* ===== PHYSICS ANIMATIONS ===== */
+/* NFS Speed lines */
+.phAnim{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.spLine{position:absolute;height:1px;background:linear-gradient(to right,transparent,rgba(144,205,244,.5),transparent);animation:spRush linear infinite;opacity:0;}
+@keyframes spRush{0%{left:-60%;width:35%;opacity:0;}6%{opacity:1;}82%{opacity:.4;}100%{left:120%;width:60%;opacity:0;}}
 
-    /* ---- PHYSICS ANIM: NFS speed lines + diagonal sweep ---- */
-    .phAnim{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-    .spLine{position:absolute;height:1px;background:linear-gradient(to right,transparent,rgba(144,205,244,.45),transparent);animation:spRush 3s linear infinite;opacity:0;}
-    @keyframes spRush{0%{left:-60%;width:40%;opacity:0;}8%{opacity:1;}85%{opacity:.5;}100%{left:120%;width:65%;opacity:0;}}
+/* Lightning bolt flash */
+.boltWrap{position:absolute;top:0;right:0;width:100%;height:100%;pointer-events:none;overflow:hidden;}
+.bolt{position:absolute;right:40px;top:0;width:3px;height:0;background:linear-gradient(to bottom,transparent,rgba(144,205,244,.8),rgba(74,144,226,.3),transparent);border-radius:2px;animation:boltFlash 4.5s ease-in-out infinite;}
+@keyframes boltFlash{0%,85%,100%{height:0;opacity:0;}87%{height:45%;opacity:1;}90%{height:70%;opacity:.7;}93%{height:40%;opacity:.5;}96%{height:0;opacity:0;}}
 
-    /* NFS diagonal burst rays */
-    .burstWrap{position:absolute;bottom:-30px;right:-30px;width:280px;height:280px;pointer-events:none;}
-    .ray{position:absolute;bottom:50px;right:50px;width:2px;transform-origin:bottom right;background:linear-gradient(to top,rgba(144,205,244,.65),transparent);animation:rayFlash 2.2s ease-in-out infinite;}
-    @keyframes rayFlash{0%,100%{opacity:.12;}50%{opacity:.75;}}
+/* Velocity arrow */
+.velArrow{position:absolute;top:50%;right:28px;transform:translateY(-50%);pointer-events:none;}
+.vLine{height:2px;background:linear-gradient(to right,transparent,var(--blue));position:relative;animation:vPulse 2.6s ease-in-out infinite;}
+.vLine::after{content:'';position:absolute;right:-1px;top:-4px;border-left:10px solid var(--blue);border-top:5px solid transparent;border-bottom:5px solid transparent;}
+@keyframes vPulse{0%,100%{width:35px;opacity:.3;}50%{width:80px;opacity:1;}}
 
-    /* Velocity arrow */
-    .velArrow{position:absolute;top:50%;right:28px;transform:translateY(-50%);pointer-events:none;}
-    .vLine{height:2px;background:linear-gradient(to right,transparent,var(--blue));position:relative;animation:vPulse 2.8s ease-in-out infinite;}
-    .vLine::after{content:'';position:absolute;right:-1px;top:-4px;border-left:10px solid var(--blue);border-top:5px solid transparent;border-bottom:5px solid transparent;}
-    @keyframes vPulse{0%,100%{width:38px;opacity:.35;}50%{width:78px;opacity:1;}}
+/* Parabola arc */
+.arcWrap{position:absolute;bottom:52px;left:15px;right:15px;pointer-events:none;}
+.arcSvg{width:100%;height:72px;overflow:visible;}
+.arcPath{fill:none;stroke:rgba(144,205,244,.18);stroke-width:1.5;stroke-dasharray:5 7;}
+.arcDot{fill:var(--blue);filter:drop-shadow(0 0 4px var(--blue));}
 
-    /* Parabola arc */
-    .arcWrap{position:absolute;bottom:55px;left:18px;right:18px;pointer-events:none;}
-    .arcSvg{width:100%;height:75px;overflow:visible;}
-    .arcPath{fill:none;stroke:rgba(144,205,244,.22);stroke-width:1.5;stroke-dasharray:5 7;}
-    .arcDot{fill:var(--blue);filter:drop-shadow(0 0 4px var(--blue));}
+/* Burst rays (NFS diagonal) */
+.burstWrap{position:absolute;bottom:-20px;right:-20px;width:200px;height:200px;pointer-events:none;}
+.ray{position:absolute;bottom:40px;right:40px;width:1.5px;transform-origin:bottom right;background:linear-gradient(to top,rgba(144,205,244,.6),transparent);animation:rayFlash 2s ease-in-out infinite;}
+@keyframes rayFlash{0%,100%{opacity:.1;}50%{opacity:.7;}}
 
-    /* ---- CHEMISTRY ANIM: electron orbits only ---- */
-    .atomWrap{position:absolute;top:-55px;right:-55px;width:250px;height:250px;pointer-events:none;}
-    .nucleus{position:absolute;top:50%;left:50%;width:13px;height:13px;border-radius:50%;background:radial-gradient(circle,#f9a8d4,var(--pink-d));box-shadow:0 0 14px var(--pink-d),0 0 28px rgba(236,72,153,.45);transform:translate(-50%,-50%);animation:nucPulse 2.2s ease-in-out infinite;}
-    @keyframes nucPulse{0%,100%{box-shadow:0 0 12px var(--pink-d),0 0 24px rgba(236,72,153,.4);transform:translate(-50%,-50%) scale(1);}50%{box-shadow:0 0 22px var(--pink),0 0 44px rgba(244,114,182,.6);transform:translate(-50%,-50%) scale(1.22);}}
-    .orb{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid;}
-    .orb1{width:78px;height:78px;border-color:rgba(244,114,182,.55);animation:oSpin 2.8s linear infinite;transform:translate(-50%,-50%);}
-    .orb2{width:128px;height:128px;border-color:rgba(236,72,153,.3);animation:oSpin2 4.8s linear infinite;transform:translate(-50%,-50%) rotateX(60deg);}
-    .orb3{width:178px;height:178px;border-color:rgba(249,168,212,.18);animation:oSpin3 7s linear infinite;transform:translate(-50%,-50%) rotateX(30deg) rotateY(45deg);}
-    @keyframes oSpin{to{transform:translate(-50%,-50%) rotate(360deg);}}
-    @keyframes oSpin2{to{transform:translate(-50%,-50%) rotateX(60deg) rotateZ(360deg);}}
-    @keyframes oSpin3{to{transform:translate(-50%,-50%) rotateX(30deg) rotateY(45deg) rotateZ(360deg);}}
-    .elec{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--pink);box-shadow:0 0 7px var(--pink),0 0 14px rgba(244,114,182,.5);}
-    .e1{top:-3px;left:50%;transform:translateX(-50%);}
-    .e2{top:50%;right:-3px;transform:translateY(-50%);}
-    .e3{bottom:-3px;left:28%;}
+/* ===== CHEMISTRY ANIMATIONS ===== */
+/* Electron orbits */
+.atomWrap{position:absolute;top:-50px;right:-50px;width:240px;height:240px;pointer-events:none;}
+.nucleus{position:absolute;top:50%;left:50%;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle,#f9a8d4,var(--pink-d));box-shadow:0 0 14px var(--pink-d),0 0 28px rgba(236,72,153,.5);transform:translate(-50%,-50%);animation:nucPulse 2s ease-in-out infinite;}
+@keyframes nucPulse{0%,100%{box-shadow:0 0 12px var(--pink-d),0 0 24px rgba(236,72,153,.4);transform:translate(-50%,-50%) scale(1);}50%{box-shadow:0 0 22px var(--pink),0 0 44px rgba(244,114,182,.65);transform:translate(-50%,-50%) scale(1.25);}}
+.orb{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid;}
+.orb1{width:75px;height:75px;border-color:rgba(244,114,182,.6);animation:oSpin 2.6s linear infinite;transform:translate(-50%,-50%);}
+.orb2{width:122px;height:122px;border-color:rgba(236,72,153,.32);animation:oSpin2 4.5s linear infinite;transform:translate(-50%,-50%) rotateX(60deg);}
+.orb3{width:170px;height:170px;border-color:rgba(249,168,212,.17);animation:oSpin3 6.5s linear infinite;transform:translate(-50%,-50%) rotateX(30deg) rotateY(45deg);}
+@keyframes oSpin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+@keyframes oSpin2{to{transform:translate(-50%,-50%) rotateX(60deg) rotateZ(360deg);}}
+@keyframes oSpin3{to{transform:translate(-50%,-50%) rotateX(30deg) rotateY(45deg) rotateZ(360deg);}}
+.elec{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px var(--pink),0 0 14px rgba(244,114,182,.5);}
+.e1{top:-3px;left:50%;transform:translateX(-50%);}
+.e2{top:50%;right:-3px;transform:translateY(-50%);}
+.e3{bottom:-3px;left:26%;}
+/* Pink diagonal scan lines */
+.chGlow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 75% 5%,rgba(236,72,153,.1) 0%,transparent 55%);}
+.chScan{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.scanLine{position:absolute;left:0;right:0;height:1px;background:linear-gradient(to right,transparent 0%,rgba(244,114,182,.55) 50%,transparent 100%);animation:scanSlide 3.8s ease-in-out infinite;}
+@keyframes scanSlide{0%{top:-2px;opacity:0;}20%{opacity:1;}80%{opacity:.6;}100%{top:100%;opacity:0;}}
+.scanLine:nth-child(2){animation-delay:1.9s;}
+.scanLine:nth-child(3){animation-delay:3.2s;}
 
-    /* Pink glow wash */
-    .chGlow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 80% 8%,rgba(236,72,153,.11) 0%,transparent 55%);}
+/* ===== BIOLOGY ANIMATIONS — NFS Unbound style ===== */
+/* Animated wing sweeps */
+.bioWing{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.wingSlash{position:absolute;top:0;left:-160%;width:100%;height:100%;background:linear-gradient(135deg,transparent 28%,rgba(74,222,128,.1) 50%,transparent 72%);animation:wingSweep 6s ease-in-out infinite;}
+.wingSlash2{animation-delay:3s!important;}
+@keyframes wingSweep{0%{left:-160%;opacity:0;}15%{opacity:1;}80%{opacity:.5;}100%{left:220%;opacity:0;}}
 
-    /* Pink NFS diagonal stripe sweep */
-    .chStripes{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-    .chStripe{position:absolute;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(244,114,182,.5),transparent);animation:strpSlide 3.5s ease-in-out infinite;}
-    @keyframes strpSlide{0%,100%{transform:scaleX(.2) translateX(-100%);opacity:0;}50%{transform:scaleX(1) translateX(0);opacity:1;}}
+/* Feather ray burst */
+.featherWrap{position:absolute;bottom:-15px;right:15px;width:160px;height:200px;pointer-events:none;}
+.fRay{position:absolute;bottom:0;right:0;width:1px;transform-origin:bottom right;background:linear-gradient(to top,rgba(74,222,128,.6),transparent);animation:fRayPulse 2.8s ease-in-out infinite;}
+@keyframes fRayPulse{0%,100%{opacity:.08;}50%{opacity:.65;}}
 
-    /* ---- BIOLOGY ANIM: NFS wings + cell pulse + vine grow ---- */
-    /* NFS wing sweep */
-    .bioWing{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-    .wingSlash{position:absolute;height:200%;background:linear-gradient(135deg,transparent 30%,rgba(74,222,128,.13) 50%,transparent 70%);animation:wingSweep 5.5s ease-in-out infinite;}
-    @keyframes wingSweep{0%{left:-150%;transform:skewX(-18deg);opacity:0;}30%,60%{opacity:1;}100%{left:200%;transform:skewX(-18deg);opacity:0;}}
-    .wingSlash:nth-child(2){animation-delay:2.75s;}
+/* Cell pulse rings */
+.cellRings{position:absolute;top:22px;right:22px;pointer-events:none;}
+.cRing{position:absolute;border-radius:50%;border:1px solid rgba(74,222,128,.38);top:50%;left:50%;transform:translate(-50%,-50%);animation:cRingPulse 3.5s ease-out infinite;}
+@keyframes cRingPulse{0%{width:14px;height:14px;opacity:.9;border-color:rgba(74,222,128,.8);}100%{width:120px;height:120px;opacity:0;border-color:rgba(74,222,128,0);}}
 
-    /* Feather rays emanating from bottom-right (NFS style) */
-    .featherWrap{position:absolute;bottom:-20px;right:20px;width:180px;height:220px;pointer-events:none;}
-    .fRay{position:absolute;bottom:0;right:0;width:1px;transform-origin:bottom right;background:linear-gradient(to top,rgba(74,222,128,.55),transparent);animation:fRayPulse 2.5s ease-in-out infinite;}
-    @keyframes fRayPulse{0%,100%{opacity:.1;}50%{opacity:.6;}}
+/* Vine grow along bottom */
+.vineWrap{position:absolute;bottom:0;left:0;right:0;height:80px;pointer-events:none;overflow:hidden;}
+.vine{position:absolute;bottom:0;width:1px;background:linear-gradient(to top,rgba(74,222,128,.45),transparent);transform-origin:bottom;animation:vineUp 4.8s ease-in-out infinite;}
+@keyframes vineUp{0%,100%{height:0;opacity:0;}50%{opacity:.6;}}
 
-    /* Cell pulse rings */
-    .cellRings{position:absolute;top:28px;right:28px;pointer-events:none;}
-    .cRing{position:absolute;border-radius:50%;border:1px solid rgba(74,222,128,.35);top:50%;left:50%;transform:translate(-50%,-50%);animation:cRingPulse 3.2s ease-out infinite;}
-    @keyframes cRingPulse{0%{width:16px;height:16px;opacity:.9;border-color:rgba(74,222,128,.8);}100%{width:130px;height:130px;opacity:0;border-color:rgba(74,222,128,0);}}
+/* DNA canvas */
+#dnaC{position:absolute;top:0;right:20px;pointer-events:none;opacity:.35;}
 
-    /* Vine grow */
-    .vineWrap{position:absolute;bottom:0;left:0;right:0;top:0;pointer-events:none;overflow:hidden;}
-    .vine{position:absolute;bottom:0;width:1px;background:linear-gradient(to top,rgba(74,222,128,.4),transparent);transform-origin:bottom;animation:vineUp 4.5s ease-in-out infinite;}
-    @keyframes vineUp{0%,100%{height:0;opacity:0;}50%{height:200px;opacity:.55;}}
+/* CARD TEXT */
+.cNum{font-family:'Share Tech Mono',monospace;font-size:.62rem;opacity:.35;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.55rem;}
+.cTitle{font-family:'Bebas Neue',sans-serif;font-size:4.8rem;line-height:.88;margin-bottom:.95rem;letter-spacing:.04em;}
+.phCard .cTitle{color:var(--blue);text-shadow:0 0 35px rgba(144,205,244,.4),0 0 70px rgba(74,144,226,.15);}
+.chCard .cTitle{color:var(--pink);text-shadow:0 0 35px rgba(244,114,182,.5),0 0 70px rgba(236,72,153,.2);}
+.biCard .cTitle{color:var(--green);text-shadow:0 0 35px rgba(74,222,128,.45),0 0 70px rgba(34,197,94,.15);}
+.cDef{font-size:.86rem;line-height:1.65;margin-bottom:1.1rem;padding-bottom:.85rem;border-bottom:1px solid rgba(255,255,255,.07);opacity:.82;}
+.phCard .cDef{border-color:rgba(144,205,244,.15);}
+.chCard .cDef{color:#f9a8d4;border-color:rgba(244,114,182,.15);}
+.biCard .cDef{border-color:rgba(74,222,128,.15);}
+.cDesc{font-size:.82rem;opacity:.62;line-height:1.65;flex-grow:1;}
+.chCard .cDesc{color:#f9a8d4;opacity:.7;}
+.cHL{margin-top:1.3rem;font-size:.78rem;font-weight:700;padding:.45rem .7rem;border-radius:6px;border-left:3px solid;background:rgba(255,255,255,.035);}
+.phCard .cHL{border-color:var(--blue-d);color:var(--blue);}
+.chCard .cHL{border-color:var(--pink-d);color:var(--pink);}
+.biCard .cHL{border-color:var(--green-d);color:var(--green);}
+.cFoot{margin-top:1.6rem;padding-top:.85rem;border-top:1px solid rgba(255,255,255,.07);font-family:'Share Tech Mono',monospace;font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;opacity:.38;transition:opacity .2s;}
+.sCard:hover .cFoot{opacity:1;}
+.chCard .cFoot{color:#f9a8d4;}
+.biCard .cFoot{color:var(--green);}
 
-    /* DNA canvas */
-    #dnaC{position:absolute;top:0;right:25px;pointer-events:none;opacity:.38;}
+/* ===== THEORY SECTIONS ===== */
+#theory{position:relative;z-index:1;}
+.tSec{padding:4rem 3rem;border-top:1px solid rgba(255,255,255,.06);}
+.tPh{background:linear-gradient(180deg,#040c1c,#060c18);}
+.tCh{background:linear-gradient(180deg,#060006,#080008);}
+.tBi{background:linear-gradient(180deg,#020e05,#030f07);}
+.tHdr{display:flex;align-items:flex-start;gap:1rem;margin-bottom:2.2rem;}
+.tHdrIcon{font-size:1.9rem;flex-shrink:0;margin-top:.18rem;}
+.tHdrTitle{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:.04em;line-height:1;}
+.tHdrSub{font-family:'Share Tech Mono',monospace;font-size:.63rem;letter-spacing:.13em;opacity:.42;margin-top:.28rem;}
+.tPh .tHdrTitle,.tPh .tHdrSub{color:var(--blue);}
+.tCh .tHdrTitle,.tCh .tHdrSub{color:var(--pink);}
+.tBi .tHdrTitle,.tBi .tHdrSub{color:var(--green);}
+.tGrid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;}
+.tFull{grid-column:1/-1;}
+.tBlk{background:rgba(255,255,255,.022);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1.5rem;overflow-y:auto;max-height:600px;}
+.tPh .tBlk{border-color:rgba(144,205,244,.09);}
+.tCh .tBlk{border-color:rgba(244,114,182,.09);background:rgba(244,114,182,.018);}
+.tBi .tBlk{border-color:rgba(74,222,128,.09);}
+.tBlk::-webkit-scrollbar{width:3px;}
+.tBlk::-webkit-scrollbar-thumb{background:rgba(144,205,244,.18);border-radius:2px;}
+.tBlk h3{font-family:'Share Tech Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.95rem;padding-bottom:.45rem;border-bottom:1px solid rgba(255,255,255,.06);}
+.tPh .tBlk h3{color:var(--blue);}
+.tCh .tBlk h3{color:var(--pink);}
+.tBi .tBlk h3{color:var(--green);}
+.tBlk p{font-size:.83rem;line-height:1.72;opacity:.78;margin-bottom:.62rem;}
+.tBlk p:last-child{margin-bottom:0;}
+.fml{font-family:'Share Tech Mono',monospace;font-size:.84rem;padding:.42rem .78rem;border-radius:5px;margin:.35rem 0;border-left:2px solid;background:rgba(0,0,0,.4);display:block;}
+.tPh .fml{color:var(--blue);border-color:var(--blue-d);}
+.tCh .fml{color:var(--pink);border-color:var(--pink-d);}
+.tBi .fml{color:var(--green);border-color:var(--green-d);}
+.tl{display:flex;gap:.8rem;margin-bottom:.8rem;align-items:flex-start;}
+.tYear{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.1em;padding:.16rem .48rem;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.tPh .tYear{background:rgba(144,205,244,.1);color:var(--blue);}
+.tCh .tYear{background:rgba(244,114,182,.1);color:var(--pink);}
+.tBi .tYear{background:rgba(74,222,128,.1);color:var(--green);}
+.tTxt{font-size:.81rem;line-height:1.65;opacity:.76;}
 
-    /* CARD TEXT */
-    .cNum{font-family:'Share Tech Mono',monospace;font-size:.63rem;opacity:.38;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.6rem;}
-    .cTitle{font-family:'Bebas Neue',sans-serif;font-size:5rem;line-height:.9;margin-bottom:1rem;letter-spacing:.04em;font-style:normal;}
-    .phCard .cTitle{color:var(--blue);text-shadow:0 0 35px rgba(144,205,244,.45),0 0 70px rgba(74,144,226,.18);}
-    .chCard .cTitle{color:var(--pink);text-shadow:0 0 35px rgba(244,114,182,.55),0 0 70px rgba(236,72,153,.22);}
-    .biCard .cTitle{color:var(--green);text-shadow:0 0 35px rgba(74,222,128,.5),0 0 70px rgba(34,197,94,.18);}
-    .cDef{font-size:.88rem;line-height:1.62;margin-bottom:1.2rem;padding-bottom:.9rem;border-bottom:1px solid rgba(255,255,255,.08);opacity:.82;}
-    .phCard .cDef{border-color:rgba(144,205,244,.18);}
-    .chCard .cDef{color:#f9a8d4;border-color:rgba(244,114,182,.18);}
-    .biCard .cDef{border-color:rgba(74,222,128,.18);}
-    .cDesc{font-size:.83rem;opacity:.65;line-height:1.62;flex-grow:1;}
-    .chCard .cDesc{color:#f9a8d4;opacity:.72;}
-    .cHL{margin-top:1.4rem;font-size:.8rem;font-weight:700;padding:.48rem .72rem;border-radius:6px;border-left:3px solid;background:rgba(255,255,255,.04);}
-    .phCard .cHL{border-color:var(--blue-d);color:var(--blue);}
-    .chCard .cHL{border-color:var(--pink-d);color:var(--pink);}
-    .biCard .cHL{border-color:var(--green-d);color:var(--green);}
-    .cFoot{margin-top:1.8rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.08);font-family:'Share Tech Mono',monospace;font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;opacity:.42;transition:opacity .22s;}
-    .sCard:hover .cFoot{opacity:1;}
-    .chCard .cFoot{color:#f9a8d4;}
-    .biCard .cFoot{color:var(--green);}
+/* QR + ABOUT */
+#qr{text-align:center;padding:2.8rem;background:rgba(0,0,0,.32);border-top:1px solid rgba(144,205,244,.07);position:relative;z-index:1;}
+#qr h2{font-size:1.2rem;font-weight:700;color:var(--blue);margin-bottom:1.3rem;text-transform:uppercase;letter-spacing:.1em;}
+#qr img{border-radius:8px;border:3px solid rgba(144,205,244,.22);box-shadow:0 0 25px rgba(74,144,226,.2);transition:all .28s;}
+#qr img:hover{box-shadow:0 0 40px rgba(74,144,226,.35);transform:scale(1.05);}
+#about{text-align:center;padding:2.8rem;background:rgba(0,0,0,.52);border-top:1px solid rgba(255,255,255,.045);position:relative;z-index:1;}
+#about h2{font-size:1.2rem;font-weight:700;color:var(--blue);margin-bottom:.65rem;text-transform:uppercase;letter-spacing:.08em;}
+#about p{opacity:.62;margin:.3rem 0;font-size:.86rem;}
+#about .team{color:#6ee7b7;font-weight:700;font-size:.94rem;margin-top:.65rem;opacity:1;}
+#about .batch{color:var(--blue);opacity:.48;font-size:.78rem;font-style:italic;}
 
-    /* THEORY */
-    #theory{position:relative;z-index:1;}
-    .tSec{padding:4.5rem 3rem;border-top:1px solid rgba(255,255,255,.07);}
-    .tPh{background:linear-gradient(180deg,#050e20,#070d1c);}
-    .tCh{background:linear-gradient(180deg,#060006,#090009);}
-    .tBi{background:linear-gradient(180deg,#020f06,#031008);}
-    .tHdr{display:flex;align-items:flex-start;gap:1rem;margin-bottom:2.5rem;}
-    .tHdrIcon{font-size:2rem;flex-shrink:0;margin-top:.2rem;}
-    .tHdrTitle{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:.04em;line-height:1;}
-    .tHdrSub{font-family:'Share Tech Mono',monospace;font-size:.65rem;letter-spacing:.13em;opacity:.45;margin-top:.3rem;}
-    .tPh .tHdrTitle,.tPh .tHdrSub{color:var(--blue);}
-    .tCh .tHdrTitle,.tCh .tHdrSub{color:var(--pink);}
-    .tBi .tHdrTitle,.tBi .tHdrSub{color:var(--green);}
-    .tGrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-    .tFull{grid-column:1/-1;}
-    .tBlk{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:1.6rem;overflow-y:auto;max-height:620px;}
-    .tPh .tBlk{border-color:rgba(144,205,244,.1);}
-    .tCh .tBlk{border-color:rgba(244,114,182,.1);background:rgba(244,114,182,.02);}
-    .tBi .tBlk{border-color:rgba(74,222,128,.1);}
-    .tBlk::-webkit-scrollbar{width:4px;}
-    .tBlk::-webkit-scrollbar-thumb{background:rgba(144,205,244,.2);border-radius:2px;}
-    .tBlk h3{font-family:'Share Tech Mono',monospace;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid rgba(255,255,255,.07);}
-    .tPh .tBlk h3{color:var(--blue);}
-    .tCh .tBlk h3{color:var(--pink);}
-    .tBi .tBlk h3{color:var(--green);}
-    .tBlk p{font-size:.84rem;line-height:1.72;opacity:.8;margin-bottom:.65rem;}
-    .tBlk p:last-child{margin-bottom:0;}
-    .fml{font-family:'Share Tech Mono',monospace;font-size:.86rem;padding:.45rem .82rem;border-radius:5px;margin:.4rem 0;border-left:2px solid;background:rgba(0,0,0,.38);display:block;}
-    .tPh .fml{color:var(--blue);border-color:var(--blue-d);}
-    .tCh .fml{color:var(--pink);border-color:var(--pink-d);}
-    .tBi .fml{color:var(--green);border-color:var(--green-d);}
-    .tl{display:flex;gap:.85rem;margin-bottom:.85rem;align-items:flex-start;}
-    .tYear{font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:.1em;padding:.18rem .5rem;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
-    .tPh .tYear{background:rgba(144,205,244,.12);color:var(--blue);}
-    .tCh .tYear{background:rgba(244,114,182,.12);color:var(--pink);}
-    .tBi .tYear{background:rgba(74,222,128,.12);color:var(--green);}
-    .tTxt{font-size:.82rem;line-height:1.62;opacity:.78;}
+/* POPUP */
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:500;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(7px);animation:fadeIn .22s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.popup-box{background:linear-gradient(135deg,rgba(2,12,5,.98),rgba(3,20,10,.98));border:1px solid rgba(74,222,128,.28);border-radius:18px;padding:2.3rem 2.8rem;text-align:center;max-width:340px;box-shadow:0 0 40px rgba(74,222,128,.12),0 20px 50px rgba(0,0,0,.75);animation:popIn .32s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes popIn{from{transform:scale(.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+.popup-box .emoji{font-size:2.8rem;margin-bottom:.9rem;display:block;}
+.popup-box h3{color:var(--green);font-size:1.35rem;font-weight:700;margin-bottom:.55rem;}
+.popup-box p{opacity:.7;font-size:.88rem;line-height:1.6;margin-bottom:1.3rem;}
+.popup-close{background:rgba(74,222,128,.13);border:1px solid rgba(74,222,128,.32);color:var(--green);padding:.48rem 1.35rem;border-radius:8px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:.78rem;letter-spacing:.08em;transition:all .2s;}
+.popup-close:hover{background:rgba(74,222,128,.22);transform:translateY(-2px);}
 
-    /* QR + ABOUT */
-    #qr{text-align:center;padding:3rem;background:rgba(0,0,0,.35);border-top:1px solid rgba(144,205,244,.08);position:relative;z-index:1;}
-    #qr h2{font-size:1.3rem;font-weight:700;color:var(--blue);margin-bottom:1.4rem;text-transform:uppercase;letter-spacing:.1em;}
-    #qr img{border-radius:8px;border:3px solid rgba(144,205,244,.25);box-shadow:0 0 25px rgba(74,144,226,.22);transition:all .3s;}
-    #qr img:hover{box-shadow:0 0 40px rgba(74,144,226,.38);transform:scale(1.05);}
-    #about{text-align:center;padding:3rem;background:rgba(0,0,0,.55);border-top:1px solid rgba(255,255,255,.05);position:relative;z-index:1;}
-    #about h2{font-size:1.3rem;font-weight:700;color:var(--blue);margin-bottom:.7rem;text-transform:uppercase;letter-spacing:.08em;}
-    #about p{opacity:.65;margin:.32rem 0;font-size:.88rem;}
-    #about .team{color:#6ee7b7;font-weight:700;font-size:.96rem;margin-top:.7rem;opacity:1;}
-    #about .batch{color:var(--blue);opacity:.5;font-size:.8rem;font-style:italic;}
+/* ===== AI BOX ===== */
+.aiBox{position:fixed;bottom:16px;right:16px;width:370px;background:rgba(2,8,20,.97);border:1px solid rgba(144,205,244,.25);border-radius:16px;box-shadow:0 0 45px rgba(74,144,226,.14),0 22px 55px rgba(0,0,0,.88);z-index:300;overflow:hidden;backdrop-filter:blur(10px);transition:all .28s;}
+.aiHdr{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(0,0,0,.48);border-bottom:1px solid rgba(144,205,244,.09);cursor:pointer;user-select:none;}
+.aiHdrL{display:flex;align-items:center;gap:8px;}
+.aiDot{width:7px;height:7px;border-radius:50%;background:#10b981;box-shadow:0 0 6px #10b981;animation:dotPulse 2.2s ease-in-out infinite;}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.75);}}
+.aiLbl{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;}
+.aiBadge{font-family:'Share Tech Mono',monospace;font-size:.58rem;padding:2px 8px;border-radius:10px;border:1px solid rgba(144,205,244,.3);color:rgba(144,205,244,.55);letter-spacing:.06em;}
+.aiTog{background:none;border:none;color:var(--blue);cursor:pointer;font-size:.78rem;opacity:.5;transition:opacity .18s;padding:2px 5px;}
+.aiTog:hover{opacity:1;}
+.aiBody{padding:12px 14px 14px;}
+/* Subject tabs */
+.aiSubjectBar{display:flex;gap:5px;margin-bottom:10px;}
+.subBtn{flex:1;padding:5px 3px;border:1px solid rgba(255,255,255,.09);border-radius:6px;background:rgba(255,255,255,.035);color:#777;font-family:'Share Tech Mono',monospace;font-size:.57rem;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;transition:all .22s;}
+.subBtn.active-ph{border-color:rgba(144,205,244,.5);background:rgba(144,205,244,.08);color:var(--blue);}
+.subBtn.active-ch{border-color:rgba(244,114,182,.5);background:rgba(244,114,182,.08);color:var(--pink);}
+.subBtn.active-bi{border-color:rgba(74,222,128,.5);background:rgba(74,222,128,.08);color:var(--green);}
+.subBtn.active-uc{border-color:rgba(250,204,21,.5);background:rgba(250,204,21,.07);color:#facc15;}
+.subBtn:hover{transform:translateY(-1px);}
+/* Chat output */
+#chatOut{height:195px;overflow-y:auto;font-size:11px;background:rgba(0,0,0,.65);font-family:'Share Tech Mono',monospace;padding:10px;border:1px solid rgba(144,205,244,.09);border-radius:8px;margin-bottom:9px;white-space:pre-wrap;line-height:1.7;scroll-behavior:smooth;}
+#chatOut::-webkit-scrollbar{width:3px;}
+#chatOut::-webkit-scrollbar-thumb{background:rgba(144,205,244,.2);border-radius:2px;}
+.msgUser{color:rgba(144,205,244,.85);margin-bottom:4px;}
+.msgAi{color:rgba(200,230,200,.9);margin-bottom:8px;}
+.msgLabel{opacity:.45;font-size:9px;letter-spacing:.1em;}
+/* Input row */
+.aiInRow{display:flex;gap:5px;}
+#chatIn{flex:1;background:rgba(255,255,255,.035);border:1px solid rgba(144,205,244,.2);color:#fff;padding:7px 9px;font-size:10.5px;border-radius:6px;outline:none;font-family:'Share Tech Mono',monospace;transition:border-color .18s;}
+#chatIn:focus{border-color:rgba(144,205,244,.48);}
+#chatIn::placeholder{color:rgba(255,255,255,.22);}
+#askBtn{background:linear-gradient(135deg,var(--blue-d),#1d4ed8);color:#fff;border:none;padding:7px 12px;border-radius:6px;font-size:10px;font-weight:700;font-family:'Share Tech Mono',monospace;letter-spacing:.05em;cursor:pointer;transition:all .2s;white-space:nowrap;}
+#askBtn:hover:not(:disabled){filter:brightness(1.2);transform:translateY(-1px);}
+#askBtn:disabled{opacity:.35;cursor:not-allowed;}
+.aiHint{margin-top:6px;font-size:9px;color:rgba(144,205,244,.28);font-family:'Share Tech Mono',monospace;text-align:center;}
+.aiBox.minimized .aiBody{display:none;}
+.blink{animation:bl 1s linear infinite;display:inline;}
+@keyframes bl{50%{opacity:0;}}
 
-    /* POPUP */
-    .popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);animation:fadeIn .25s ease;}
-    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-    .popup-box{background:linear-gradient(135deg,rgba(2,15,6,.98),rgba(4,25,12,.98));border:1px solid rgba(74,222,128,.3);border-radius:18px;padding:2.5rem 3rem;text-align:center;max-width:360px;box-shadow:0 0 40px rgba(74,222,128,.15),0 20px 50px rgba(0,0,0,.7);animation:popIn .35s cubic-bezier(.175,.885,.32,1.275);}
-    @keyframes popIn{from{transform:scale(.8);opacity:0;}to{transform:scale(1);opacity:1;}}
-    .popup-box .emoji{font-size:3rem;margin-bottom:1rem;display:block;}
-    .popup-box h3{color:var(--green);font-size:1.4rem;font-weight:700;margin-bottom:.6rem;}
-    .popup-box p{opacity:.72;font-size:.9rem;line-height:1.6;margin-bottom:1.4rem;}
-    .popup-close{background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.35);color:var(--green);padding:.5rem 1.4rem;border-radius:8px;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:.8rem;letter-spacing:.08em;transition:all .2s;}
-    .popup-close:hover{background:rgba(74,222,128,.25);transform:translateY(-2px);}
+/* UNIT CONVERTER PANEL */
+.ucPanel{display:none;background:rgba(0,0,0,.48);border-radius:8px;padding:10px;margin-bottom:10px;border:1px solid rgba(250,204,21,.14);}
+.ucPanel.show{display:block;}
+.ucTitle{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:#facc15;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.ucCatRow{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
+.ucCatBtn{padding:3px 8px;border:1px solid rgba(250,204,21,.2);border-radius:4px;background:rgba(250,204,21,.04);color:#9a8a40;font-family:'Share Tech Mono',monospace;font-size:.55rem;cursor:pointer;transition:all .18s;letter-spacing:.04em;}
+.ucCatBtn.active{border-color:rgba(250,204,21,.5);background:rgba(250,204,21,.1);color:#facc15;}
+.ucRow{display:flex;gap:5px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
+.ucSel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.13);color:#fff;font-family:'Share Tech Mono',monospace;font-size:9.5px;border-radius:4px;outline:none;padding:4px 6px;cursor:pointer;min-width:90px;}
+.ucIn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.13);color:#fff;font-family:'Share Tech Mono',monospace;font-size:9.5px;border-radius:4px;outline:none;padding:4px 6px;width:75px;}
+.ucArrow{color:#facc15;opacity:.6;font-size:.8rem;}
+.ucOut{font-family:'Share Tech Mono',monospace;font-size:10.5px;color:#facc15;margin-top:5px;min-height:18px;padding:4px 6px;background:rgba(250,204,21,.04);border-radius:4px;border:1px solid rgba(250,204,21,.1);}
 
-    /* ===== AI BOX ===== */
-    .aiBox{position:fixed;bottom:18px;right:18px;width:360px;background:rgba(3,9,22,.97);border:1px solid rgba(144,205,244,.28);border-radius:16px;box-shadow:0 0 40px rgba(74,144,226,.18),0 20px 50px rgba(0,0,0,.85);z-index:300;overflow:hidden;backdrop-filter:blur(8px);transition:width .3s,height .3s;}
-    .aiHdr{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;background:rgba(0,0,0,.5);border-bottom:1px solid rgba(144,205,244,.1);cursor:pointer;user-select:none;}
-    .aiHdrL{display:flex;align-items:center;gap:9px;}
-    .aiDot{width:7px;height:7px;border-radius:50%;background:#10b981;box-shadow:0 0 6px #10b981;animation:dotPulse 2s ease-in-out infinite;}
-    @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.8);}}
-    .aiLbl{font-family:'Share Tech Mono',monospace;font-size:.67rem;color:var(--blue);letter-spacing:.12em;text-transform:uppercase;}
-    .aiBadge{font-family:'Share Tech Mono',monospace;font-size:.6rem;padding:2px 9px;border-radius:12px;border:1px solid;letter-spacing:.07em;transition:all .3s;}
-    .aiTog{background:none;border:none;color:var(--blue);cursor:pointer;font-size:.75rem;opacity:.55;transition:opacity .2s;}
-    .aiTog:hover{opacity:1;}
-    .aiBody{padding:13px 15px 15px;}
-    .aiSubjectBar{display:flex;gap:6px;margin-bottom:11px;}
-    .subBtn{flex:1;padding:6px 4px;border:1px solid rgba(255,255,255,.1);border-radius:6px;background:rgba(255,255,255,.04);color:#888;font-family:'Share Tech Mono',monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .25s;}
-    .subBtn.active-ph{border-color:rgba(144,205,244,.55);background:rgba(144,205,244,.1);color:var(--blue);}
-    .subBtn.active-ch{border-color:rgba(244,114,182,.55);background:rgba(244,114,182,.1);color:var(--pink);}
-    .subBtn.active-bi{border-color:rgba(74,222,128,.55);background:rgba(74,222,128,.1);color:var(--green);}
-    .subBtn.active-uc{border-color:rgba(250,204,21,.55);background:rgba(250,204,21,.08);color:#facc15;}
-    .subBtn:hover{transform:translateY(-1px);}
-    #chatOut{height:200px;overflow-y:auto;font-size:11.5px;background:rgba(0,0,0,.68);font-family:'Share Tech Mono',monospace;padding:11px;border:1px solid rgba(144,205,244,.1);border-radius:8px;margin-bottom:10px;white-space:pre-wrap;line-height:1.68;scroll-behavior:smooth;}
-    #chatOut::-webkit-scrollbar{width:3px;}
-    #chatOut::-webkit-scrollbar-thumb{background:rgba(144,205,244,.22);border-radius:2px;}
-    .aiInRow{display:flex;gap:6px;}
-    #chatIn{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(144,205,244,.22);color:#fff;padding:8px 10px;font-size:11px;border-radius:6px;outline:none;font-family:'Share Tech Mono',monospace;transition:border-color .2s;}
-    #chatIn:focus{border-color:rgba(144,205,244,.52);}
-    #chatIn::placeholder{color:rgba(255,255,255,.25);}
-    #askBtn{background:linear-gradient(135deg,var(--blue-d),#1d4ed8);color:#fff;border:none;padding:8px 13px;border-radius:6px;font-size:10.5px;font-weight:700;font-family:'Share Tech Mono',monospace;letter-spacing:.05em;cursor:pointer;transition:all .22s;white-space:nowrap;}
-    #askBtn:hover:not(:disabled){filter:brightness(1.18);transform:translateY(-1px);}
-    #askBtn:disabled{opacity:.38;cursor:not-allowed;}
-    .aiHint{margin-top:7px;font-size:9.5px;color:rgba(144,205,244,.3);font-family:'Share Tech Mono',monospace;text-align:center;}
-    .aiBox.minimized .aiBody{display:none;}
-    .blink{animation:bl 1s linear infinite;display:inline;}
-    @keyframes bl{50%{opacity:0;}}
-
-    /* UNIT CONVERTER panel */
-    .ucPanel{display:none;background:rgba(0,0,0,.5);border-radius:8px;padding:10px;margin-bottom:10px;border:1px solid rgba(250,204,21,.15);}
-    .ucPanel.show{display:block;}
-    .ucRow{display:flex;gap:6px;align-items:center;margin-bottom:7px;flex-wrap:wrap;}
-    .ucSel,.ucIn{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);color:#fff;font-family:'Share Tech Mono',monospace;font-size:10px;border-radius:4px;outline:none;padding:5px 7px;}
-    .ucSel{cursor:pointer;}
-    .ucIn{width:80px;}
-    .ucOut{font-family:'Share Tech Mono',monospace;font-size:10.5px;color:#facc15;margin-top:5px;min-height:18px;}
-
-    /* Responsive */
-    @media(max-width:960px){
-      #home{grid-template-columns:1fr;min-height:auto;}
-      .sCard{border-right:none;border-bottom:1px solid rgba(255,255,255,.05);min-height:70vh;}
-      .tGrid{grid-template-columns:1fr;}
-      .tFull{grid-column:1;}
-      nav{padding:.6rem 1rem;}
-      .aiBox{width:300px;right:10px;bottom:10px;}
-    }
-  </style>
+@media(max-width:960px){
+  #home{grid-template-columns:1fr;min-height:auto;}
+  .sCard{border-right:none;border-bottom:1px solid rgba(255,255,255,.04);min-height:68vh;}
+  .tGrid{grid-template-columns:1fr;}
+  .tFull{grid-column:1;}
+  nav{padding:.55rem 1rem;}
+  .aiBox{width:295px;right:8px;bottom:8px;}
+}
+</style>
 </head>
 <body>
 <canvas id="pCanvas"></canvas>
@@ -292,77 +302,82 @@
 <!-- HERO -->
 <div id="home">
 
-  <!-- PHYSICS -->
-  <a href="https://stounchvicinity65.github.io/INTERACTIVE-MOTIONS/" class="sCard phCard">
-    <div class="phAnim" id="phAnim"></div>
-    <div class="burstWrap" id="burstWrap"></div>
-    <div class="velArrow"><div class="vLine"></div></div>
-    <div class="arcWrap">
-      <svg class="arcSvg" viewBox="0 0 300 75">
-        <path class="arcPath" d="M8,68 Q150,-18 292,68"/>
-        <circle class="arcDot" r="5" cx="0" cy="0">
-          <animateMotion dur="3.8s" repeatCount="indefinite" path="M8,68 Q150,-18 292,68"/>
-        </circle>
-      </svg>
-    </div>
-    <div class="cNum"><span class="lang-en">Project 01 — Physics</span><span class="lang-bn hidden">প্রকল্প ০১ — পদার্থবিজ্ঞান</span></div>
-    <h1 class="cTitle"><span class="lang-en">PHYSICS</span><span class="lang-bn hidden">পদার্থবিজ্ঞান</span></h1>
-    <div class="cDef">
-      <span class="lang-en">The fundamental science of matter, energy and motion. Every object's behaviour — from subatomic to cosmic — obeys physical laws.</span>
-      <span class="lang-bn hidden">পদার্থ, শক্তি ও গতির মৌলিক বিজ্ঞান। অতিপারমাণবিক থেকে মহাজাগতিক — প্রতিটি বস্তু ভৌত নিয়ম মেনে চলে।</span>
-    </div>
-    <p class="cDesc">
-      <span class="lang-en">Galileo challenged Aristotle. Newton unified heaven and earth. Einstein warped space and time. Each revolution redefined reality itself.</span>
-      <span class="lang-bn hidden">গ্যালিলিও অ্যারিস্টটলকে চ্যালেঞ্জ করলেন। নিউটন আকাশ ও পৃথিবীকে একত্রিত করলেন। আইনস্টাইন স্থান ও কালকে বাঁকিয়ে দিলেন।</span>
-    </p>
-    <div class="cHL"><span class="lang-en">⚡ v = u+at · s = ut+½at² · F = ma</span><span class="lang-bn hidden">⚡ v = u+at · F = ma · গতির তিন সূত্র</span></div>
-    <div class="cFoot"><span class="lang-en">Open Interactive Lab →</span><span class="lang-bn hidden">ইন্টারেক্টিভ ল্যাব খুলুন →</span></div>
-  </a>
+<!-- PHYSICS -->
+<a href="https://stounchvicinity65.github.io/INTERACTIVE-MOTIONS/" class="sCard phCard">
+  <div class="phAnim" id="phAnim"></div>
+  <div class="boltWrap"><div class="bolt"></div></div>
+  <div class="burstWrap" id="burstWrap"></div>
+  <div class="velArrow"><div class="vLine"></div></div>
+  <div class="arcWrap">
+    <svg class="arcSvg" viewBox="0 0 300 72">
+      <path class="arcPath" d="M8,65 Q150,-15 292,65"/>
+      <circle class="arcDot" r="4.5" cx="0" cy="0">
+        <animateMotion dur="3.6s" repeatCount="indefinite" path="M8,65 Q150,-15 292,65"/>
+      </circle>
+    </svg>
+  </div>
+  <div class="cNum"><span class="lang-en">Project 01 — Physics</span><span class="lang-bn hidden">প্রকল্প ০১ — পদার্থবিজ্ঞান</span></div>
+  <h1 class="cTitle"><span class="lang-en">PHYSICS</span><span class="lang-bn hidden">পদার্থবিজ্ঞান</span></h1>
+  <div class="cDef">
+    <span class="lang-en">The fundamental science of matter, energy and motion. Every object's behaviour — from subatomic to cosmic — obeys physical laws.</span>
+    <span class="lang-bn hidden">পদার্থ, শক্তি ও গতির মৌলিক বিজ্ঞান। অতিপারমাণবিক থেকে মহাজাগতিক — প্রতিটি বস্তু ভৌত নিয়ম মেনে চলে।</span>
+  </div>
+  <p class="cDesc">
+    <span class="lang-en">Galileo challenged Aristotle. Newton unified heaven and earth. Einstein warped space and time. Each revolution redefined reality itself.</span>
+    <span class="lang-bn hidden">গ্যালিলিও অ্যারিস্টটলকে চ্যালেঞ্জ করেছিলেন। নিউটন আকাশ ও পৃথিবীকে একত্রিত করলেন। আইনস্টাইন স্থান-কালকে বাঁকিয়ে দিলেন।</span>
+  </p>
+  <div class="cHL"><span class="lang-en">⚡ v = u+at · s = ut+½at² · F = ma</span><span class="lang-bn hidden">⚡ v = u+at · F = ma · গতির তিনটি সূত্র</span></div>
+  <div class="cFoot"><span class="lang-en">Open Interactive Lab →</span><span class="lang-bn hidden">ইন্টারেক্টিভ ল্যাব খুলুন →</span></div>
+</a>
 
-  <!-- CHEMISTRY -->
-  <a href="https://antidominator.github.io/fair-project/" class="sCard chCard">
-    <div class="chGlow"></div>
-    <div class="atomWrap">
-      <div class="nucleus"></div>
-      <div class="orb orb1"><div class="elec e1"></div></div>
-      <div class="orb orb2"><div class="elec e2"></div></div>
-      <div class="orb orb3"><div class="elec e3"></div></div>
-    </div>
-    <div class="chStripes" id="chStripes"></div>
-    <div class="cNum" style="color:#f9a8d4;"><span class="lang-en">Project 02 — Chemistry</span><span class="lang-bn hidden">প্রকল্প ০২ — রসায়নবিজ্ঞান</span></div>
-    <h1 class="cTitle"><span class="lang-en">CHEMISTRY</span><span class="lang-bn hidden">রসায়ন</span></h1>
-    <div class="cDef">
-      <span class="lang-en">The science of matter's composition, structure and transformation. Every reaction — from rust to respiration — is chemistry.</span>
-      <span class="lang-bn hidden">পদার্থের গঠন, বৈশিষ্ট্য ও রূপান্তরের বিজ্ঞান। মরিচা থেকে শ্বসন — প্রতিটি বিক্রিয়াই রসায়ন।</span>
-    </div>
-    <p class="cDesc" style="color:#f9a8d4;">
-      <span class="lang-en">Mendeleev predicted three unknown elements from patterns alone. Bohr mapped where electrons live. Modern chemistry builds molecules atom by atom.</span>
-      <span class="lang-bn hidden">মেন্ডেলিভ শুধু ধারা থেকে তিনটি অজানা মৌল ভবিষ্যদ্বাণী করেছিলেন। বোর দেখালেন ইলেকট্রন কোথায় থাকে।</span>
-    </p>
-    <div class="cHL"><span class="lang-en">🧪 118 elements · pH = -log[H⁺] · PV = nRT</span><span class="lang-bn hidden">🧪 ১১৮ মৌল · pH = -log[H⁺] · পর্যায় সারণি</span></div>
-    <div class="cFoot"><span class="lang-en">Open Interactive Lab →</span><span class="lang-bn hidden">ইন্টারেক্টিভ ল্যাব খুলুন →</span></div>
-  </a>
+<!-- CHEMISTRY -->
+<a href="https://antidominator.github.io/fair-project/" class="sCard chCard">
+  <div class="chGlow"></div>
+  <div class="atomWrap">
+    <div class="nucleus"></div>
+    <div class="orb orb1"><div class="elec e1"></div></div>
+    <div class="orb orb2"><div class="elec e2"></div></div>
+    <div class="orb orb3"><div class="elec e3"></div></div>
+  </div>
+  <div class="chScan"><div class="scanLine"></div><div class="scanLine"></div><div class="scanLine"></div></div>
+  <div class="cNum" style="color:#f9a8d4;"><span class="lang-en">Project 02 — Chemistry</span><span class="lang-bn hidden">প্রকল্প ০২ — রসায়নবিজ্ঞান</span></div>
+  <h1 class="cTitle"><span class="lang-en">CHEM</span><span class="lang-bn hidden">রসায়ন</span></h1>
+  <div class="cDef">
+    <span class="lang-en">The science of matter's composition, structure and transformation. Every reaction — from rust to respiration — is chemistry.</span>
+    <span class="lang-bn hidden">পদার্থের গঠন, বৈশিষ্ট্য ও রূপান্তরের বিজ্ঞান। মরিচা থেকে শ্বসন — প্রতিটি বিক্রিয়াই রসায়ন।</span>
+  </div>
+  <p class="cDesc" style="color:#f9a8d4;">
+    <span class="lang-en">Mendeleev predicted three unknown elements from patterns alone. Bohr mapped where electrons live. Modern chemistry builds molecules atom by atom.</span>
+    <span class="lang-bn hidden">মেন্ডেলিভ কেবল পর্যাবৃত্ত ধারা থেকে তিনটি অজানা মৌল ভবিষ্যদ্বাণী করেছিলেন। বোর দেখালেন ইলেকট্রন কোথায় অবস্থান করে।</span>
+  </p>
+  <div class="cHL" style="color:var(--pink);border-color:var(--pink-d);"><span class="lang-en">🧪 118 elements · pH = -log[H⁺] · PV = nRT</span><span class="lang-bn hidden">🧪 ১১৮টি মৌল · pH = -log[H⁺] · পর্যায় সারণি</span></div>
+  <div class="cFoot"><span class="lang-en">Open Interactive Lab →</span><span class="lang-bn hidden">ইন্টারেক্টিভ ল্যাব খুলুন →</span></div>
+</a>
 
-  <!-- BIOLOGY -->
-  <a href="#" class="sCard biCard" id="biCardLink">
-    <div class="bioWing"><div class="wingSlash" style="top:0;left:0;right:0;bottom:0;"></div><div class="wingSlash" style="top:0;left:0;right:0;bottom:0;height:200%;"></div></div>
-    <div class="featherWrap" id="featherWrap"></div>
-    <div class="cellRings"><div class="cRing" style="animation-delay:0s;"></div><div class="cRing" style="animation-delay:1.1s;"></div><div class="cRing" style="animation-delay:2.2s;"></div></div>
-    <div class="vineWrap" id="vineWrap"></div>
-    <canvas id="dnaC" width="48"></canvas>
-    <div class="cNum"><span class="lang-en">Project 03 — Biology</span><span class="lang-bn hidden">প্রকল্প ০৩ — জীববিজ্ঞান</span></div>
-    <h1 class="cTitle"><span class="lang-en">BIOLOGY</span><span class="lang-bn hidden">জীববিজ্ঞান</span></h1>
-    <div class="cDef">
-      <span class="lang-en">The science of life itself. From the double helix inside every cell to the sweep of evolution across billions of years.</span>
-      <span class="lang-bn hidden">জীবন বিজ্ঞান। প্রতিটি কোষের ভেতরের দ্বি-সর্পিল থেকে কোটি বছরের বিবর্তনের পরিধি পর্যন্ত।</span>
-    </div>
-    <p class="cDesc">
-      <span class="lang-en">Darwin unified all species under evolution. Watson & Crick cracked the code of heredity. Every living thing runs on the same molecular machinery.</span>
-      <span class="lang-bn hidden">ডারউইন বিবর্তনে সব প্রজাতিকে একত্রিত করলেন। ওয়াটসন ও ক্রিক বংশগতির সংকেত উন্মোচন করলেন।</span>
-    </p>
-    <div class="cHL"><span class="lang-en">🧬 DNA → RNA → Protein · 6CO₂ + 6H₂O → Glucose</span><span class="lang-bn hidden">🧬 DNA → RNA → প্রোটিন · সালোকসংশ্লেষণ</span></div>
-    <div class="cFoot"><span class="lang-en">Coming Soon — View Theory ↓</span><span class="lang-bn hidden">শীঘ্রই আসছে — তত্ত্ব দেখুন ↓</span></div>
-  </a>
+<!-- BIOLOGY -->
+<a href="#" class="sCard biCard" id="biCardLink">
+  <div class="bioWing"><div class="wingSlash"></div><div class="wingSlash wingSlash2"></div></div>
+  <div class="featherWrap" id="featherWrap"></div>
+  <div class="cellRings">
+    <div class="cRing" style="animation-delay:0s;"></div>
+    <div class="cRing" style="animation-delay:1.2s;"></div>
+    <div class="cRing" style="animation-delay:2.4s;"></div>
+  </div>
+  <div class="vineWrap" id="vineWrap"></div>
+  <canvas id="dnaC" width="44"></canvas>
+  <div class="cNum"><span class="lang-en">Project 03 — Biology</span><span class="lang-bn hidden">প্রকল্প ০৩ — জীববিজ্ঞান</span></div>
+  <h1 class="cTitle"><span class="lang-en">BIOLOGY</span><span class="lang-bn hidden">জীববিজ্ঞান</span></h1>
+  <div class="cDef">
+    <span class="lang-en">The science of life itself. From the double helix inside every cell to the sweep of evolution across billions of years.</span>
+    <span class="lang-bn hidden">জীবনের বিজ্ঞান। প্রতিটি কোষের অভ্যন্তরীণ দ্বি-কুণ্ডলী থেকে কোটি বছরের বিবর্তন পর্যন্ত।</span>
+  </div>
+  <p class="cDesc">
+    <span class="lang-en">Darwin unified all species under evolution. Watson & Crick cracked the code of heredity. Every living thing runs on the same molecular machinery.</span>
+    <span class="lang-bn hidden">ডারউইন বিবর্তনের মাধ্যমে সমস্ত প্রজাতিকে একত্রিত করলেন। ওয়াটসন ও ক্রিক বংশগতির সংকেত উন্মোচন করলেন।</span>
+  </p>
+  <div class="cHL"><span class="lang-en">🧬 DNA → RNA → Protein · 6CO₂ + 6H₂O → Glucose</span><span class="lang-bn hidden">🧬 DNA → RNA → প্রোটিন · সালোকসংশ্লেষণ বিক্রিয়া</span></div>
+  <div class="cFoot"><span class="lang-en">Coming Soon — View Theory ↓</span><span class="lang-bn hidden">শীঘ্রই আসছে — তত্ত্ব দেখুন ↓</span></div>
+</a>
 </div>
 
 <!-- BIOLOGY POPUP -->
@@ -371,10 +386,10 @@
     <span class="emoji">🚧</span>
     <h3><span class="lang-en">Sorry, not available yet!</span><span class="lang-bn hidden">দুঃখিত, এখনও উপলব্ধ নয়!</span></h3>
     <p>
-      <span class="lang-en">The Biology interactive lab is still under construction. Check back soon — it's going to be amazing!</span>
-      <span class="lang-bn hidden">জীববিজ্ঞান ইন্টারেক্টিভ ল্যাব এখনও নির্মাণাধীন। শীঘ্রই আসছে — এটি অসাধারণ হবে!</span>
+      <span class="lang-en">The Biology interactive lab is still under construction. Check back soon — it's going to be amazing! Meanwhile, you can ask our AI assistant or browse the Biology theory below.</span>
+      <span class="lang-bn hidden">জীববিজ্ঞান ইন্টারেক্টিভ ল্যাব নির্মাণাধীন। শীঘ্রই আসছে! এর মধ্যে আমাদের AI সহকারী ব্যবহার করুন অথবা নিচের তত্ত্ব দেখুন।</span>
     </p>
-    <button class="popup-close" onclick="closeBioPopup()"><span class="lang-en">Got it!</span><span class="lang-bn hidden">ঠিক আছে!</span></button>
+    <button class="popup-close" onclick="closeBioPopup()"><span class="lang-en">Got it!</span><span class="lang-bn hidden">বুঝেছি!</span></button>
   </div>
 </div>
 
@@ -387,63 +402,105 @@
     <span class="tHdrIcon">⚛️</span>
     <div>
       <div class="tHdrTitle"><span class="lang-en">PHYSICS — MOTION</span><span class="lang-bn hidden">পদার্থবিজ্ঞান — গতি</span></div>
-      <div class="tHdrSub">KINEMATICS · LAWS · HISTORY</div>
+      <div class="tHdrSub">KINEMATICS · LAWS OF MOTION · HISTORY · ENERGY</div>
     </div>
   </div>
   <div class="tGrid">
     <div class="tBlk tFull">
       <h3><span class="lang-en">History of Physics</span><span class="lang-bn hidden">পদার্থবিজ্ঞানের ইতিহাস</span></h3>
-      <div class="tl"><span class="tYear">~350 BC</span><span class="tTxt"><strong>Aristotle</strong> proposed heavier objects fall faster — wrong, but believed for 2,000 years. He also thought continuous force was needed to maintain motion.</span></div>
-      <div class="tl"><span class="tYear">1589</span><span class="tTxt"><strong>Galileo Galilei</strong> disproved Aristotle at the Leaning Tower of Pisa. He introduced inertia and described projectile paths mathematically for the first time.</span></div>
-      <div class="tl"><span class="tYear">1687</span><span class="tTxt"><strong>Isaac Newton</strong> published Principia Mathematica — 3 Laws of Motion + Universal Gravitation (F = Gm₁m₂/r²). Unified terrestrial and celestial mechanics.</span></div>
-      <div class="tl"><span class="tYear">1865</span><span class="tTxt"><strong>James Clerk Maxwell</strong> unified electricity, magnetism and light into 4 equations. Predicted electromagnetic waves, confirmed by Hertz (1887).</span></div>
-      <div class="tl"><span class="tYear">1905</span><span class="tTxt"><strong>Albert Einstein</strong> — Special Relativity: E=mc², time dilation at high speeds. Nothing with mass can reach the speed of light.</span></div>
-      <div class="tl"><span class="tYear">1915</span><span class="tTxt"><strong>General Relativity</strong>: gravity is spacetime curvature caused by mass. Confirmed by light bending around the Sun (Eddington, 1919).</span></div>
-      <div class="tl"><span class="tYear">1927</span><span class="tTxt"><strong>Quantum Mechanics</strong> (Heisenberg, Schrödinger, Bohr): particles exist as probability waves. Uncertainty principle: Δx·Δp ≥ ℏ/2.</span></div>
+      <div class="tl"><span class="tYear">~350 BC</span><span class="tTxt"><strong>অ্যারিস্টটল / Aristotle</strong> — <span class="lang-en">Proposed heavier objects fall faster and continuous force is needed to maintain motion. Both ideas are wrong, yet dominated science for 2,000 years. His qualitative approach lacked mathematics.</span><span class="lang-bn hidden">বলেছিলেন ভারী বস্তু দ্রুত পড়ে এবং গতি বজায় রাখতে ক্রমাগত বলের প্রয়োজন। উভয় ধারণাই ভুল ছিল, তবুও ২০০০ বছর ধরে বিজ্ঞানকে প্রভাবিত করেছে।</span></span></div>
+      <div class="tl"><span class="tYear">1589</span><span class="tTxt"><strong>গ্যালিলিও গ্যালিলেই / Galileo Galilei</strong> — <span class="lang-en">Disproved Aristotle at the Leaning Tower of Pisa. Introduced the concept of inertia, described projectile motion mathematically for the first time, and pioneered experimental scientific method. Showed that in the absence of friction, objects maintain velocity.</span><span class="lang-bn hidden">পিসার হেলানো মিনারে অ্যারিস্টটলকে ভুল প্রমাণ করেন। জাড্যতার ধারণা প্রবর্তন করেন, প্রথমবার প্রাসের গতি গণিতের ভাষায় বর্ণনা করেন এবং পরীক্ষামূলক বৈজ্ঞানিক পদ্ধতির পথিকৃৎ হন।</span></span></div>
+      <div class="tl"><span class="tYear">1687</span><span class="tTxt"><strong>আইজ্যাক নিউটন / Isaac Newton</strong> — <span class="lang-en">Published Principia Mathematica. Three Laws of Motion + Universal Gravitation (F = Gm₁m₂/r²). United terrestrial and celestial mechanics for the first time. Invented calculus to solve motion problems. Considered the greatest scientific work ever written.</span><span class="lang-bn hidden">প্রিন্সিপিয়া ম্যাথমেটিকা প্রকাশ করেন। গতির তিনটি সূত্র ও সার্বজনীন মহাকর্ষ সূত্র (F = Gm₁m₂/r²) প্রদান করেন। পার্থিব ও মহাজাগতিক বলবিদ্যাকে প্রথমবার একত্রিত করেন। গতির সমস্যা সমাধানের জন্য ক্যালকুলাস আবিষ্কার করেন।</span></span></div>
+      <div class="tl"><span class="tYear">1798</span><span class="tTxt"><strong>হেনরি ক্যাভেন্ডিশ / Henry Cavendish</strong> — <span class="lang-en">Measured the gravitational constant G = 6.674×10⁻¹¹ N·m²/kg² using a torsion balance. This allowed the mass of the Earth to be calculated (5.97×10²⁴ kg).</span><span class="lang-bn hidden">টর্শন তুলা ব্যবহার করে মহাকর্ষ ধ্রুবক G = 6.674×10⁻¹¹ N·m²/kg² পরিমাপ করেন এবং পৃথিবীর ভর গণনা করতে সক্ষম হন।</span></span></div>
+      <div class="tl"><span class="tYear">1865</span><span class="tTxt"><strong>জেমস ক্লার্ক ম্যাক্সওয়েল / James Clerk Maxwell</strong> — <span class="lang-en">Unified electricity, magnetism and light into 4 elegant equations. Predicted electromagnetic waves traveling at speed of light — confirmed by Hertz (1887). Laid foundation for modern electronics and relativity.</span><span class="lang-bn hidden">বিদ্যুৎ, চুম্বকত্ব ও আলোকে ৪টি সমীকরণে একত্রিত করেন। আলোর বেগে তাড়িতচুম্বকীয় তরঙ্গের ভবিষ্যদ্বাণী করেন।</span></span></div>
+      <div class="tl"><span class="tYear">1905</span><span class="tTxt"><strong>আলবার্ট আইনস্টাইন / Albert Einstein</strong> — <span class="lang-en">Special Relativity: E = mc², time dilation, length contraction at high speeds. Mass and energy are interchangeable. Nothing with mass can reach or exceed the speed of light (c = 3×10⁸ m/s).</span><span class="lang-bn hidden">বিশেষ আপেক্ষিকতা: E = mc², উচ্চবেগে কাল প্রসারণ ও দৈর্ঘ্য সংকোচন। ভর ও শক্তি রূপান্তরযোগ্য। কোনো ভরযুক্ত বস্তু আলোর বেগে পৌঁছাতে পারে না।</span></span></div>
+      <div class="tl"><span class="tYear">1915</span><span class="tTxt"><strong>সাধারণ আপেক্ষিকতা / General Relativity</strong> — <span class="lang-en">Gravity is the curvature of spacetime caused by mass-energy. Confirmed when Eddington observed light bending around the Sun (1919). Predicts black holes, gravitational waves (detected LIGO 2015), and GPS correction (without GR, GPS would drift 10 km/day).</span><span class="lang-bn hidden">মহাকর্ষ হলো ভর-শক্তি দ্বারা সৃষ্ট স্থান-কালের বক্রতা। ১৯১৯ সালে আলোর বিচ্যুতি দ্বারা নিশ্চিত হয়। কৃষ্ণগহ্বর ও মহাকর্ষীয় তরঙ্গ পূর্বাভাস দেয়।</span></span></div>
+      <div class="tl"><span class="tYear">1927</span><span class="tTxt"><strong>কোয়ান্টাম বলবিদ্যা / Quantum Mechanics</strong> — <span class="lang-en">Heisenberg, Schrödinger, Bohr: particles exist as probability waves. Uncertainty principle: Δx·Δp ≥ ℏ/2. Wave-particle duality. Quantum tunneling enables radioactive decay and modern transistors.</span><span class="lang-bn hidden">হাইজেনবার্গ, শ্রোডিঙ্গার, বোর: কণা সম্ভাবনা তরঙ্গ হিসেবে বিদ্যমান। অনিশ্চয়তার নীতি: Δx·Δp ≥ ℏ/2। তরঙ্গ-কণা দ্বৈততা।</span></span></div>
+      <div class="tl"><span class="tYear">1971</span><span class="tTxt"><strong>অ্যাপোলো ১৫ / Apollo 15</strong> — <span class="lang-en">Astronaut David Scott dropped a hammer and feather on the Moon simultaneously — both hit the surface at the same time, confirming Galileo's 1589 claim that all objects fall equally in the absence of air resistance.</span><span class="lang-bn hidden">নভোচারী ডেভিড স্কট চাঁদে হাতুড়ি ও পালক একসাথে ফেললেন — দুটি একই সময়ে পড়ল, ১৫৮৯ সালে গ্যালিলিওর দাবি নিশ্চিত করে।</span></span></div>
     </div>
+
     <div class="tBlk">
-      <h3><span class="lang-en">Newton's Laws of Motion</span><span class="lang-bn hidden">নিউটনের গতিসূত্র</span></h3>
-      <p><strong style="color:var(--blue)">১ম সূত্র / 1st (Inertia):</strong> <span class="lang-en">An object remains at rest or uniform motion unless a net external force acts on it. A hockey puck on ice slides forever (ideally).</span><span class="lang-bn hidden">বাহ্যিক বল না লাগলে স্থির বস্তু স্থির থাকে, গতিশীল বস্তু সমবেগে চলতে থাকে।</span></p>
-      <p><strong style="color:var(--blue)">২য় সূত্র / 2nd:</strong></p>
+      <h3><span class="lang-en">Newton's Laws of Motion</span><span class="lang-bn hidden">নিউটনের গতিসূত্রসমূহ</span></h3>
+      <p><strong style="color:var(--blue)"><span class="lang-en">1st Law — Inertia:</span><span class="lang-bn hidden">১ম সূত্র — জাড্যতা:</span></strong><br>
+      <span class="lang-en">An object remains at rest or in uniform motion in a straight line unless acted upon by a net external force. The tendency to resist change in motion is called inertia. Mass is the measure of inertia.</span>
+      <span class="lang-bn hidden">বাহ্যিক নেট বল প্রযুক্ত না হলে স্থির বস্তু স্থিরই থাকে এবং গতিশীল বস্তু সমবেগে সরলরেখায় চলতে থাকে। গতি পরিবর্তনে বাধার এই প্রবণতাকে জাড্যতা বলে। ভর হলো জাড্যতার পরিমাপ।</span></p>
+      <p><strong style="color:var(--blue)"><span class="lang-en">2nd Law — Force:</span><span class="lang-bn hidden">২য় সূত্র — বল:</span></strong></p>
       <span class="fml">F = ma</span>
-      <span class="fml">a = Δv/Δt</span>
-      <p><span class="lang-en">Net force = mass × acceleration. Double the mass → half the acceleration for the same force.</span><span class="lang-bn hidden">নেট বল = ভর × ত্বরণ। একই বলে ভর দ্বিগুণ → ত্বরণ অর্ধেক।</span></p>
-      <p><strong style="color:var(--blue)">৩য় সূত্র / 3rd:</strong> <span class="lang-en">Every action has an equal and opposite reaction. Rocket exhaust pushes down → rocket goes up.</span><span class="lang-bn hidden">প্রতিটি ক্রিয়ার সমান ও বিপরীত প্রতিক্রিয়া আছে। রকেটের গ্যাস নিচে → রকেট ওপরে যায়।</span></p>
+      <span class="fml">F = Δp/Δt (impulse form)</span>
+      <p><span class="lang-en">Net force equals rate of change of momentum. Double the mass → half the acceleration for the same force. A 1 kg mass accelerated at 1 m/s² requires exactly 1 Newton of force.</span>
+      <span class="lang-bn hidden">নেট বল = ভর × ত্বরণ। একই বলে ভর দ্বিগুণ হলে ত্বরণ অর্ধেক হয়। ১ kg ভরকে ১ m/s² ত্বরণ দিতে ঠিক ১ Newton বলের প্রয়োজন।</span></p>
+      <p><strong style="color:var(--blue)"><span class="lang-en">3rd Law — Reaction:</span><span class="lang-bn hidden">৩য় সূত্র — প্রতিক্রিয়া:</span></strong><br>
+      <span class="lang-en">Every action has an equal and opposite reaction acting on different bodies. Rocket exhaust pushes backward → rocket accelerates forward. You push the floor → floor pushes you up (Normal force).</span>
+      <span class="lang-bn hidden">প্রতিটি ক্রিয়ার সমান ও বিপরীত প্রতিক্রিয়া ভিন্ন বস্তুতে ক্রিয়া করে। রকেট গ্যাস পিছনে ঠেলে → রকেট সামনে যায়। তুমি মেঝে ঠেলো → মেঝে তোমাকে উপরে ঠেলে (স্বাভাবিক বল)।</span></p>
     </div>
+
     <div class="tBlk">
-      <h3><span class="lang-en">Kinematic Equations</span><span class="lang-bn hidden">গতিবিদ্যার সমীকরণ</span></h3>
-      <p><span class="lang-en">Under constant acceleration, these four equations cover all 1D motion:</span><span class="lang-bn hidden">সমত্বরণে এই চারটি সমীকরণ সব একমাত্রিক গতি বর্ণনা করে:</span></p>
+      <h3><span class="lang-en">Kinematic Equations</span><span class="lang-bn hidden">গতিবিদ্যার সমীকরণসমূহ</span></h3>
+      <p><span class="lang-en">For constant acceleration along a straight line (5 variables: u, v, a, t, s — each equation uses 4):</span>
+      <span class="lang-bn hidden">সমত্বরণে সরলরৈখিক গতির জন্য (৫টি রাশি: u, v, a, t, s — প্রতিটি সমীকরণ ৪টি ব্যবহার করে):</span></p>
       <span class="fml">v = u + at</span>
       <span class="fml">s = ut + ½at²</span>
       <span class="fml">v² = u² + 2as</span>
       <span class="fml">s = (u+v)/2 × t</span>
-      <p style="font-size:.78rem;opacity:.6;"><span class="lang-en">u=initial vel · v=final vel · a=acceleration · t=time · s=displacement</span><span class="lang-bn hidden">u=আদিবেগ · v=অন্তবেগ · a=ত্বরণ · t=সময় · s=সরণ</span></p>
+      <span class="fml">s = vt − ½at²</span>
+      <p style="font-size:.78rem;opacity:.58;"><span class="lang-en">u = initial velocity · v = final velocity · a = acceleration · t = time · s = displacement</span>
+      <span class="lang-bn hidden">u = আদিবেগ · v = অন্তিমবেগ · a = ত্বরণ · t = সময় · s = সরণ</span></p>
+      <p><span class="lang-en"><strong style="color:var(--blue)">Free fall:</strong> Replace a with g = 9.8 m/s² (9.81 precisely). On Moon: g = 1.62 m/s². On Mars: g = 3.72 m/s².</span>
+      <span class="lang-bn hidden"><strong style="color:var(--blue)">মুক্তপতন:</strong> a-এর জায়গায় g = 9.8 m/s² বসাও। চাঁদে: g = 1.62, মঙ্গলে: g = 3.72 m/s²।</span></p>
     </div>
+
     <div class="tBlk">
       <h3><span class="lang-en">Projectile Motion</span><span class="lang-bn hidden">প্রাসের গতি</span></h3>
-      <p><span class="lang-en">Launched at angle θ with speed u. Horizontal and vertical components are independent. Air resistance ignored.</span><span class="lang-bn hidden">θ কোণে u বেগে নিক্ষিপ্ত। অনুভূমিক ও উল্লম্ব উপাংশ স্বাধীন।</span></p>
-      <span class="fml">Range = u²sin(2θ)/g</span>
-      <span class="fml">H_max = u²sin²θ / 2g</span>
+      <p><span class="lang-en">Launched at angle θ with initial speed u. Horizontal (x) and vertical (y) components are completely independent. Horizontal: constant velocity (no force). Vertical: constant downward acceleration g.</span>
+      <span class="lang-bn hidden">θ কোণে u বেগে নিক্ষিপ্ত। অনুভূমিক (x) ও উল্লম্ব (y) উপাংশ সম্পূর্ণ স্বাধীন। অনুভূমিক: সমবেগ। উল্লম্ব: নিচের দিকে সমত্বরণ g।</span></p>
+      <span class="fml">uₓ = u·cosθ,  u_y = u·sinθ</span>
+      <span class="fml">Range R = u²·sin(2θ) / g</span>
+      <span class="fml">H_max = u²·sin²θ / (2g)</span>
       <span class="fml">T_flight = 2u·sinθ / g</span>
-      <p><span class="lang-en">Maximum range at θ=45°. Galileo was first to analyse this correctly in 1609.</span><span class="lang-bn hidden">θ=45°-এ সর্বোচ্চ পরিসর। গ্যালিলিও ১৬০৯ সালে প্রথম সঠিকভাবে বিশ্লেষণ করেন।</span></p>
+      <p><span class="lang-en">Maximum range at θ = 45°. Complementary angles (e.g. 30° & 60°) give the same range. Galileo first derived this correctly in 1609 — a revolutionary result.</span>
+      <span class="lang-bn hidden">θ = 45°-এ সর্বোচ্চ পরিসর। পরিপূরক কোণ (যেমন ৩০° ও ৬০°) একই পরিসর দেয়। গ্যালিলিও ১৬০৯ সালে প্রথম সঠিকভাবে এটি প্রমাণ করেন।</span></p>
     </div>
+
     <div class="tBlk">
       <h3><span class="lang-en">Types of Motion</span><span class="lang-bn hidden">গতির প্রকারভেদ</span></h3>
-      <p><strong style="color:var(--blue)">Linear / সরলরৈখিক:</strong> <span class="lang-en">Straight line. Uniform (constant v) or uniformly accelerated.</span><span class="lang-bn hidden">সরল রেখায় গতি। সমগতি বা সুষম ত্বরিত।</span></p>
-      <p><strong style="color:var(--blue)">Circular / বৃত্তাকার:</strong> <span class="lang-en">Constant speed, changing direction. F_c = mv²/r toward center. ω = v/r.</span><span class="lang-bn hidden">স্থির দ্রুতি, পরিবর্তনশীল দিক। F_c = mv²/r কেন্দ্রমুখী।</span></p>
-      <p><strong style="color:var(--blue)">SHM / সরল স্পন্দন:</strong> <span class="lang-en">F = -kx. T_spring = 2π√(m/k). T_pendulum = 2π√(L/g).</span><span class="lang-bn hidden">F = -kx। T_স্প্রিং = 2π√(m/k)। T_দোলক = 2π√(L/g)।</span></p>
-      <p><strong style="color:var(--blue)">Random / এলোমেলো (Brownian):</strong> <span class="lang-en">Irregular particle collisions in fluid. Brown observed pollen in water (1827).</span><span class="lang-bn hidden">তরলে অনিয়মিত কণার সংঘর্ষ। ব্রাউন ১৮২৭ সালে পরাগরেণুতে দেখেন।</span></p>
-      <p><strong style="color:var(--blue)">Oscillatory / দোলন:</strong> <span class="lang-en">Periodic back-and-forth about equilibrium. SHM is a special case. All waves are oscillatory.</span><span class="lang-bn hidden">ভারসাম্যের চারপাশে পর্যায়ক্রমিক গতি। SHM বিশেষ ক্ষেত্র।</span></p>
+      <p><strong style="color:var(--blue)">সরলরৈখিক / Linear:</strong> <span class="lang-en">Along a straight line. Uniform (constant velocity, a=0) or non-uniform (changing velocity, a≠0). Distance is scalar; displacement is vector.</span>
+      <span class="lang-bn hidden">সরল রেখায়। সুষম (সমবেগ, a=0) বা অসুষম (পরিবর্তিত বেগ, a≠0)। দূরত্ব স্কেলার; সরণ ভেক্টর।</span></p>
+      <p><strong style="color:var(--blue)">বৃত্তাকার / Circular:</strong><br>
+      <span class="lang-en">Constant speed but continuously changing direction → always accelerating. Centripetal acceleration a = v²/r toward center. Centripetal force F_c = mv²/r. Angular velocity ω = v/r = 2π/T.</span>
+      <span class="lang-bn hidden">স্থির দ্রুতি কিন্তু ক্রমাগত পরিবর্তনশীল দিক → সর্বদা ত্বরণ। কেন্দ্রমুখী ত্বরণ a = v²/r। কেন্দ্রমুখী বল F_c = mv²/r। কৌণিক বেগ ω = v/r।</span></p>
+      <p><strong style="color:var(--blue)">সরল স্পন্দন / SHM:</strong>
+      <span class="lang-en">Restoring force F = -kx (proportional to displacement, toward equilibrium). Spring: T = 2π√(m/k). Simple pendulum: T = 2π√(L/g). Energy oscillates between KE and PE.</span>
+      <span class="lang-bn hidden">পুনরুদ্ধারকারী বল F = -kx (সরণের সমানুপাতিক, ভারসাম্যের দিকে)। স্প্রিং: T = 2π√(m/k)। সরল দোলক: T = 2π√(L/g)।</span></p>
+      <p><strong style="color:var(--blue)">দোলন গতি / Oscillatory:</strong>
+      <span class="lang-en">Periodic motion about a fixed equilibrium. SHM is a special case. All mechanical waves are oscillatory. Period T (seconds), Frequency f = 1/T (Hz), ω = 2πf.</span>
+      <span class="lang-bn hidden">নির্দিষ্ট ভারসাম্য বিন্দুর চারদিকে পর্যায়ক্রমিক গতি। SHM বিশেষ ক্ষেত্র। আবর্তকাল T, কম্পাঙ্ক f = 1/T।</span></p>
+      <p><strong style="color:var(--blue)">ব্রাউনীয় / Random (Brownian):</strong>
+      <span class="lang-en">Irregular, random motion of particles in a fluid due to molecular bombardment. Brown observed pollen in water (1827). Einstein explained it mathematically in 1905, proving atoms exist.</span>
+      <span class="lang-bn hidden">তরলে অণুর আঘাতের কারণে কণার অনিয়মিত, এলোমেলো গতি। ব্রাউন ১৮২৭ সালে পরাগরেণুতে প্রথম দেখেন। আইনস্টাইন ১৯০৫ সালে গাণিতিকভাবে ব্যাখ্যা করেন।</span></p>
     </div>
+
     <div class="tBlk">
-      <h3><span class="lang-en">Gravity, Energy & Momentum</span><span class="lang-bn hidden">মহাকর্ষ, শক্তি ও ভরবেগ</span></h3>
-      <span class="fml">F = Gm₁m₂/r² (Universal Gravitation)</span>
-      <span class="fml">g = 9.8 m/s² (near Earth surface)</span>
+      <h3><span class="lang-en">Energy, Work & Momentum</span><span class="lang-bn hidden">শক্তি, কার্য ও ভরবেগ</span></h3>
       <span class="fml">KE = ½mv²</span>
-      <span class="fml">PE = mgh</span>
-      <span class="fml">p = mv (Momentum)</span>
-      <span class="fml">W = F·d·cosθ (Work)</span>
-      <p><span class="lang-en">Apollo 15 (1971): astronaut dropped hammer and feather on Moon — hit simultaneously, confirming Galileo's claim that all objects fall equally.</span><span class="lang-bn hidden">অ্যাপোলো ১৫ (১৯৭১): চাঁদে হাতুড়ি ও পালক একসাথে পড়ে — গ্যালিলিওর দাবি নিশ্চিত করে।</span></p>
+      <span class="fml">PE_gravity = mgh</span>
+      <span class="fml">W = F·d·cosθ</span>
+      <span class="fml">Power P = W/t = F·v</span>
+      <span class="fml">p = mv (Linear Momentum)</span>
+      <span class="fml">L = Iω (Angular Momentum)</span>
+      <span class="fml">e = ½kx² (Elastic PE)</span>
+      <p><span class="lang-en"><strong style="color:var(--blue)">Conservation Laws:</strong> In a closed system, total energy is conserved (First Law of Thermodynamics). Total linear momentum is conserved in any collision. Elastic collision: both KE and p conserved. Inelastic: only p conserved.</span>
+      <span class="lang-bn hidden"><strong style="color:var(--blue)">সংরক্ষণ সূত্র:</strong> বদ্ধ তন্ত্রে মোট শক্তি সংরক্ষিত। যেকোনো সংঘর্ষে মোট রৈখিক ভরবেগ সংরক্ষিত। স্থিতিস্থাপক সংঘর্ষে: KE ও p উভয়ই সংরক্ষিত।</span></p>
+    </div>
+
+    <div class="tBlk">
+      <h3><span class="lang-en">Gravity & Universal Law</span><span class="lang-bn hidden">মহাকর্ষ ও সার্বজনীন সূত্র</span></h3>
+      <span class="fml">F = Gm₁m₂/r²</span>
+      <span class="fml">G = 6.674×10⁻¹¹ N·m²/kg²</span>
+      <span class="fml">g_surface = GM/R²</span>
+      <span class="fml">v_escape = √(2GM/R)</span>
+      <span class="fml">T² ∝ r³ (Kepler's 3rd Law)</span>
+      <p><span class="lang-en">Earth: g = 9.8 m/s², escape velocity = 11.2 km/s. Newton realised the Moon is in free fall — it falls around Earth, just like an apple falls toward Earth. This unified terrestrial and celestial physics.</span>
+      <span class="lang-bn hidden">পৃথিবী: g = 9.8 m/s², মুক্তিবেগ = 11.2 km/s। নিউটন বুঝলেন চাঁদও মুক্তভাবে পড়ছে — সে পৃথিবীর চারদিকে পড়ছে, যেমন আপেল মাটিতে পড়ে। এটি পার্থিব ও মহাজাগতিক পদার্থবিজ্ঞানকে একত্রিত করল।</span></p>
     </div>
   </div>
 </section>
@@ -454,56 +511,91 @@
     <span class="tHdrIcon">🧪</span>
     <div>
       <div class="tHdrTitle"><span class="lang-en">CHEMISTRY — ATOMS & TRENDS</span><span class="lang-bn hidden">রসায়ন — পরমাণু ও প্রবণতা</span></div>
-      <div class="tHdrSub">PERIODIC TABLE · BONDING · HISTORY</div>
+      <div class="tHdrSub">PERIODIC TABLE · BONDING · ATOMIC STRUCTURE · HISTORY</div>
     </div>
   </div>
   <div class="tGrid">
     <div class="tBlk tFull">
       <h3><span class="lang-en">History of Chemistry</span><span class="lang-bn hidden">রসায়নবিজ্ঞানের ইতিহাস</span></h3>
-      <div class="tl"><span class="tYear">~450 BC</span><span class="tTxt"><strong>Democritus</strong> proposed matter is made of indivisible "atomos." Pure philosophy — no experiments. Aristotle rejected this, delaying progress by millennia.</span></div>
-      <div class="tl"><span class="tYear">1661</span><span class="tTxt"><strong>Robert Boyle</strong> — The Sceptical Chymist: separated chemistry from alchemy, defined elements as irreducible substances. Founded scientific chemistry.</span></div>
-      <div class="tl"><span class="tYear">1789</span><span class="tTxt"><strong>Lavoisier</strong> proved conservation of mass, named oxygen and hydrogen, wrote first modern chemistry textbook. Called "Father of Chemistry." Guillotined in 1794.</span></div>
-      <div class="tl"><span class="tYear">1803</span><span class="tTxt"><strong>John Dalton</strong> — modern atomic theory: elements made of identical atoms; compounds = fixed atom ratios; reactions rearrange atoms.</span></div>
-      <div class="tl"><span class="tYear">1869</span><span class="tTxt"><strong>Dmitri Mendeleev</strong> arranged 63 elements by atomic weight and recurring properties. Left gaps for unknown elements, predicting gallium, scandium, germanium — all confirmed within 15 years.</span></div>
-      <div class="tl"><span class="tYear">1897</span><span class="tTxt"><strong>J.J. Thomson</strong> discovered the electron via cathode ray tubes. First subatomic particle found, disproving the "solid atom."</span></div>
-      <div class="tl"><span class="tYear">1911</span><span class="tTxt"><strong>Ernest Rutherford</strong> gold foil experiment: discovered nucleus. Most of atom is empty space. Nucleus is tiny but contains almost all mass.</span></div>
-      <div class="tl"><span class="tYear">1913</span><span class="tTxt"><strong>Niels Bohr</strong> quantum atom: electrons occupy discrete energy levels (shells). Explained hydrogen's emission spectrum exactly.</span></div>
-      <div class="tl"><span class="tYear">1926</span><span class="tTxt"><strong>Schrödinger</strong> — quantum mechanical model: electrons exist as probability clouds (orbitals s,p,d,f), not fixed paths.</span></div>
+      <div class="tl"><span class="tYear">~450 BC</span><span class="tTxt"><strong>ডেমোক্রিটাস / Democritus</strong> — <span class="lang-en">Proposed matter is made of indivisible "atomos." Pure philosophy with no experiments. Aristotle rejected this in favour of four elements (earth, water, fire, air), delaying atomic theory by over 2,000 years.</span><span class="lang-bn hidden">বলেছিলেন পদার্থ অবিভাজ্য "পরমাণু" দিয়ে তৈরি। কিন্তু কোনো পরীক্ষা-নিরীক্ষা ছাড়া শুধু দার্শনিক চিন্তা। অ্যারিস্টটল চার মূল উপাদানের পক্ষে এটি প্রত্যাখ্যান করেন।</span></span></div>
+      <div class="tl"><span class="tYear">8th-13th c</span><span class="tTxt"><strong>জাবির ইবনে হাইয়ান / Jabir ibn Hayyan</strong> — <span class="lang-en">Father of Chemistry. Arab chemist who pioneered experimental methods, distillation, crystallisation, and described many acids (sulfuric, nitric, hydrochloric). His work preserved and extended Greek knowledge through the Dark Ages.</span><span class="lang-bn hidden">রসায়নের জনক। পরীক্ষামূলক পদ্ধতি, পাতন, স্ফটিকীকরণের পথিকৃৎ এবং সালফিউরিক, নাইট্রিক, হাইড্রোক্লোরিক অ্যাসিড বর্ণনা করেন।</span></span></div>
+      <div class="tl"><span class="tYear">1661</span><span class="tTxt"><strong>রবার্ট বয়েল / Robert Boyle</strong> — <span class="lang-en">The Sceptical Chymist: separated chemistry from alchemy, defined elements as irreducible substances that cannot be broken down further. Founded scientific chemistry. Boyle's Law: P₁V₁ = P₂V₂ at constant temperature.</span><span class="lang-bn hidden">রসায়নকে আলকেমি থেকে আলাদা করেন, মৌল সংজ্ঞায়িত করেন। বৈজ্ঞানিক রসায়নের প্রতিষ্ঠাতা। বয়েলের সূত্র: P₁V₁ = P₂V₂।</span></span></div>
+      <div class="tl"><span class="tYear">1789</span><span class="tTxt"><strong>ল্যাভয়সিয়ে / Lavoisier</strong> — <span class="lang-en">Proved conservation of mass ("matter is neither created nor destroyed"), named oxygen and hydrogen, wrote the first modern chemistry textbook. Called the "Father of Modern Chemistry." Ironically guillotined during the French Revolution in 1794.</span><span class="lang-bn hidden">ভরের সংরক্ষণ প্রমাণ করেন, অক্সিজেন ও হাইড্রোজেনের নামকরণ করেন। আধুনিক রসায়নের জনক। ১৭৯৪ সালে ফরাসি বিপ্লবে গিলোটিনে মৃত্যুবরণ করেন।</span></span></div>
+      <div class="tl"><span class="tYear">1803</span><span class="tTxt"><strong>জন ডাল্টন / John Dalton</strong> — <span class="lang-en">Modern Atomic Theory: elements made of identical, indivisible atoms; different elements have different atomic weights; compounds form by fixed whole-number ratios of atoms; chemical reactions rearrange (not create/destroy) atoms.</span><span class="lang-bn hidden">আধুনিক পারমাণবিক তত্ত্ব: মৌল অভিন্ন, অবিভাজ্য পরমাণু দিয়ে গঠিত; যৌগ নির্দিষ্ট পূর্ণসংখ্যা অনুপাতে গঠিত; বিক্রিয়া পরমাণু পুনর্বিন্যস্ত করে।</span></span></div>
+      <div class="tl"><span class="tYear">1869</span><span class="tTxt"><strong>দিমিত্রি মেন্ডেলিভ / Dmitri Mendeleev</strong> — <span class="lang-en">Arranged 63 known elements by atomic weight and recurring properties. Left deliberate gaps for undiscovered elements, predicting properties of gallium (eka-aluminium), scandium (eka-boron), and germanium (eka-silicon) — all confirmed within 15 years. Revolutionary act of scientific faith.</span><span class="lang-bn hidden">৬৩টি মৌলকে পারমাণবিক ভর ও পর্যাবৃত্ত ধর্মানুসারে সাজান। অনাবিষ্কৃত মৌলের জন্য ইচ্ছাকৃতভাবে ফাঁকা রাখেন — গ্যালিয়াম, স্ক্যান্ডিয়াম, জার্মেনিয়ামের ভবিষ্যদ্বাণী করেন, সব ১৫ বছরের মধ্যে নিশ্চিত হয়।</span></span></div>
+      <div class="tl"><span class="tYear">1897</span><span class="tTxt"><strong>J.J. টমসন / J.J. Thomson</strong> — <span class="lang-en">Discovered the electron via cathode ray tube experiments. First subatomic particle found, disproving the solid atom model. Proposed the "plum pudding" model: electrons embedded in a diffuse positive sphere.</span><span class="lang-bn hidden">ক্যাথোড রশ্মি নলের পরীক্ষায় ইলেকট্রন আবিষ্কার করেন। প্রথম উপপারমাণবিক কণা। "পুডিং মডেল" প্রস্তাব করেন।</span></span></div>
+      <div class="tl"><span class="tYear">1911</span><span class="tTxt"><strong>আর্নেস্ট রাদারফোর্ড / Ernest Rutherford</strong> — <span class="lang-en">Gold foil experiment: fired alpha particles at gold foil. Most passed through, but 1 in 8000 bounced back ("like firing artillery shells at tissue paper and they bounced back"). Conclusion: atom is mostly empty space with a tiny, dense, positively-charged nucleus.</span><span class="lang-bn hidden">স্বর্ণ পাত পরীক্ষা: অধিকাংশ আলফা কণা সরাসরি পার হল, কিন্তু ৮০০০টিতে ১টি পিছনে ফিরে এল। সিদ্ধান্ত: পরমাণু মূলত ফাঁকা, ক্ষুদ্র ঘন ধনাত্মক নিউক্লিয়াস আছে।</span></span></div>
+      <div class="tl"><span class="tYear">1913</span><span class="tTxt"><strong>নীলস বোর / Niels Bohr</strong> — <span class="lang-en">Quantum atomic model: electrons occupy discrete energy levels (shells n=1,2,3...). Electrons emit or absorb photons when jumping between levels (E = hf). Explained hydrogen's emission spectrum exactly. Introduced the concept of quantised angular momentum.</span><span class="lang-bn hidden">কোয়ান্টাম পারমাণবিক মডেল: ইলেকট্রন নির্দিষ্ট শক্তিস্তরে (শেল n=1,2,3...) অবস্থান করে। স্তর পরিবর্তনে ফোটন নির্গত বা শোষিত হয়। হাইড্রোজেনের বর্ণালি ঠিকঠাক ব্যাখ্যা করেন।</span></span></div>
+      <div class="tl"><span class="tYear">1926</span><span class="tTxt"><strong>শ্রোডিঙ্গার / Schrödinger</strong> — <span class="lang-en">Quantum mechanical model: electrons exist as probability clouds (orbitals: s, p, d, f), not fixed circular paths. Wave equation describes the probability of finding an electron at any location. This is the model still used today.</span><span class="lang-bn hidden">কোয়ান্টাম যান্ত্রিক মডেল: ইলেকট্রন সম্ভাবনা মেঘ (অরবিটাল: s, p, d, f) হিসেবে বিদ্যমান, নির্দিষ্ট বৃত্তাকার পথে নয়। তরঙ্গ সমীকরণ ইলেকট্রন খুঁজে পাওয়ার সম্ভাবনা বর্ণনা করে।</span></span></div>
     </div>
+
     <div class="tBlk">
-      <h3><span class="lang-en">Periodic Trends</span><span class="lang-bn hidden">পর্যায়বৃত্ত প্রবণতা</span></h3>
-      <p><strong style="color:var(--pink)">পারমাণবিক ব্যাসার্ধ / Atomic Radius:</strong> <span class="lang-en">↓ across period (more protons pull electrons closer). ↑ down group (new shells).</span><span class="lang-bn hidden">পর্যায়ে ↓ (বেশি প্রোটন ইলেকট্রন টানে)। গ্রুপে ↑ (নতুন শেল যোগ)।</span></p>
-      <p><strong style="color:var(--pink)">আয়নিকরণ শক্তি / Ionization Energy:</strong> <span class="lang-en">↑ left→right (electrons harder to remove). ↓ top→bottom (outer electrons more shielded). Highest: He (2372 kJ/mol).</span><span class="lang-bn hidden">বাম→ডানে ↑ (ইলেকট্রন সরানো কঠিন)। উপর→নিচে ↓। সর্বোচ্চ: He।</span></p>
-      <p><strong style="color:var(--pink)">তড়িৎঋণাত্মকতা / Electronegativity:</strong> <span class="lang-en">↑ toward top-right. F = 3.98 (Pauling scale, highest). Fr ≈ 0.7 (lowest). Key for predicting bond type.</span><span class="lang-bn hidden">উপর-ডানে ↑। F = 3.98 (পলিং স্কেলে সর্বোচ্চ)।</span></p>
-      <p><strong style="color:var(--pink)">ইলেকট্রন আসক্তি / Electron Affinity:</strong> <span class="lang-en">Energy released gaining an electron. Cl has the highest among all elements.</span><span class="lang-bn hidden">ইলেকট্রন গ্রহণে নির্গত শক্তি। Cl-এর সর্বোচ্চ।</span></p>
+      <h3><span class="lang-en">Periodic Trends — In Depth</span><span class="lang-bn hidden">পর্যায়বৃত্ত প্রবণতা — বিস্তারিত</span></h3>
+      <p><strong style="color:var(--pink)">পারমাণবিক ব্যাসার্ধ / Atomic Radius:</strong><br>
+      <span class="lang-en">Decreases left→right across a period: increasing nuclear charge (more protons) pulls electron clouds closer without adding new shells. Increases top→bottom down a group: each period adds a new electron shell, increasing atomic size. Li (152 pm) → F (64 pm) across period 2. Cs is the largest non-radioactive atom.</span>
+      <span class="lang-bn hidden">পর্যায়ে বাম→ডান হ্রাস পায়: পারমাণবিক আধান বৃদ্ধি (বেশি প্রোটন) ইলেকট্রন মেঘকে কাছে টানে, নতুন শেল যোগ হয় না। গ্রুপে উপর→নিচে বৃদ্ধি পায়: প্রতিটি পর্যায়ে নতুন শেল যুক্ত হয়। সিজিয়াম সবচেয়ে বড় অ-তেজস্ক্রিয় পরমাণু।</span></p>
+      <p><strong style="color:var(--pink)">আয়নিকরণ শক্তি / Ionization Energy (IE₁):</strong><br>
+      <span class="lang-en">Energy to remove the outermost electron. Increases left→right (stronger nuclear attraction, same shielding). Decreases top→bottom (more shielding from inner electrons, greater atomic radius). Anomalies: IE₁(O) &lt; IE₁(N) due to electron pairing in 2p. IE₁(Al) &lt; IE₁(Mg) due to 3p vs 3s subshell. Highest: He (2372 kJ/mol). Lowest: Cs (376 kJ/mol).</span>
+      <span class="lang-bn hidden">সর্ববাহ্য ইলেকট্রন অপসারণে প্রয়োজনীয় শক্তি। বাম→ডানে বৃদ্ধি (শক্তিশালী নিউক্লিয়ার আকর্ষণ)। উপর→নিচে হ্রাস (বেশি পরিরক্ষণ)। ব্যতিক্রম: IE₁(O) &lt; IE₁(N), IE₁(Al) &lt; IE₁(Mg)। সর্বোচ্চ: He, সর্বনিম্ন: Cs।</span></p>
+      <p><strong style="color:var(--pink)">তড়িৎঋণাত্মকতা / Electronegativity:</strong><br>
+      <span class="lang-en">Ability to attract electrons in a bond. Increases toward top-right of the periodic table. F = 3.98 (highest, Pauling scale). Fr ≈ 0.7 (lowest). If ΔEN &gt; 1.7: ionic bond. 0.4–1.7: polar covalent. &lt; 0.4: non-polar covalent. Determines molecular polarity, solubility, and reactivity.</span>
+      <span class="lang-bn hidden">বন্ধনে ইলেকট্রন আকর্ষণের ক্ষমতা। পর্যায় সারণির উপর-ডানে বৃদ্ধি পায়। F = 3.98 (সর্বোচ্চ)। ΔEN &gt; 1.7: আয়নিক বন্ধন। 0.4–1.7: মেরু সমযোজী। &lt; 0.4: অমেরু সমযোজী।</span></p>
+      <p><strong style="color:var(--pink)">ইলেকট্রন আসক্তি / Electron Affinity:</strong><br>
+      <span class="lang-en">Energy change when a gaseous atom gains one electron. Generally increases left→right. Cl has the highest electron affinity of all elements (−349 kJ/mol), higher than F due to smaller atomic size causing more electron-electron repulsion in F. Halogens and chalcogens have high electron affinities. Noble gases: near zero (full shells).</span>
+      <span class="lang-bn hidden">গ্যাসীয় পরমাণু একটি ইলেকট্রন গ্রহণ করলে শক্তির পরিবর্তন। Cl-এর সর্বোচ্চ ইলেকট্রন আসক্তি (-349 kJ/mol)। হ্যালোজেন ও চ্যালকোজেনের উচ্চ ইলেকট্রন আসক্তি। নিষ্ক্রিয় গ্যাসের: শূন্যের কাছাকাছি।</span></p>
+      <p><strong style="color:var(--pink)">ধাতব বৈশিষ্ট্য / Metallic Character:</strong><br>
+      <span class="lang-en">Increases bottom-left: easily lose electrons. Decreases top-right: metals → metalloids → non-metals → noble gases. Fr is the most metallic. F is the most non-metallic. Metalloids (Si, Ge, As, Sb, Te) act as semiconductors.</span>
+      <span class="lang-bn hidden">নিচে-বামে বৃদ্ধি: সহজে ইলেকট্রন হারায়। উপরে-ডানে হ্রাস। Fr সবচেয়ে ধাতব। F সবচেয়ে অধাতব। অর্ধধাতু (Si, Ge) অর্ধপরিবাহী।</span></p>
     </div>
+
     <div class="tBlk">
       <h3><span class="lang-en">Atomic Structure</span><span class="lang-bn hidden">পরমাণুর গঠন</span></h3>
-      <span class="fml">Z = proton number (পারমাণবিক সংখ্যা)</span>
+      <span class="fml">Z = atomic number (প্রোটন সংখ্যা)</span>
       <span class="fml">A = Z + N (ভর সংখ্যা)</span>
-      <span class="fml">Config: 1s² 2s² 2p⁶ 3s² 3p⁶...</span>
-      <p><span class="lang-en">Orbitals: s(2), p(6), d(10), f(14). Aufbau: fill lowest energy first. Pauli: max 2e⁻ per orbital. Hund: one e⁻ per degenerate before pairing. If nucleus = marble, atom = football stadium.</span><span class="lang-bn hidden">অরবিটাল: s(2), p(6), d(10), f(14)। আউফবাউ নীতি, পাউলি নিষেধাজ্ঞা, হুন্ডের নিয়ম। নিউক্লিয়াস মার্বেল হলে পরমাণু স্টেডিয়াম।</span></p>
+      <span class="fml">Electron config: 1s² 2s² 2p⁶ 3s² 3p⁶...</span>
+      <p><span class="lang-en"><strong style="color:var(--pink)">Subshell capacities:</strong> s(2), p(6), d(10), f(14). <strong>Aufbau principle:</strong> fill lowest energy orbitals first. <strong>Pauli exclusion:</strong> max 2 electrons per orbital (opposite spins). <strong>Hund's rule:</strong> one electron per degenerate orbital before pairing (maximise unpaired spins).</span>
+      <span class="lang-bn hidden"><strong style="color:var(--pink)">অরবিটাল ধারণক্ষমতা:</strong> s(2), p(6), d(10), f(14). <strong>আউফবাউ নীতি:</strong> সর্বনিম্ন শক্তিস্তর পূরণ করো। <strong>পাউলি নিষেধাজ্ঞা:</strong> প্রতি অরবিটালে সর্বোচ্চ ২টি ইলেকট্রন। <strong>হুন্ডের নিয়ম:</strong> জোড়া বাঁধার আগে প্রতিটি সমশক্তির অরবিটালে একটি করে ইলেকট্রন।</span></p>
+      <p><span class="lang-en">If nucleus were a marble (1 cm), the atom would be a football stadium (100 m). Atom is 99.9999999% empty space. Proton mass ≈ 1836 × electron mass. Nuclear density ≈ 10¹⁷ kg/m³ (a teaspoon of nuclear matter weighs ~10⁸ tonnes).</span>
+      <span class="lang-bn hidden">নিউক্লিয়াস মার্বেলসমান (1 cm) হলে পরমাণু ফুটবল স্টেডিয়ামসমান। পরমাণু ৯৯.৯৯৯৯৯৯৯% ফাঁকা। প্রোটনের ভর ≈ ১৮৩৬ × ইলেকট্রনের ভর।</span></p>
     </div>
+
     <div class="tBlk">
       <h3><span class="lang-en">Chemical Bonding</span><span class="lang-bn hidden">রাসায়নিক বন্ধন</span></h3>
-      <p><strong style="color:var(--pink)">আয়নিক / Ionic:</strong> <span class="lang-en">e⁻ transfer metal→nonmetal. High mp. Conducts when dissolved. NaCl, MgO.</span><span class="lang-bn hidden">ধাতু→অধাতু ইলেকট্রন স্থানান্তর। উচ্চ গলনাঙ্ক।</span></p>
-      <p><strong style="color:var(--pink)">সহযোজী / Covalent:</strong> <span class="lang-en">e⁻ sharing. Single, double, triple bonds. Polar (H₂O) if ΔEN > 0.4. Non-polar (Cl₂) if ΔEN ≈ 0.</span><span class="lang-bn hidden">ইলেকট্রন ভাগাভাগি। একক, দ্বি, ত্রি বন্ধন।</span></p>
-      <p><strong style="color:var(--pink)">ধাতব / Metallic:</strong> <span class="lang-en">Delocalized e⁻ sea. Explains conductivity, malleability, luster.</span><span class="lang-bn hidden">ডিলোকালাইজড ইলেকট্রন সমুদ্র। পরিবাহিতা ব্যাখ্যা।</span></p>
+      <p><strong style="color:var(--pink)">আয়নিক বন্ধন / Ionic Bond:</strong>
+      <span class="lang-en">Complete electron transfer from metal to non-metal. Results in oppositely charged ions held by electrostatic attraction. High melting/boiling points. Conducts electricity when dissolved in water or molten. Examples: NaCl, MgO, CaCl₂.</span>
+      <span class="lang-bn hidden">ধাতু থেকে অধাতুতে ইলেকট্রনের সম্পূর্ণ স্থানান্তর। বিপরীত চার্জের আয়ন তড়িৎস্থৈতিক আকর্ষণে আবদ্ধ। উচ্চ গলনাঙ্ক। জলে দ্রবীভূত বা গলন্ত অবস্থায় বিদ্যুৎ পরিবাহী।</span></p>
+      <p><strong style="color:var(--pink)">সহযোজী বন্ধন / Covalent Bond:</strong>
+      <span class="lang-en">Electron sharing between non-metals. Single (σ), double (σ+π), triple (σ+2π). Polar if ΔEN > 0.4 (H₂O, HCl). Non-polar if ΔEN ≈ 0 (Cl₂, O₂). VSEPR theory determines 3D molecular shape. Electronegativity differences govern polarity.</span>
+      <span class="lang-bn hidden">অধাতুর মধ্যে ইলেকট্রন ভাগাভাগি। একক (σ), দ্বি (σ+π), ত্রি বন্ধন। ΔEN > 0.4 হলে মেরু। VSEPR তত্ত্ব ত্রিমাত্রিক আকৃতি নির্ধারণ করে।</span></p>
+      <p><strong style="color:var(--pink)">ধাতব বন্ধন / Metallic Bond:</strong>
+      <span class="lang-en">Delocalised electron "sea" surrounding positive metal cations. Explains malleability, ductility, conductivity, and metallic lustre. Strength varies: Na (weak, soft) → W (very strong, highest mp = 3422°C).</span>
+      <span class="lang-bn hidden">ধনাত্মক ধাতব ক্যাটায়নকে ঘিরে অবস্থানীয় ইলেকট্রন "সমুদ্র"। নমনীয়তা, তন্তুতা, পরিবাহিতা ব্যাখ্যা করে।</span></p>
+      <p><strong style="color:var(--pink)">আন্তর-আণবিক শক্তি / IMFs:</strong>
+      <span class="lang-en">London dispersion (all molecules, weakest) &lt; Dipole-dipole &lt; Hydrogen bonds (N-H, O-H, F-H — strongest, explains water's anomalous properties). H-bonds give DNA its shape and allow self-replication.</span>
+      <span class="lang-bn hidden">লন্ডন বিচ্ছুরণ (সবচেয়ে দুর্বল) &lt; দ্বিমেরু-দ্বিমেরু &lt; হাইড্রোজেন বন্ধন (N-H, O-H, F-H — সবচেয়ে শক্তিশালী, পানির অস্বাভাবিক ধর্ম ব্যাখ্যা করে)।</span></p>
     </div>
+
     <div class="tBlk">
-      <h3><span class="lang-en">pH, Acids & Bases</span><span class="lang-bn hidden">pH, এসিড ও ক্ষার</span></h3>
-      <span class="fml">pH = -log[H⁺]</span>
-      <span class="fml">pH + pOH = 14 (25°C)</span>
-      <p><span class="lang-en">pH &lt; 7: acid · pH = 7: neutral · pH &gt; 7: base. Each unit = 10× change. Stomach: pH≈1.5. Ocean: pH≈8.1.</span><span class="lang-bn hidden">pH &lt; 7: অম্লীয় · pH = 7: নিরপেক্ষ · pH &gt; 7: ক্ষারীয়। প্রতি একক = ১০ গুণ পরিবর্তন।</span></p>
-      <p><span class="lang-en">Arrhenius (H⁺/OH⁻), Brønsted-Lowry (proton donor/acceptor), Lewis (e⁻ pair acceptor/donor) — each theory broader than the last.</span><span class="lang-bn hidden">অ্যারেনিয়াস, ব্রনস্টেড-লাউরি, লুইস — প্রতিটি তত্ত্ব পূর্বের চেয়ে ব্যাপক।</span></p>
+      <h3><span class="lang-en">pH, Acids & Bases</span><span class="lang-bn hidden">pH, অম্ল ও ক্ষার</span></h3>
+      <span class="fml">pH = −log[H⁺]</span>
+      <span class="fml">pOH = −log[OH⁻]</span>
+      <span class="fml">pH + pOH = 14  (at 25°C)</span>
+      <span class="fml">Kw = [H⁺][OH⁻] = 10⁻¹⁴</span>
+      <p><span class="lang-en">pH &lt; 7: acidic · pH = 7: neutral · pH &gt; 7: basic. Each unit = 10× concentration change. Common pH values: stomach acid (1.5), lemon (2.3), black coffee (5.0), pure water (7.0), blood (7.4), seawater (8.1), baking soda (8.3), bleach (12.5).</span>
+      <span class="lang-bn hidden">pH &lt; 7: অম্লীয় · pH = 7: নিরপেক্ষ · pH &gt; 7: ক্ষারীয়। প্রতিটি একক = ঘনমাত্রায় ১০ গুণ পরিবর্তন। পাকস্থলীর রস: 1.5, লেবু: 2.3, বিশুদ্ধ জল: 7.0, রক্ত: 7.4।</span></p>
+      <p><span class="lang-en"><strong style="color:var(--pink)">Three Acid-Base Theories:</strong> Arrhenius (H⁺/OH⁻ in water only) → Brønsted-Lowry (proton donor/acceptor, broader — works in any solvent) → Lewis (electron pair acceptor/donor, broadest — explains reactions with no H⁺ at all). Each theory is a superset of the previous.</span>
+      <span class="lang-bn hidden"><strong style="color:var(--pink)">তিনটি তত্ত্ব:</strong> অ্যারেনিয়াস (শুধু পানিতে H⁺/OH⁻) → ব্রনস্টেড-লাউরি (প্রোটন দাতা/গ্রহীতা) → লুইস (ইলেকট্রন যুগল গ্রহীতা/দাতা, সবচেয়ে ব্যাপক)।</span></p>
     </div>
+
     <div class="tBlk">
-      <h3><span class="lang-en">Gas Laws & Stoichiometry</span><span class="lang-bn hidden">গ্যাস সূত্র ও স্টয়কিওমেট্রি</span></h3>
-      <span class="fml">PV = nRT (Ideal Gas)</span>
-      <span class="fml">P₁V₁ = P₂V₂ (Boyle's)</span>
-      <span class="fml">V₁/T₁ = V₂/T₂ (Charles's)</span>
-      <span class="fml">n = m/M (moles)</span>
-      <p><span class="lang-en">Avogadro's number: 6.022×10²³ particles/mol. 1 mol gas at STP = 22.4 L. % yield = (actual/theoretical)×100.</span><span class="lang-bn hidden">অ্যাভোগাড্রো সংখ্যা: 6.022×10²³। STP-তে 1 mol গ্যাস = 22.4 L।</span></p>
+      <h3><span class="lang-en">Gas Laws & Stoichiometry</span><span class="lang-bn hidden">গ্যাসের সূত্র ও স্টয়কিওমেট্রি</span></h3>
+      <span class="fml">PV = nRT  (Ideal Gas)</span>
+      <span class="fml">P₁V₁ = P₂V₂  (Boyle — const. T)</span>
+      <span class="fml">V₁/T₁ = V₂/T₂  (Charles — const. P)</span>
+      <span class="fml">P₁/T₁ = P₂/T₂  (Gay-Lussac — const. V)</span>
+      <span class="fml">n = m/M  (moles)</span>
+      <p><span class="lang-en">R = 8.314 J/(mol·K). Avogadro's number: 6.022×10²³ particles/mol. 1 mol ideal gas at STP (0°C, 1 atm) = 22.4 L. Stoichiometry: balance atoms on both sides. Limiting reagent determines product yield. % yield = (actual ÷ theoretical) × 100.</span>
+      <span class="lang-bn hidden">R = 8.314 J/(mol·K)। অ্যাভোগাড্রো সংখ্যা: 6.022×10²³। STP-তে 1 mol আদর্শ গ্যাস = 22.4 L। সীমাকারী বিকারক উৎপাদের পরিমাণ নির্ধারণ করে।</span></p>
     </div>
   </div>
 </section>
@@ -514,122 +606,760 @@
     <span class="tHdrIcon">🧬</span>
     <div>
       <div class="tHdrTitle"><span class="lang-en">BIOLOGY — LIFE & EVOLUTION</span><span class="lang-bn hidden">জীববিজ্ঞান — জীবন ও বিবর্তন</span></div>
-      <div class="tHdrSub">CELL THEORY · GENETICS · EVOLUTION</div>
+      <div class="tHdrSub">CELL THEORY · GENETICS · EVOLUTION · MOLECULAR BIOLOGY</div>
     </div>
   </div>
   <div class="tGrid">
     <div class="tBlk tFull">
       <h3><span class="lang-en">History of Biology</span><span class="lang-bn hidden">জীববিজ্ঞানের ইতিহাস</span></h3>
-      <div class="tl"><span class="tYear">~350 BC</span><span class="tTxt"><strong>Aristotle</strong> classified 500+ species. Proposed spontaneous generation (life from non-living matter) — believed for 2,000 years.</span></div>
-      <div class="tl"><span class="tYear">1665</span><span class="tTxt"><strong>Robert Hooke</strong> saw cork cells under microscope, coined "cell." Van Leeuwenhoek (1674) first observed live bacteria — "animalcules" in pond water.</span></div>
-      <div class="tl"><span class="tYear">1838–39</span><span class="tTxt"><strong>Schleiden & Schwann</strong> formulated Cell Theory. Virchow (1855): "Omnis cellula e cellula" — all cells from pre-existing cells.</span></div>
-      <div class="tl"><span class="tYear">1859</span><span class="tTxt"><strong>Charles Darwin</strong> — On the Origin of Species. Natural selection drives evolution. Unified all biology under one framework. Called "the most important book in science."</span></div>
-      <div class="tl"><span class="tYear">1865</span><span class="tTxt"><strong>Gregor Mendel</strong> discovered laws of inheritance via 7 years of pea plant breeding. Published 1866, ignored until 1900 — then became the foundation of genetics.</span></div>
-      <div class="tl"><span class="tYear">1953</span><span class="tTxt"><strong>Watson & Crick</strong> (using Rosalind Franklin's X-ray crystallography data) revealed DNA's double helix. Nobel Prize 1962. Launched molecular biology revolution.</span></div>
-      <div class="tl"><span class="tYear">2003</span><span class="tTxt"><strong>Human Genome Project</strong> fully sequenced human DNA: ~3 billion base pairs, ~20,000-25,000 genes, 23 chromosome pairs. Cost $3 billion. Today: $200 per genome.</span></div>
+      <div class="tl"><span class="tYear">~350 BC</span><span class="tTxt"><strong>অ্যারিস্টটল / Aristotle</strong> — <span class="lang-en">Classified 500+ animal species into systematic groups. Proposed spontaneous generation (life arises from non-living matter — e.g. flies from meat). Believed for ~2,000 years until Pasteur disproved it in 1859.</span><span class="lang-bn hidden">৫০০+ প্রাণী প্রজাতি শ্রেণিবদ্ধ করেন। স্বতঃস্ফূর্ত উৎপত্তি প্রস্তাব করেন। ২০০০ বছর বিশ্বাস করা হয়েছিল যতক্ষণ না পাস্তুর ১৮৫৯ সালে ভুল প্রমাণ করেন।</span></span></div>
+      <div class="tl"><span class="tYear">1665</span><span class="tTxt"><strong>রবার্ট হুক / Robert Hooke</strong> — <span class="lang-en">Observed thin slices of cork under a compound microscope. Named the tiny compartments "cells" because they resembled monks' rooms (cellulae). Published Micrographia — first scientific bestseller. Van Leeuwenhoek (1674) observed live bacteria in pond water — first person to see living microorganisms.</span><span class="lang-bn hidden">যৌগিক অণুবীক্ষণ যন্ত্রে কর্কের পাতলা টুকরো পর্যবেক্ষণ করে "কোষ" নামকরণ করেন। ভ্যান লিউয়েনহুক (১৬৭৪) পুকুরের জলে জীবন্ত ব্যাকটেরিয়া পর্যবেক্ষণ করেন।</span></span></div>
+      <div class="tl"><span class="tYear">1838–55</span><span class="tTxt"><strong>কোষ তত্ত্ব / Cell Theory</strong> — <span class="lang-en">Schleiden (1838): all plants are made of cells. Schwann (1839): all animals too — unified all living things. Virchow (1855): "Omnis cellula e cellula" — all cells arise from pre-existing cells (no spontaneous generation of cells). These three principles remain the foundation of all biology.</span><span class="lang-bn hidden">শ্লাইডেন (১৮৩৮): সব উদ্ভিদ কোষ দিয়ে তৈরি। শোয়ান (১৮৩৯): সব প্রাণীও। ভার্চো (১৮৫৫): "Omnis cellula e cellula" — সব কোষ পূর্ববর্তী কোষ থেকে উৎপন্ন।</span></span></div>
+      <div class="tl"><span class="tYear">1859</span><span class="tTxt"><strong>চার্লস ডারউইন / Charles Darwin</strong> — <span class="lang-en">On the Origin of Species: Natural selection drives evolution. Organisms with advantageous traits survive and reproduce more (differential reproductive success). Over generations, populations change. All life shares common ancestry. Called "the most important book in science" and "the most dangerous idea in human thought."</span><span class="lang-bn hidden">On the Origin of Species: প্রাকৃতিক নির্বাচন বিবর্তন চালিত করে। সুবিধাজনক বৈশিষ্ট্যসম্পন্ন জীব বেশি বেঁচে থাকে ও প্রজনন করে। সব জীবের সাধারণ পূর্বপুরুষ আছে। "বিজ্ঞানের সবচেয়ে গুরুত্বপূর্ণ বই" বলা হয়।</span></span></div>
+      <div class="tl"><span class="tYear">1865</span><span class="tTxt"><strong>গ্রেগর মেন্ডেল / Gregor Mendel</strong> — <span class="lang-en">7 years of pea plant experiments (1856–63). Discovered laws of inheritance: Law of Segregation (alleles separate during gamete formation) and Law of Independent Assortment. Introduced dominant and recessive traits. His work was ignored for 35 years until rediscovered in 1900.</span><span class="lang-bn hidden">মটরশুঁটি নিয়ে ৭ বছরের পরীক্ষা (১৮৫৬-৬৩)। বংশগতির সূত্র আবিষ্কার: পৃথকীকরণের সূত্র ও স্বাধীন বিন্যাসের সূত্র। প্রচ্ছন্ন ও প্রকট বৈশিষ্ট্য প্রবর্তন। ৩৫ বছর উপেক্ষিত।</span></span></div>
+      <div class="tl"><span class="tYear">1953</span><span class="tTxt"><strong>ওয়াটসন ও ক্রিক / Watson & Crick</strong> — <span class="lang-en">Discovered the double helix structure of DNA. Built on Rosalind Franklin's X-ray crystallography data (Photo 51). A=T, G=C base pairing means each strand is a template for the other — immediately suggesting how genetic information is copied. Awarded Nobel Prize 1962.</span><span class="lang-bn hidden">DNA-এর দ্বিসূত্রক সর্পিল গঠন আবিষ্কার করেন। রোজালিন্ড ফ্র্যাংকলিনের X-রশ্মি কেলাসলেখন ডেটার উপর ভিত্তি করে। A=T, G=C ক্ষারক যুগল — প্রতিটি সূত্র অপরটির টেমপ্লেট, বংশগতির প্রতিলিপির পথ দেখায়।</span></span></div>
+      <div class="tl"><span class="tYear">1983</span><span class="tTxt"><strong>PCR — Kary Mullis</strong> — <span class="lang-en">Polymerase Chain Reaction: amplifies tiny DNA samples millions of times. Revolutionised forensic science, medicine, and virology. Won Nobel Prize 1993. Key technology behind COVID-19 PCR tests.</span><span class="lang-bn hidden">পলিমারেজ শৃঙ্খল বিক্রিয়া: ক্ষুদ্র DNA নমুনাকে লক্ষ লক্ষ গুণ বাড়ানো যায়। ফরেনসিক বিজ্ঞান, চিকিৎসা ও ভাইরাসবিদ্যায় বিপ্লব এনেছে।</span></span></div>
+      <div class="tl"><span class="tYear">2003</span><span class="tTxt"><strong>মানব জিনোম প্রকল্প / Human Genome Project</strong> — <span class="lang-en">Sequenced all 3.2 billion base pairs of human DNA. Found ~20,000–25,000 protein-coding genes (far fewer than expected). 99.9% of DNA is identical between any two humans. Opened era of personalised medicine and gene therapy.</span><span class="lang-bn hidden">মানব DNA-এর ৩.২ বিলিয়ন ক্ষারক জোড়ার ক্রম নির্ধারণ করা হয়। ~২০,০০০-২৫,০০০ প্রোটিন-কোডিং জিন। যেকোনো দুই মানুষের মধ্যে ৯৯.৯% DNA একই।</span></span></div>
     </div>
+
     <div class="tBlk">
-      <h3><span class="lang-en">Cell Theory & Organelles</span><span class="lang-bn hidden">কোষ তত্ত্ব ও অঙ্গাণু</span></h3>
-      <p><span class="lang-en">Three tenets: (1) All life = cells. (2) Cell = basic unit. (3) Cells from cells. Prokaryotes: no nucleus (bacteria, archaea), 1-10µm. Eukaryotes: membrane-bound nucleus, 10-100µm. Human body: ~37 trillion cells.</span><span class="lang-bn hidden">তিন মূলনীতি: সব জীব কোষে গঠিত; কোষ মৌলিক একক; কোষ থেকে কোষ। আদিকোষী: নিউক্লিয়াস নেই। সুকোষী: নিউক্লিয়াস আছে। মানবদেহে ~৩৭ ট্রিলিয়ন কোষ।</span></p>
-      <p><strong style="color:var(--green)">Key organelles / মূল অঙ্গাণু:</strong> <span class="lang-en">Mitochondria (ATP — powerhouse), Ribosome (proteins), Chloroplast (photosynthesis), Nucleus (DNA control), Golgi (shipping), Lysosome (digestion).</span><span class="lang-bn hidden">মাইটোকন্ড্রিয়া (ATP), রাইবোসোম (প্রোটিন), ক্লোরোপ্লাস্ট (সালোকসংশ্লেষণ), নিউক্লিয়াস (নিয়ন্ত্রণ)।</span></p>
+      <h3><span class="lang-en">Cell Theory & Cell Types</span><span class="lang-bn hidden">কোষ তত্ত্ব ও কোষের প্রকারভেদ</span></h3>
+      <p><span class="lang-en"><strong style="color:var(--green)">Three Pillars of Cell Theory:</strong> (1) All living organisms are made of cells. (2) The cell is the basic unit of life. (3) All cells arise from pre-existing cells (biogenesis).</span>
+      <span class="lang-bn hidden"><strong style="color:var(--green)">কোষ তত্ত্বের তিন স্তম্ভ:</strong> (১) সব জীব কোষ দিয়ে তৈরি। (২) কোষ জীবনের মৌলিক একক। (৩) সব কোষ পূর্ববর্তী কোষ থেকে উৎপন্ন।</span></p>
+      <p><strong style="color:var(--green)">আদিকোষী / Prokaryotic:</strong>
+      <span class="lang-en">No membrane-bound nucleus or organelles. DNA circular, in nucleoid region. Bacteria and Archaea. Size: 1–10 μm. Fastest reproducers (E. coli divides every 20 min). Came first on Earth (~3.5 billion years ago).</span>
+      <span class="lang-bn hidden">ঝিল্লি-আবৃত নিউক্লিয়াস বা অঙ্গাণু নেই। DNA বৃত্তাকার, নিউক্লয়েড অঞ্চলে। ব্যাকটেরিয়া ও আর্কিয়া। সাইজ: 1–10 μm।</span></p>
+      <p><strong style="color:var(--green)">সুকোষী / Eukaryotic:</strong>
+      <span class="lang-en">True membrane-bound nucleus + specialised organelles. Size: 10–100 μm. Mitochondria (powerhouse — ATP via oxidative phosphorylation), Chloroplasts (photosynthesis), Ribosome (protein synthesis), ER, Golgi, Lysosome. Plants have cell wall (cellulose) + vacuole + chloroplasts.</span>
+      <span class="lang-bn hidden">প্রকৃত ঝিল্লি-আবৃত নিউক্লিয়াস + বিশেষায়িত অঙ্গাণু। মাইটোকন্ড্রিয়া (শক্তি উৎপাদন — ATP), ক্লোরোপ্লাস্ট (সালোকসংশ্লেষণ), রাইবোসোম (প্রোটিন সংশ্লেষণ)।</span></p>
     </div>
+
     <div class="tBlk">
-      <h3><span class="lang-en">DNA & Genetics</span><span class="lang-bn hidden">DNA ও জিনতত্ত্ব</span></h3>
-      <span class="fml">A—T · C—G (base pairing)</span>
-      <span class="fml">DNA → mRNA → Protein</span>
-      <p><span class="lang-en">Central Dogma: Replication (DNA copies itself) → Transcription (DNA→mRNA in nucleus) → Translation (ribosome reads mRNA, builds protein from amino acids). Codons: 3 bases = 1 amino acid. 64 codons, 20 amino acids.</span><span class="lang-bn hidden">কেন্দ্রীয় মতবাদ: প্রতিলিপি → প্রতিলিখন → অনুবাদ। কোডন: ৩ ক্ষার = ১ অ্যামিনো এসিড।</span></p>
-      <p><strong style="color:var(--green)">Mendel's Laws / মেন্ডেলের সূত্র:</strong> <span class="lang-en">Segregation: alleles separate in gametes. Independent Assortment: genes on different chromosomes sort independently. F2 ratio: 3 dominant : 1 recessive.</span><span class="lang-bn hidden">বিভাজন সূত্র: গ্যামেটে অ্যালিল আলাদা হয়। স্বাধীন বিন্যাস সূত্র। F2 অনুপাত: 3:1।</span></p>
+      <h3><span class="lang-en">DNA, Genetics & Heredity</span><span class="lang-bn hidden">DNA, জিনতত্ত্ব ও বংশগতি</span></h3>
+      <span class="fml">DNA → Transcription → mRNA</span>
+      <span class="fml">mRNA → Translation → Protein</span>
+      <span class="fml">Codon: 3 nucleotides = 1 amino acid</span>
+      <p><span class="lang-en"><strong style="color:var(--green)">Central Dogma:</strong> DNA makes RNA makes Protein. The genetic code is universal — same codons code same amino acids in all living things (strong evidence for common ancestry). 4 bases: Adenine(A), Thymine(T), Guanine(G), Cytosine(C). In RNA: Uracil(U) replaces T.</span>
+      <span class="lang-bn hidden"><strong style="color:var(--green)">কেন্দ্রীয় মতবাদ:</strong> DNA থেকে RNA, RNA থেকে প্রোটিন। জিনগত কোড সর্বজনীন — একই কোডন সব জীবে একই অ্যামিনো অ্যাসিড কোড করে (সাধারণ পূর্বপুরুষের প্রমাণ)।</span></p>
+      <p><strong style="color:var(--green)">মেন্ডেলের সূত্র / Mendel's Laws:</strong>
+      <span class="lang-en">1. Segregation: alleles separate during gamete formation (meiosis). 2. Independent Assortment: genes on different chromosomes sort independently. Punnett square predicts offspring ratios. Dominant (A) masks recessive (a). Heterozygous (Aa) shows dominant phenotype but carries recessive allele.</span>
+      <span class="lang-bn hidden">১. পৃথকীভবনের সূত্র: অ্যালিল গ্যামেট গঠনের সময় আলাদা হয়। ২. স্বাধীন বিন্যাসের সূত্র: ভিন্ন ক্রোমোসোমের জিন স্বাধীনভাবে বিন্যস্ত হয়। পানেট স্কোয়ার অপত্যের অনুপাত পূর্বাভাস দেয়।</span></p>
     </div>
+
     <div class="tBlk">
-      <h3><span class="lang-en">Photosynthesis</span><span class="lang-bn hidden">সালোকসংশ্লেষণ</span></h3>
+      <h3><span class="lang-en">Photosynthesis & Respiration</span><span class="lang-bn hidden">সালোকসংশ্লেষণ ও শ্বসন</span></h3>
       <span class="fml">6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂</span>
-      <p><span class="lang-en">In chloroplasts. Stage 1 — Light Reactions (thylakoid): water splits (O₂ released), ATP + NADPH made. Stage 2 — Calvin Cycle (stroma): CO₂ fixed by RuBisCO enzyme → glucose. Photosynthesis produces all atmospheric O₂ and underpins nearly all food chains.</span><span class="lang-bn hidden">ক্লোরোপ্লাস্টে। পর্যায় ১: আলোক বিক্রিয়া (জল বিভাজন, O₂ মুক্তি, ATP তৈরি)। পর্যায় ২: ক্যালভিন চক্র (CO₂ → গ্লুকোজ)।</span></p>
+      <span class="fml">C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP</span>
+      <p><span class="lang-en"><strong style="color:var(--green)">Photosynthesis</strong> (in chloroplasts): Light reactions (thylakoid) split water, produce ATP + NADPH + O₂. Calvin cycle (stroma) fixes CO₂ into glucose using ATP + NADPH. Chlorophyll absorbs red (~680 nm) and blue (~430 nm) light, reflects green.</span>
+      <span class="lang-bn hidden"><strong style="color:var(--green)">সালোকসংশ্লেষণ</strong> (ক্লোরোপ্লাস্টে): আলোক বিক্রিয়া (থাইলাকয়েড) জল বিভাজন করে, ATP + NADPH + O₂ উৎপন্ন করে। ক্যালভিন চক্র (স্ট্রোমা) CO₂ গ্লুকোজে রূপান্তর করে।</span></p>
+      <p><span class="lang-en"><strong style="color:var(--green)">Aerobic Respiration</strong> (in mitochondria): Glycolysis → Pyruvate → Krebs cycle → Electron Transport Chain. Net yield: ~38 ATP per glucose molecule. Anaerobic: no O₂, yields only 2 ATP (lactic acid in muscles, ethanol in yeast).</span>
+      <span class="lang-bn hidden"><strong style="color:var(--green)">বায়বীয় শ্বসন</strong> (মাইটোকন্ড্রিয়ায়): গ্লাইকোলাইসিস → পাইরুভেট → ক্রেবস চক্র → ইলেকট্রন পরিবহন শৃঙ্খল। নেট উৎপাদন: ~৩৮ ATP প্রতি গ্লুকোজে। অবায়বীয়: মাত্র ২ ATP।</span></p>
     </div>
-    <div class="tBlk">
-      <h3><span class="lang-en">Cellular Respiration</span><span class="lang-bn hidden">কোষীয় শ্বসন</span></h3>
-      <span class="fml">C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ~32 ATP</span>
-      <p><span class="lang-en">3 stages: Glycolysis (cytoplasm, 2 ATP) → Krebs Cycle (matrix, 2 ATP + NADH/FADH₂) → Oxidative Phosphorylation / ETC (inner membrane, ~28 ATP). Anaerobic: lactic acid (muscle) or ethanol (yeast) — only 2 ATP.</span><span class="lang-bn hidden">৩ পর্যায়: গ্লাইকোলাইসিস (২ ATP) → ক্রেবস চক্র → জারণ ফসফোরাইলেশন (~২৮ ATP)। অবায়বীয়: ২ ATP মাত্র।</span></p>
-    </div>
+
     <div class="tBlk">
       <h3><span class="lang-en">Evolution & Natural Selection</span><span class="lang-bn hidden">বিবর্তন ও প্রাকৃতিক নির্বাচন</span></h3>
-      <p><span class="lang-en">Darwin's mechanism: variation → differential survival → inheritance → population change over generations. Evidence: fossils, homologous structures (whale flipper = human arm bones), biogeography (Galápagos finches), molecular biology (shared DNA across all life).</span><span class="lang-bn hidden">ডারউইনের প্রক্রিয়া: বৈচিত্র্য → পার্থক্যমূলক বেঁচে থাকা → উত্তরাধিকার → জনগোষ্ঠীর পরিবর্তন। প্রমাণ: জীবাশ্ম, সমজাত অঙ্গ, আণবিক জীববিজ্ঞান।</span></p>
-      <p><span class="lang-en">Hardy-Weinberg: allele frequencies stable without evolution. 5 factors cause evolution: mutation, natural selection, genetic drift, gene flow, non-random mating.</span><span class="lang-bn hidden">হার্ডি-ওয়াইনবার্গ: বিবর্তন ছাড়া অ্যালিল কম্পাঙ্ক স্থির। ৫ কারণ: মিউটেশন, নির্বাচন, জিনগত প্রবাহ, জিন প্রবাহ, অনির্বাচিত সংগম।</span></p>
+      <p><span class="lang-en"><strong style="color:var(--green)">5 Conditions for Natural Selection:</strong> (1) Variation exists in population. (2) Variation is heritable. (3) More offspring produced than can survive. (4) Individuals with favourable traits survive more. (5) Over generations → change in allele frequencies.</span>
+      <span class="lang-bn hidden"><strong style="color:var(--green)">প্রাকৃতিক নির্বাচনের ৫ শর্ত:</strong> (১) জনগোষ্ঠীতে প্রকরণ বিদ্যমান। (২) প্রকরণ বংশগত। (৩) বেঁচে থাকার চেয়ে বেশি অপত্য জন্মায়। (৪) অনুকূল বৈশিষ্ট্যযুক্ত জীব বেশি বাঁচে। (৫) প্রজন্মের পর প্রজন্ম → অ্যালিল কম্পাঙ্কের পরিবর্তন।</span></p>
+      <p><span class="lang-en"><strong style="color:var(--green)">Evidence for Evolution:</strong> Fossil record (transitional forms), comparative anatomy (homologous structures), biogeography (related species on nearby islands), molecular biology (DNA similarity: humans share 98.7% with chimps, 60% with bananas). Speciation occurs when populations become reproductively isolated.</span>
+      <span class="lang-bn hidden"><strong style="color:var(--green)">বিবর্তনের প্রমাণ:</strong> জীবাশ্ম রেকর্ড, তুলনামূলক শারীরস্থান, জৈব-ভূগোল, আণবিক জীববিজ্ঞান (মানুষ শিম্পাঞ্জির সাথে ৯৮.৭% DNA ভাগ করে)। প্রজননগত বিচ্ছিন্নতায় প্রজাতির উদ্ভব।</span></p>
     </div>
   </div>
 </section>
 </div>
 
 <!-- QR -->
-<section id="qr">
-  <h2>📱 <span class="lang-en">QR Access</span><span class="lang-bn hidden">QR প্রবেশাধিকার</span></h2>
-  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://stounchvicinity65.github.io/portal/" alt="QR Code">
-</section>
+<div id="qr">
+  <h2><span class="lang-en">Scan QR Code</span><span class="lang-bn hidden">QR কোড স্ক্যান করুন</span></h2>
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://stounchvicinity65.github.io/INTERACTIVE-MOTIONS/" alt="QR Code" width="160" height="160">
+</div>
 
 <!-- ABOUT -->
-<section id="about">
-  <h2>👤 <span class="lang-en">About</span><span class="lang-bn hidden">পরিচয়</span></h2>
-  <p><span class="lang-en">Science Fair Project — Interactive Science Learning Portal</span><span class="lang-bn hidden">বিজ্ঞান মেলা প্রকল্প — ইন্টারেক্টিভ বিজ্ঞান শিক্ষা পোর্টাল</span></p>
-  <p class="team">Nafis Islam &amp; Khandoker Shafowan Wafa</p>
-  <p class="batch"><span class="lang-en">SSC 2027 Batch</span><span class="lang-bn hidden">এসএসসি ২০২৭ ব্যাচ</span></p>
-</section>
-
+<div id="about">
+  <h2><span class="lang-en">About This Project</span><span class="lang-bn hidden">এই প্রকল্প সম্পর্কে</span></h2>
+  <p><span class="lang-en">Science Fair — Interactive Portal for Physics, Chemistry & Biology</span><span class="lang-bn hidden">বিজ্ঞান মেলা — পদার্থ, রসায়ন ও জীববিজ্ঞানের ইন্টারেক্টিভ পোর্টাল</span></p>
+  <p class="team">✦ Science Team ✦</p>
+  <p class="batch"><span class="lang-en">Science Fair Project — 2025</span><span class="lang-bn hidden">বিজ্ঞান মেলা প্রকল্প — ২০২৫</span></p>
+</div>
 </div><!-- /wrap -->
 
 <!-- ===== AI BOX ===== -->
 <div class="aiBox" id="aiBox">
-  <div class="aiHdr" onclick="toggleAI()">
+  <div class="aiHdr" id="aiHdrToggle">
     <div class="aiHdrL">
       <div class="aiDot"></div>
-      <span class="aiLbl">SciBot v3</span>
+      <span class="aiLbl">SCIENCE·AI</span>
+      <span class="aiBadge">OFFLINE</span>
     </div>
-    <div id="aiBadge" class="aiBadge" style="color:#10b981;background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.3);">OFFLINE · READY</div>
-    <button class="aiTog" id="aiTogIcon">▼</button>
+    <button class="aiTog" id="aiTogBtn">▼</button>
   </div>
-  <div class="aiBody" id="aiBody">
-    <!-- Subject tabs -->
+  <div class="aiBody" id="aiBodyEl">
     <div class="aiSubjectBar">
-      <button class="subBtn active-ph" id="sBtnPh" onclick="setSubject('ph')">⚛ Physics</button>
-      <button class="subBtn" id="sBtnCh" onclick="setSubject('ch')">🧪 Chem</button>
-      <button class="subBtn" id="sBtnBi" onclick="setSubject('bi')">🧬 Bio</button>
-      <button class="subBtn" id="sBtnUc" onclick="setSubject('uc')">📐 Units</button>
+      <button class="subBtn active-ph" onclick="setSubject('ph')">⚡ PHY</button>
+      <button class="subBtn" onclick="setSubject('ch')">🧪 CHEM</button>
+      <button class="subBtn" onclick="setSubject('bi')">🧬 BIO</button>
+      <button class="subBtn" onclick="setSubject('uc')">📐 UNITS</button>
     </div>
-    <!-- Unit converter panel -->
+    <!-- Unit Converter Panel -->
     <div class="ucPanel" id="ucPanel">
+      <div class="ucTitle">⚙ UNIT CONVERTER</div>
+      <div class="ucCatRow" id="ucCatRow"></div>
       <div class="ucRow">
-        <select class="ucSel" id="ucType" onchange="updateUcUnits()">
-          <option value="length">Length</option>
-          <option value="mass">Mass</option>
-          <option value="time">Time</option>
-          <option value="temperature">Temperature</option>
-          <option value="velocity">Velocity</option>
-          <option value="force">Force</option>
-          <option value="pressure">Pressure</option>
-          <option value="energy">Energy</option>
-          <option value="power">Power</option>
-          <option value="area">Area</option>
-          <option value="volume">Volume</option>
-          <option value="angle">Angle</option>
-          <option value="frequency">Frequency</option>
-        </select>
-        <input type="number" class="ucIn" id="ucVal" placeholder="Value" oninput="doConvert()">
-      </div>
-      <div class="ucRow">
-        <select class="ucSel" id="ucFrom" onchange="doConvert()"></select>
-        <span style="color:#facc15;font-size:10px;font-family:'Share Tech Mono',monospace;">→</span>
-        <select class="ucSel" id="ucTo" onchange="doConvert()"></select>
+        <input class="ucIn" id="ucVal" type="number" placeholder="value" oninput="convertUnit()">
+        <select class="ucSel" id="ucFrom" onchange="convertUnit()"></select>
+        <span class="ucArrow">→</span>
+        <select class="ucSel" id="ucTo" onchange="convertUnit()"></select>
       </div>
       <div class="ucOut" id="ucOut">Enter a value to convert</div>
     </div>
-    <!-- Chat output -->
-    <div id="chatOut" style="color:#34d399;">SciBot v3 — Offline AI loaded.
-Knowledge banks: Physics ✓ Chemistry ✓ Biology ✓
-Unit Converter: 13 categories ✓
-Bangla support ✓
-Select a subject tab and ask anything...<span class="blink">_</span></div>
+    <div id="chatOut"></div>
     <div class="aiInRow">
-      <input id="chatIn" placeholder="Ask about motion, atoms, DNA..." onkeydown="if(event.key==='Enter')askBot()">
-      <button id="askBtn" onclick="askBot()">▶ ASK</button>
+      <input id="chatIn" type="text" placeholder="Ask physics, chem, bio..." autocomplete="off" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button id="askBtn" onclick="sendMsg()">ASK</button>
     </div>
-    <div class="aiHint">Offline · No internet needed · Physics · Chemistry · Biology · Unit Converter</div>
+    <div class="aiHint">offline · knowledge base · bilingual</div>
   </div>
 </div>
+
+<script>
+// ============================================================
+//  KNOWLEDGE BANK (PHYSICS + CHEM + BIO)
+// ============================================================
+const KB = {
+  ph: {
+    // === PHYSICS KNOWLEDGE ===
+    topics: {
+      "velocity": {
+        en: "Velocity is the rate of change of displacement. v = Δs/Δt. It is a vector quantity (has both magnitude and direction). Average velocity = total displacement / total time. Instantaneous velocity = dx/dt. Units: m/s.",
+        bn: "বেগ হলো সরণের পরিবর্তনের হার। v = Δs/Δt। এটি ভেক্টর রাশি। গড় বেগ = মোট সরণ / মোট সময়। একক: m/s।"
+      },
+      "acceleration": {
+        en: "Acceleration is the rate of change of velocity. a = Δv/Δt. Vector quantity. Uniform acceleration: constant change. Free fall: a = g = 9.8 m/s² downward. Centripetal acceleration: a = v²/r. Units: m/s².",
+        bn: "ত্বরণ হলো বেগের পরিবর্তনের হার। a = Δv/Δt। ভেক্টর রাশি। মুক্তপতনে a = g = 9.8 m/s²। কেন্দ্রমুখী ত্বরণ: a = v²/r।"
+      },
+      "newton": {
+        en: "Newton's Laws: 1st (Inertia): object stays at rest or constant velocity without net force. 2nd: F = ma (net force = mass × acceleration). 3rd: Every action has equal opposite reaction. All three together explain all classical motion.",
+        bn: "নিউটনের সূত্র: ১ম (জাড্যতা): বল না লাগলে বস্তু স্থির বা সমবেগে থাকে। ২য়: F = ma। ৩য়: প্রতিটি ক্রিয়ার সমান ও বিপরীত প্রতিক্রিয়া।"
+      },
+      "kinematics": {
+        en: "Kinematic equations (constant acceleration): v = u + at | s = ut + ½at² | v² = u² + 2as | s = (u+v)/2 × t. u=initial velocity, v=final, a=acceleration, t=time, s=displacement.",
+        bn: "গতিবিদ্যার সমীকরণ (সমত্বরণ): v = u + at | s = ut + ½at² | v² = u² + 2as | s = (u+v)/2 × t।"
+      },
+      "projectile": {
+        en: "Projectile motion: Horizontal (no force): x = u·cosθ·t. Vertical (gravity): y = u·sinθ·t - ½gt². Range = u²sin(2θ)/g. Max height = u²sin²θ/(2g). Flight time = 2u·sinθ/g. Max range at θ=45°.",
+        bn: "প্রাসের গতি: পরিসর = u²sin(2θ)/g। সর্বোচ্চ উচ্চতা = u²sin²θ/(2g)। উড্ডয়নকাল = 2u·sinθ/g। θ=45°-এ সর্বোচ্চ পরিসর।"
+      },
+      "momentum": {
+        en: "Momentum p = mv. Impulse J = FΔt = Δp. Conservation of momentum: in a closed system, total momentum before = total momentum after any collision. Elastic collision: both momentum and KE conserved. Inelastic: only momentum conserved.",
+        bn: "ভরবেগ p = mv। আবেগ J = FΔt = Δp। ভরবেগের সংরক্ষণ সূত্র: বদ্ধ তন্ত্রে সংঘর্ষের আগে ও পরে মোট ভরবেগ সমান।"
+      },
+      "energy": {
+        en: "Kinetic energy KE = ½mv². Gravitational PE = mgh. Elastic PE = ½kx². Work W = F·d·cosθ. Power P = W/t = F·v. Conservation of energy: total energy in a closed system remains constant (KE + PE = constant if no friction).",
+        bn: "গতিশক্তি KE = ½mv²। অভিকর্ষজ বিভব শক্তি PE = mgh। কার্য W = F·d·cosθ। ক্ষমতা P = W/t। শক্তির সংরক্ষণ সূত্র।"
+      },
+      "gravity": {
+        en: "Universal Gravitation: F = Gm₁m₂/r². G = 6.674×10⁻¹¹ N·m²/kg². Surface gravity g = GM/R². Earth: g = 9.8 m/s². Escape velocity = √(2GM/R) = 11.2 km/s for Earth. Kepler's 3rd law: T² ∝ r³.",
+        bn: "সার্বজনীন মহাকর্ষ: F = Gm₁m₂/r²। G = 6.674×10⁻¹¹। পৃথিবীতে g = 9.8 m/s²। মুক্তিবেগ = √(2GM/R) = 11.2 km/s।"
+      },
+      "circular": {
+        en: "Circular motion: centripetal force Fc = mv²/r toward center. Centripetal acceleration a = v²/r = ω²r. Angular velocity ω = v/r = 2π/T. Period T = 2πr/v. Linear velocity v = rω.",
+        bn: "বৃত্তাকার গতি: কেন্দ্রমুখী বল Fc = mv²/r। কেন্দ্রমুখী ত্বরণ a = v²/r। কৌণিক বেগ ω = v/r = 2π/T।"
+      },
+      "shm": {
+        en: "Simple Harmonic Motion: restoring force F = -kx. Acceleration a = -ω²x. Spring: T = 2π√(m/k). Simple pendulum: T = 2π√(L/g). Energy oscillates: KE = ½mω²(A²-x²), PE = ½mω²x². Max KE at equilibrium, max PE at amplitude.",
+        bn: "সরল স্পন্দন গতি: পুনরুদ্ধারকারী বল F = -kx। স্প্রিং: T = 2π√(m/k)। সরল দোলক: T = 2π√(L/g)।"
+      },
+      "waves": {
+        en: "Wave speed v = fλ. Frequency f = 1/T. For sound in air at 20°C: v ≈ 343 m/s. Light in vacuum: c = 3×10⁸ m/s. Transverse waves: oscillation perpendicular to propagation (light). Longitudinal: parallel (sound).",
+        bn: "তরঙ্গ বেগ v = fλ। কম্পাঙ্ক f = 1/T। বায়ুতে শব্দের বেগ ≈ 343 m/s। শূন্যে আলোর বেগ c = 3×10⁸ m/s।"
+      },
+      "relativity": {
+        en: "Special Relativity (Einstein, 1905): E = mc². Time dilation: moving clocks run slower. Length contraction: moving objects are shorter. Nothing with mass can reach speed of light. Mass increases with velocity. General Relativity: gravity = curvature of spacetime.",
+        bn: "বিশেষ আপেক্ষিকতা (আইনস্টাইন, ১৯০৫): E = mc²। কাল প্রসারণ: গতিশীল ঘড়ি ধীরে চলে। ভরযুক্ত কোনো বস্তু আলোর বেগে পৌঁছাতে পারে না।"
+      },
+      "friction": {
+        en: "Friction opposes relative motion. Static friction: fs ≤ μs·N (object still). Kinetic friction: fk = μk·N (object sliding). μs > μk always. Normal force N = mg·cosθ on incline. Net force on incline: F = mgsinθ - μk·mgcosθ.",
+        bn: "ঘর্ষণ আপেক্ষিক গতির বিরোধিতা করে। স্থিতি ঘর্ষণ: fs ≤ μs·N। গতি ঘর্ষণ: fk = μk·N। সবসময় μs > μk।"
+      },
+      "pressure": {
+        en: "Pressure P = F/A. Units: Pascal (Pa) = N/m². Fluid pressure: P = ρgh. Atmospheric pressure at sea level: 101,325 Pa ≈ 1 atm ≈ 760 mmHg. Archimedes' principle: buoyant force = weight of fluid displaced.",
+        bn: "চাপ P = F/A। একক: Pa = N/m²। তরলে চাপ P = ρgh। আর্কিমিডিসের নীতি: প্লাবিকা বল = অপসারিত তরলের ওজন।"
+      }
+    },
+    formulas: {
+      "F=ma": "Newton's 2nd Law: F = ma. Force (N) = mass (kg) × acceleration (m/s²).",
+      "v=u+at": "1st kinematic equation: final velocity = initial velocity + acceleration × time.",
+      "s=ut+½at²": "2nd kinematic equation: displacement = initial velocity × time + ½ × acceleration × time².",
+      "v²=u²+2as": "3rd kinematic equation: v² = u² + 2as (no time needed).",
+      "ke": "Kinetic energy KE = ½mv². Units: Joules (J).",
+      "pe": "Gravitational potential energy PE = mgh. Units: Joules (J).",
+      "momentum": "Momentum p = mv. Units: kg·m/s. Conserved in closed systems.",
+      "gravity": "F = Gm₁m₂/r². G = 6.674×10⁻¹¹ N·m²/kg².",
+      "range": "Projectile range R = u²·sin(2θ)/g. Maximum at θ = 45°.",
+      "power": "Power P = Work/time = F·v. Units: Watts (W)."
+    }
+  },
+  ch: {
+    topics: {
+      "periodic table": {
+        en: "The periodic table has 118 confirmed elements arranged by increasing atomic number (Z). Rows = periods (same electron shells). Columns = groups (same valence electrons, similar properties). Mendeleev (1869) created first version, leaving gaps for undiscovered elements.",
+        bn: "পর্যায় সারণিতে ১১৮টি মৌল পারমাণবিক সংখ্যা অনুযায়ী সজ্জিত। সারি = পর্যায়। স্তম্ভ = গ্রুপ। মেন্ডেলিভ ১৮৬৯ সালে প্রথম সংস্করণ তৈরি করেন।"
+      },
+      "atomic radius": {
+        en: "Atomic radius: decreases left→right across period (more protons, same shells — stronger pull). Increases top→bottom in group (adding new electron shells). Period 2: Li (152 pm) → F (64 pm). Largest: Cs. Smallest: He (non-metal) or F (if only reactive elements).",
+        bn: "পারমাণবিক ব্যাসার্ধ: পর্যায়ে বাম→ডান হ্রাস পায় (বেশি প্রোটন, একই শেল → শক্তিশালী টান)। গ্রুপে উপর→নিচে বৃদ্ধি পায় (নতুন শেল)। সবচেয়ে বড়: Cs।"
+      },
+      "ionization energy": {
+        en: "Ionization energy (IE): energy to remove outermost electron. IE increases left→right (stronger nuclear attraction). IE decreases top→bottom (outer electrons more shielded). Anomalies: IE(O) < IE(N) [pairing in 2p]; IE(Al) < IE(Mg) [3p vs 3s]. Highest IE: He (2372 kJ/mol). Lowest: Cs (376 kJ/mol).",
+        bn: "আয়নিকরণ শক্তি: সর্ববাহ্য ইলেকট্রন সরাতে শক্তি। পর্যায়ে বৃদ্ধি, গ্রুপে হ্রাস। ব্যতিক্রম: IE(O) < IE(N)। সর্বোচ্চ: He। সর্বনিম্ন: Cs।"
+      },
+      "electronegativity": {
+        en: "Electronegativity: ability to attract electrons in a bond. Increases toward top-right. F = 3.98 (highest). Fr ≈ 0.7 (lowest). ΔEN > 1.7: ionic bond. 0.4–1.7: polar covalent. < 0.4: non-polar covalent. Determines bond type and molecular polarity.",
+        bn: "তড়িৎঋণাত্মকতা: বন্ধনে ইলেকট্রন আকর্ষণের ক্ষমতা। উপর-ডানে বৃদ্ধি। F = 3.98 (সর্বোচ্চ)। ΔEN > 1.7: আয়নিক। 0.4-1.7: মেরু সমযোজী।"
+      },
+      "electron affinity": {
+        en: "Electron affinity: energy released when a neutral gaseous atom gains one electron. Generally increases left→right. Cl has highest EA (-349 kJ/mol) — higher than F due to smaller atomic size causing more e-e repulsion in F. Halogens and chalcogens have high EAs.",
+        bn: "ইলেকট্রন আসক্তি: গ্যাসীয় পরমাণু একটি ইলেকট্রন গ্রহণে নির্গত শক্তি। সাধারণত পর্যায়ে বৃদ্ধি। Cl-এর সর্বোচ্চ (-349 kJ/mol)।"
+      },
+      "bonding": {
+        en: "Three main bond types: 1) Ionic: electron transfer metal→non-metal. High mp, conducts when dissolved. 2) Covalent: electron sharing non-metal + non-metal. Polar if ΔEN>0.4. 3) Metallic: delocalized electron sea — explains conductivity and malleability. IMFs: London < dipole-dipole < H-bonds.",
+        bn: "তিনটি মূল বন্ধন: ১) আয়নিক: ধাতু→অধাতু ইলেকট্রন স্থানান্তর। ২) সমযোজী: ইলেকট্রন ভাগাভাগি। ৩) ধাতব: ডিলোকালাইজড ইলেকট্রন সমুদ্র।"
+      },
+      "ph": {
+        en: "pH = -log[H⁺]. pH + pOH = 14 at 25°C. pH < 7: acidic. pH = 7: neutral. pH > 7: basic. Each unit = 10× [H⁺] change. Kw = [H⁺][OH⁻] = 10⁻¹⁴. Stomach: pH 1.5, blood: pH 7.4, seawater: pH 8.1, bleach: pH 12.5.",
+        bn: "pH = -log[H⁺]। pH + pOH = 14। pH < 7: অম্লীয়। pH = 7: নিরপেক্ষ। pH > 7: ক্ষারীয়। প্রতি একক = ১০ গুণ পরিবর্তন।"
+      },
+      "acid base": {
+        en: "Arrhenius: acids release H⁺, bases release OH⁻ (only in water). Brønsted-Lowry: acids donate protons, bases accept protons (broader). Lewis: acids accept electron pairs, bases donate (broadest — no H needed). Each theory is a superset of previous.",
+        bn: "অ্যারেনিয়াস: অম্ল H⁺ মুক্ত করে, ক্ষার OH⁻। ব্রনস্টেড-লাউরি: প্রোটন দাতা/গ্রহীতা (আরও ব্যাপক)। লুইস: ইলেকট্রন যুগল গ্রহীতা/দাতা (সবচেয়ে ব্যাপক)।"
+      },
+      "gas laws": {
+        en: "Boyle's: P₁V₁ = P₂V₂ (constant T). Charles's: V₁/T₁ = V₂/T₂ (constant P). Gay-Lussac's: P₁/T₁ = P₂/T₂ (constant V). Ideal Gas: PV = nRT (R = 8.314 J/mol·K). At STP (0°C, 1 atm): 1 mol ideal gas = 22.4 L. Avogadro: 6.022×10²³ particles/mol.",
+        bn: "বয়েলের সূত্র: P₁V₁ = P₂V₂। চার্লসের: V₁/T₁ = V₂/T₂। আদর্শ গ্যাস: PV = nRT। STP-তে 1 mol = 22.4 L।"
+      },
+      "atomic structure": {
+        en: "Atom: nucleus (protons + neutrons) + electrons. Atomic number Z = protons. Mass number A = Z + N. Isotopes: same Z, different N. Electron config: 1s²2s²2p⁶3s²3p⁶... Aufbau: fill lowest energy first. Pauli: max 2e/orbital. Hund: max unpaired e in degenerate orbitals.",
+        bn: "পরমাণু: নিউক্লিয়াস (প্রোটন + নিউট্রন) + ইলেকট্রন। Z = প্রোটন সংখ্যা। A = Z + N। আইসোটোপ: একই Z, ভিন্ন N। ইলেকট্রন বিন্যাস: আউফবাউ, পাউলি, হুন্ড।"
+      },
+      "oxidation": {
+        en: "Oxidation state rules: free element = 0. Monatomic ion = charge. O usually -2 (except peroxide: -1). H usually +1 (except metal hydrides: -1). Sum of oxidation states = overall charge. Redox: oxidation = lose e⁻ (OIL). Reduction = gain e⁻ (RIG). OIL RIG mnemonic.",
+        bn: "জারণ অবস্থার নিয়ম: মুক্ত মৌল = 0। একক পারমাণবিক আয়ন = চার্জ। O সাধারণত -2। H সাধারণত +1। জারণ = ইলেকট্রন হারানো। বিজারণ = ইলেকট্রন লাভ।"
+      },
+      "mole": {
+        en: "Mole: n = m/M. Avogadro's number NA = 6.022×10²³. 1 mol contains 6.022×10²³ particles. Molar mass M = sum of atomic masses (g/mol). % yield = (actual yield / theoretical yield) × 100. Limiting reagent determines max product.",
+        bn: "মোল: n = m/M। অ্যাভোগাড্রো সংখ্যা NA = 6.022×10²³। 1 mol-এ 6.022×10²³ কণা থাকে। % ফলন = (প্রকৃত / তাত্ত্বিক) × 100।"
+      }
+    },
+    formulas: {
+      "pH": "pH = -log[H⁺]. pH + pOH = 14 at 25°C.",
+      "pv=nrt": "Ideal Gas Law: PV = nRT. R = 8.314 J/(mol·K).",
+      "boyle": "Boyle's Law: P₁V₁ = P₂V₂ (constant temperature).",
+      "charles": "Charles's Law: V₁/T₁ = V₂/T₂ (constant pressure, T in Kelvin).",
+      "mole": "n = m/M. n=moles, m=mass(g), M=molar mass(g/mol).",
+      "electronegativity": "F=3.98 (highest), Fr≈0.7 (lowest). ΔEN>1.7: ionic. 0.4-1.7: polar covalent."
+    }
+  },
+  bi: {
+    topics: {
+      "cell": {
+        en: "Cell Theory (Schleiden & Schwann, 1838-39; Virchow 1855): 1) All living things made of cells. 2) Cell is the basic unit of life. 3) All cells from pre-existing cells. Prokaryotic (no nucleus — bacteria, archaea) vs Eukaryotic (nucleus + organelles — plants, animals, fungi). Size: prokaryotes 1-10 μm, eukaryotes 10-100 μm.",
+        bn: "কোষ তত্ত্ব (শ্লাইডেন ও শোয়ান, ১৮৩৮-৩৯; ভার্চো ১৮৫৫): ১) সব জীব কোষ দিয়ে তৈরি। ২) কোষ জীবনের মৌলিক একক। ৩) সব কোষ পূর্ববর্তী কোষ থেকে। আদিকোষী (নিউক্লিয়াস নেই) বনাম সুকোষী (নিউক্লিয়াস + অঙ্গাণু)।"
+      },
+      "dna": {
+        en: "DNA (deoxyribonucleic acid): double helix. Watson & Crick (1953), aided by Franklin's X-ray data. Bases: A-T (2 H-bonds), G-C (3 H-bonds). Each strand is antiparallel (5'→3'). DNA → transcription → mRNA → translation (ribosomes) → protein. 3 nucleotides (codon) = 1 amino acid. Genetic code is universal.",
+        bn: "DNA: দ্বিসূত্রক সর্পিল। ওয়াটসন ও ক্রিক (১৯৫৩)। ক্ষার: A-T (২ H-বন্ধন), G-C (৩ H-বন্ধন)। DNA → লিখান্তর → mRNA → অনুবাদ (রাইবোসোম) → প্রোটিন। ৩ নিউক্লিওটাইড (কোডন) = ১ অ্যামিনো অ্যাসিড।"
+      },
+      "evolution": {
+        en: "Natural selection (Darwin, 1859): variation exists, it's heritable, more offspring than survive, favourable traits increase → allele frequency changes over generations. Evidence: fossils, homologous structures, DNA similarity (humans 98.7% with chimps, 60% with bananas). Speciation = reproductive isolation.",
+        bn: "প্রাকৃতিক নির্বাচন (ডারউইন, ১৮৫৯): প্রকরণ বিদ্যমান, বংশগত, অনুকূল বৈশিষ্ট্য বেশি টিকে থাকে → প্রজন্মে অ্যালিল কম্পাঙ্ক পরিবর্তিত হয়। প্রমাণ: জীবাশ্ম, সমসংস্থ অঙ্গ, DNA সাদৃশ্য।"
+      },
+      "photosynthesis": {
+        en: "Photosynthesis: 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂. In chloroplasts. Light reactions (thylakoid): water splitting, ATP + NADPH production. Calvin cycle (stroma): CO₂ fixation into glucose using ATP + NADPH. Chlorophyll absorbs red (~680nm) and blue (~430nm) light.",
+        bn: "সালোকসংশ্লেষণ: 6CO₂ + 6H₂O + আলো → C₆H₁₂O₆ + 6O₂। ক্লোরোপ্লাস্টে। আলোক বিক্রিয়া: জল বিভাজন, ATP ও NADPH উৎপন্ন। ক্যালভিন চক্র: CO₂ গ্লুকোজে রূপান্তর।"
+      },
+      "respiration": {
+        en: "Aerobic respiration: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ~38 ATP. Stages: 1) Glycolysis (cytoplasm, 2 ATP net) 2) Pyruvate oxidation 3) Krebs cycle (mitochondria matrix, 2 ATP) 4) Electron transport chain (inner mitochondrial membrane, ~34 ATP). Anaerobic: only 2 ATP. Lactic acid in muscles, ethanol in yeast.",
+        bn: "বায়বীয় শ্বসন: গ্লুকোজ + O₂ → CO₂ + H₂O + ~৩৮ ATP। ধাপ: গ্লাইকোলাইসিস (২ ATP) → পাইরুভেট জারণ → ক্রেবস চক্র (২ ATP) → ইলেকট্রন পরিবহন শৃঙ্খল (~৩৪ ATP)। অবায়বীয়: মাত্র ২ ATP।"
+      },
+      "genetics": {
+        en: "Mendel's Laws: 1) Segregation: alleles separate during meiosis. 2) Independent Assortment: genes on different chromosomes sort randomly. Dominant (A) masks recessive (a). Punnett square predicts ratios. Aa × Aa: 1 AA : 2 Aa : 1 aa (phenotype ratio 3:1). Incomplete dominance, codominance are exceptions.",
+        bn: "মেন্ডেলের সূত্র: ১) পৃথকীভবন: মিয়োসিসে অ্যালিল আলাদা হয়। ২) স্বাধীন বিন্যাস। প্রকট (A) প্রচ্ছন্ন (a)-কে ঢেকে রাখে। Aa × Aa: ফিনোটাইপ অনুপাত ৩:১।"
+      },
+      "mitosis": {
+        en: "Mitosis: cell division for growth/repair. Produces 2 identical daughter cells (diploid 2n). Phases: Prophase (chromosomes condense), Metaphase (line up at plate), Anaphase (chromosomes pull apart), Telophase (two nuclei form) + Cytokinesis. Meiosis: 4 haploid (n) gametes, enables sexual reproduction, introduces variation via crossing over.",
+        bn: "মাইটোসিস: বৃদ্ধি ও ক্ষতিপূরণের জন্য কোষ বিভাজন। ২টি অভিন্ন দ্বিগুণ (2n) কন্যা কোষ উৎপন্ন করে। ধাপ: প্রোফেজ, মেটাফেজ, অ্যানাফেজ, টেলোফেজ। মিয়োসিস: ৪টি অর্ধ (n) গ্যামেট।"
+      },
+      "ecosystem": {
+        en: "Ecosystem = biotic (living) + abiotic (non-living) factors. Energy flow: sun → producers (photosynthesis) → primary consumers → secondary consumers → tertiary (only ~10% energy transferred per level). Food chain vs food web. Carbon cycle, nitrogen cycle, water cycle are key biogeochemical cycles.",
+        bn: "বাস্তুতন্ত্র = জৈব (জীবন্ত) + অজৈব (নির্জীব) উপাদান। শক্তি প্রবাহ: সূর্য → উৎপাদক → প্রাথমিক ভোক্তা → দ্বিতীয় ভোক্তা (প্রতি স্তরে মাত্র ~১০% শক্তি স্থানান্তর)।"
+      },
+      "enzyme": {
+        en: "Enzymes are biological catalysts (proteins). They lower activation energy without being consumed. Active site binds substrate (lock-and-key model or induced fit). Factors affecting enzyme activity: temperature (optimum ~37°C in humans), pH (pepsin pH 2, amylase pH 7), substrate concentration, inhibitors (competitive/non-competitive).",
+        bn: "এনজাইম জৈবিক অনুঘটক (প্রোটিন)। সক্রিয়করণ শক্তি কমায়, নিজে পরিবর্তিত হয় না। সক্রিয় স্থান সাবস্ট্রেটের সাথে যুক্ত হয়। প্রভাবক: তাপমাত্রা (~৩৭°C সর্বোত্তম), pH, সাবস্ট্রেট ঘনমাত্রা।"
+      },
+      "immunity": {
+        en: "Immune system: Innate (non-specific, fast — skin, phagocytes, inflammation, fever) + Adaptive (specific, slower). B-cells produce antibodies (humoral immunity). T-cells: helper T (coordinate response), cytotoxic T (kill infected cells), memory T (long-term). Vaccines train adaptive immunity safely.",
+        bn: "প্রতিরোধ ব্যবস্থা: সহজাত (অনির্দিষ্ট — ত্বক, ফ্যাগোসাইট) + অভিযোজিত (নির্দিষ্ট)। B-কোষ অ্যান্টিবডি তৈরি করে। T-কোষ: সহায়ক, সাইটোটক্সিক, স্মৃতি। টিকা অভিযোজিত অনাক্রম্যতা প্রশিক্ষণ দেয়।"
+      }
+    }
+  }
+};
+
+// ============================================================
+//  UNIT CONVERTER DATA
+// ============================================================
+const UC = {
+  "Length / দৈর্ঘ্য": {
+    m: 1, km: 1000, cm: 0.01, mm: 0.001, nm: 1e-9, μm: 1e-6,
+    mile: 1609.344, yard: 0.9144, foot: 0.3048, inch: 0.0254,
+    "light-year": 9.461e15, au: 1.496e11, nautical_mi: 1852
+  },
+  "Mass / ভর": {
+    kg: 1, g: 0.001, mg: 1e-6, μg: 1e-9, tonne: 1000,
+    lb: 0.453592, oz: 0.0283495, grain: 6.47989e-5,
+    stone: 6.35029, "short ton": 907.185, "long ton": 1016.05, slug: 14.5939
+  },
+  "Time / সময়": {
+    s: 1, ms: 0.001, μs: 1e-6, ns: 1e-9, min: 60, hr: 3600,
+    day: 86400, week: 604800, month: 2.628e6, year: 3.156e7, decade: 3.156e8
+  },
+  "Temperature / তাপমাত্রা": { "°C": "c", "°F": "f", K: "k" },
+  "Speed / বেগ": {
+    "m/s": 1, "km/h": 1/3.6, "mph": 0.44704, knot: 0.514444,
+    "ft/s": 0.3048, "mi/min": 26.8224, "km/min": 1000/60
+  },
+  "Force / বল": {
+    N: 1, kN: 1000, MN: 1e6, dyne: 1e-5, lbf: 4.44822, kgf: 9.80665
+  },
+  "Energy / শক্তি": {
+    J: 1, kJ: 1000, MJ: 1e6, cal: 4.184, kcal: 4184,
+    kWh: 3.6e6, eV: 1.602e-19, BTU: 1055.06, erg: 1e-7
+  },
+  "Power / ক্ষমতা": {
+    W: 1, kW: 1000, MW: 1e6, hp: 745.7, BTU_h: 0.29307, "ft·lb/s": 1.35582
+  },
+  "Pressure / চাপ": {
+    Pa: 1, kPa: 1000, MPa: 1e6, bar: 1e5, atm: 101325,
+    psi: 6894.76, torr: 133.322, mmHg: 133.322, inHg: 3386.39
+  },
+  "Area / ক্ষেত্রফল": {
+    "m²": 1, "km²": 1e6, "cm²": 1e-4, "mm²": 1e-6,
+    hectare: 1e4, acre: 4046.86, "ft²": 0.0929, "in²": 6.452e-4, "mile²": 2.59e6
+  },
+  "Volume / আয়তন": {
+    "m³": 1, L: 0.001, mL: 1e-6, "cm³": 1e-6, "ft³": 0.0283168,
+    "in³": 1.638e-5, gallon_US: 0.003785, gallon_UK: 0.004546,
+    quart: 9.464e-4, pint: 4.732e-4, cup: 2.366e-4, fl_oz: 2.957e-5, tsp: 4.929e-6, tbsp: 1.479e-5
+  },
+  "Data / ডেটা": {
+    bit: 1, Byte: 8, KB: 8192, MB: 8.389e6, GB: 8.59e9,
+    TB: 8.796e12, PB: 9.007e15, Kib: 1024, Mib: 1.049e6, Gib: 1.074e9
+  },
+  "Angle / কোণ": {
+    rad: 1, deg: Math.PI/180, grad: Math.PI/200,
+    rev: 2*Math.PI, arcmin: Math.PI/10800, arcsec: Math.PI/648000
+  },
+  "Frequency / কম্পাঙ্ক": { Hz: 1, kHz: 1000, MHz: 1e6, GHz: 1e9, THz: 1e12 },
+  "Current / বিদ্যুৎ প্রবাহ": { A: 1, mA: 0.001, μA: 1e-6, kA: 1000 },
+  "Voltage / বিভব": { V: 1, mV: 0.001, kV: 1000, MV: 1e6 },
+  "Luminosity / দীপ্তি": { cd: 1, lm: 1, lx: 1 }
+};
+
+// ============================================================
+//  LANGUAGE
+// ============================================================
+let lang = 'en';
+function toggleLang(){
+  lang = lang === 'en' ? 'bn' : 'en';
+  document.querySelectorAll('.lang-en').forEach(el=>{
+    el.classList.toggle('hidden', lang!=='en');
+  });
+  document.querySelectorAll('.lang-bn').forEach(el=>{
+    el.classList.toggle('hidden', lang!=='bn');
+  });
+  document.body.classList.toggle('bangla', lang==='bn');
+  // update chatIn placeholder
+  document.getElementById('chatIn').placeholder = lang==='en' ? 'Ask physics, chem, bio...' : 'পদার্থ, রসায়ন বা জীববিজ্ঞান জিজ্ঞেস করুন...';
+}
+document.getElementById('langToggle').addEventListener('click', toggleLang);
+
+// ============================================================
+//  POPUP
+// ============================================================
+document.getElementById('biCardLink').addEventListener('click', e=>{
+  e.preventDefault();
+  document.getElementById('bioPopup').classList.remove('hidden');
+});
+function closeBioPopup(){ document.getElementById('bioPopup').classList.add('hidden'); }
+document.getElementById('bioPopup').addEventListener('click', e=>{
+  if(e.target === document.getElementById('bioPopup')) closeBioPopup();
+});
+
+// ============================================================
+//  AI BOX
+// ============================================================
+let aiMinimized = false;
+let currentSubject = 'ph';
+
+document.getElementById('aiHdrToggle').addEventListener('click', ()=>{
+  aiMinimized = !aiMinimized;
+  document.getElementById('aiBox').classList.toggle('minimized', aiMinimized);
+  document.getElementById('aiTogBtn').textContent = aiMinimized ? '▲' : '▼';
+});
+
+function setSubject(s){
+  currentSubject = s;
+  document.querySelectorAll('.subBtn').forEach(b=>b.className='subBtn');
+  const btns = document.querySelectorAll('.subBtn');
+  const map = ['ph','ch','bi','uc'];
+  map.forEach((sub,i)=>{ if(sub===s) btns[i].classList.add('active-'+s); });
+  const ucPanel = document.getElementById('ucPanel');
+  if(s==='uc'){ ucPanel.classList.add('show'); initUC(); }
+  else { ucPanel.classList.remove('show'); }
+}
+
+function appendMsg(who, text){
+  const out = document.getElementById('chatOut');
+  const cls = who==='user' ? 'msgUser' : 'msgAi';
+  const label = who==='user' ? (lang==='bn' ? 'তুমি:' : 'You:') : 'AI:';
+  out.innerHTML += `<div class="${cls}"><span class="msgLabel">${label} </span>${text}</div>`;
+  out.scrollTop = out.scrollHeight;
+}
+
+function sendMsg(){
+  const input = document.getElementById('chatIn');
+  const q = input.value.trim();
+  if(!q) return;
+  input.value = '';
+  document.getElementById('askBtn').disabled = true;
+  appendMsg('user', q);
+  // short delay for feel
+  setTimeout(()=>{
+    const answer = resolveQuery(q.toLowerCase(), currentSubject);
+    appendMsg('ai', answer);
+    document.getElementById('askBtn').disabled = false;
+  }, 180);
+}
+
+// ============================================================
+//  AI LOGIC — QUERY RESOLVER
+// ============================================================
+function resolveQuery(q, sub){
+  const isBn = /[\u0980-\u09FF]/.test(q);
+  const l = isBn ? 'bn' : lang;
+
+  // subject override detection
+  if(/physics|পদার্থ|motion|গতি|force|বল|velocity|বেগ|newton|নিউটন|kinematic|গতিবিদ্যা/.test(q)) sub='ph';
+  if(/chemistry|রসায়ন|periodic|পর্যায়|element|মৌল|bond|বন্ধন|acid|অম্ল|ph|electron|ইলেকট্রন/.test(q)) sub='ch';
+  if(/biology|জীববিজ্ঞান|cell|কোষ|dna|evolution|বিবর্তন|photo|photosynthesis|gene|জিন|mendel/.test(q)) sub='bi';
+
+  // unit conversion shortcut
+  const convMatch = q.match(/(\d+\.?\d*)\s*([a-zA-Z₂°/·⁻²³]+)\s+(to|থেকে|in|এ)\s+([a-zA-Z₂°/·⁻²³]+)/);
+  if(convMatch){
+    const val = parseFloat(convMatch[1]);
+    const from = convMatch[2];
+    const to = convMatch[4];
+    const result = convertText(val, from, to);
+    return result || (l==='bn' ? `রূপান্তর খুঁজে পাওয়া যায়নি: ${from} → ${to}` : `Conversion not found: ${from} → ${to}`);
+  }
+
+  // formula detection
+  const fmls = sub === 'ph' ? KB.ph.formulas : sub === 'ch' ? KB.ch.formulas : {};
+  for(const [key, val] of Object.entries(fmls)){
+    if(q.includes(key.toLowerCase())){
+      return val;
+    }
+  }
+
+  // math solver: "calculate" / "হিসাব"
+  const calcPh = solveMath(q);
+  if(calcPh) return calcPh;
+
+  // topic lookup
+  const bank = sub==='ph' ? KB.ph.topics : sub==='ch' ? KB.ch.topics : KB.bi.topics;
+  let best = null, bestScore = 0;
+  for(const [key, content] of Object.entries(bank)){
+    const keywords = key.split(' ');
+    const score = keywords.reduce((acc, kw) => acc + (q.includes(kw) ? 1 : 0), 0);
+    if(score > bestScore){ bestScore = score; best = content; }
+    // also check within the content keys
+    if(q.includes(key)) { best = content; bestScore = 999; break; }
+  }
+
+  if(best && bestScore > 0) return l==='bn' ? best.bn : best.en;
+
+  // cross-subject fallback
+  const allBanks = [KB.ph.topics, KB.ch.topics, KB.bi.topics];
+  for(const b of allBanks){
+    for(const [key, content] of Object.entries(b)){
+      if(q.includes(key)) return l==='bn' ? content.bn : content.en;
+    }
+  }
+
+  // greeting / general
+  if(/hello|hi|hey|হ্যালো|হেই|নমস্কার|সালাম/.test(q)){
+    return l==='bn' ? 'নমস্কার! আমি বিজ্ঞান AI। পদার্থবিজ্ঞান, রসায়ন বা জীববিজ্ঞান সম্পর্কে যেকোনো প্রশ্ন করুন।' : 'Hello! I\'m Science AI. Ask me anything about Physics, Chemistry, or Biology!';
+  }
+  if(/what is|what are|কি|কী/.test(q)){
+    return l==='bn' ? 'আরেকটু নির্দিষ্ট করুন — কোন বিষয়ে জানতে চাইছেন? (গতি, পর্যায় সারণি, কোষ?)' : 'Could you be more specific? (motion, periodic table, cell biology, etc.)';
+  }
+  if(/define|definition|সংজ্ঞা/.test(q)){
+    return l==='bn' ? 'কীসের সংজ্ঞা চাই? বিষয়টি উল্লেখ করুন।' : 'What definition are you looking for? Please mention the topic.';
+  }
+
+  return l==='bn' ?
+    `"${q.slice(0,30)}" সম্পর্কে নির্দিষ্ট তথ্য নেই। তবে ${sub==='ph'?'পদার্থবিজ্ঞানের গতি, নিউটনের সূত্র, শক্তি':sub==='ch'?'পর্যায় সারণি, বন্ধন, pH, গ্যাসের সূত্র':'কোষ, DNA, বিবর্তন, সালোকসংশ্লেষণ'} সম্পর্কে জিজ্ঞেস করতে পারেন।` :
+    `I don't have specific info on "${q.slice(0,30)}". Try asking about ${sub==='ph'?'kinematics, Newton\'s laws, energy, gravity':sub==='ch'?'periodic trends, bonding, pH, gas laws':'cells, DNA, evolution, photosynthesis'}.`;
+}
+
+// ============================================================
+//  MATH SOLVER
+// ============================================================
+function solveMath(q){
+  // v=u+at
+  let m;
+  m = q.match(/u\s*=\s*([\d.]+).*a\s*=\s*([\d.]+).*t\s*=\s*([\d.]+)/);
+  if(m) return `v = u + at = ${+m[1]} + ${+m[2]}×${+m[3]} = ${(+m[1] + +m[2] * +m[3]).toFixed(4)} m/s`;
+
+  // F=ma
+  m = q.match(/m(?:ass)?\s*=\s*([\d.]+).*a(?:cc)?\s*=\s*([\d.]+)/);
+  if(m) return `F = ma = ${+m[1]} × ${+m[2]} = ${(+m[1] * +m[2]).toFixed(4)} N`;
+
+  m = q.match(/f(?:orce)?\s*=\s*([\d.]+).*a(?:cc)?\s*=\s*([\d.]+)/);
+  if(m) return `m = F/a = ${+m[1]} / ${+m[2]} = ${(+m[1] / +m[2]).toFixed(4)} kg`;
+
+  // KE = ½mv²
+  m = q.match(/ke.*m\s*=\s*([\d.]+).*v\s*=\s*([\d.]+)/);
+  if(!m) m = q.match(/kinetic.*m\s*=\s*([\d.]+).*v\s*=\s*([\d.]+)/);
+  if(m) return `KE = ½mv² = ½ × ${+m[1]} × ${+m[2]}² = ${(0.5 * +m[1] * +m[2] * +m[2]).toFixed(4)} J`;
+
+  // pH = -log[H+]
+  m = q.match(/ph.*h\+?\s*[=:]\s*([\d.e\-]+)/i);
+  if(m) return `pH = -log(${+m[1]}) = ${(-Math.log10(+m[1])).toFixed(4)}`;
+
+  // PV=nRT
+  m = q.match(/p\s*=\s*([\d.]+).*v\s*=\s*([\d.]+).*t\s*=\s*([\d.]+)/i);
+  if(q.includes('mol') && m) return `n = PV/RT = (${+m[1]} × ${+m[2]}) / (8.314 × ${+m[3]}) = ${((+m[1] * +m[2])/(8.314 * +m[3])).toFixed(4)} mol`;
+
+  return null;
+}
+
+// ============================================================
+//  UNIT CONVERTER UI
+// ============================================================
+let ucCurrentCat = Object.keys(UC)[0];
+
+function initUC(){
+  const catRow = document.getElementById('ucCatRow');
+  catRow.innerHTML = '';
+  Object.keys(UC).forEach(cat=>{
+    const btn = document.createElement('button');
+    btn.className = 'ucCatBtn' + (cat===ucCurrentCat ? ' active' : '');
+    btn.textContent = cat;
+    btn.onclick = ()=>{ ucCurrentCat = cat; initUC(); };
+    catRow.appendChild(btn);
+  });
+  populateSelects(ucCurrentCat);
+  convertUnit();
+}
+
+function populateSelects(cat){
+  const units = Object.keys(UC[cat]);
+  const from = document.getElementById('ucFrom');
+  const to = document.getElementById('ucTo');
+  from.innerHTML = to.innerHTML = '';
+  units.forEach(u=>{
+    from.add(new Option(u,u));
+    to.add(new Option(u,u));
+  });
+  if(units.length > 1) to.selectedIndex = 1;
+}
+
+function convertUnit(){
+  const val = parseFloat(document.getElementById('ucVal').value);
+  const from = document.getElementById('ucFrom').value;
+  const to = document.getElementById('ucTo').value;
+  const out = document.getElementById('ucOut');
+  if(isNaN(val)){ out.textContent = 'Enter a value'; return; }
+  const result = convertText(val, from, to);
+  out.textContent = result || 'N/A';
+}
+
+function convertText(val, fromU, toU){
+  for(const [cat, units] of Object.entries(UC)){
+    const keys = Object.keys(units);
+    const fromKey = keys.find(k=>k.toLowerCase()===fromU.toLowerCase());
+    const toKey = keys.find(k=>k.toLowerCase()===toU.toLowerCase());
+    if(!fromKey || !toKey) continue;
+
+    // Temperature special case
+    if(cat.includes('Temperature')){
+      const c = units[fromKey], t = units[toKey];
+      let celsius;
+      if(c==='c') celsius=val;
+      else if(c==='f') celsius=(val-32)*5/9;
+      else celsius=val-273.15;
+      let result;
+      if(t==='c') result=celsius;
+      else if(t==='f') result=celsius*9/5+32;
+      else result=celsius+273.15;
+      return `${val} ${fromKey} = ${result.toFixed(4)} ${toKey}`;
+    }
+
+    const base = val * units[fromKey];
+    const result = base / units[toKey];
+    const fmt = result > 1e6 || (result < 1e-4 && result !== 0) ? result.toExponential(4) : result.toPrecision(6);
+    return `${val} ${fromKey} = ${fmt} ${toKey}`;
+  }
+  return null;
+}
+
+// ============================================================
+//  PARTICLES (background)
+// ============================================================
+(function(){
+  const c = document.getElementById('pCanvas');
+  const ctx = c.getContext('2d');
+  let W, H, pts = [];
+  function resize(){ W=c.width=innerWidth; H=c.height=innerHeight; }
+  function init(){
+    resize();
+    pts = Array.from({length:65},()=>({
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*.28, vy:(Math.random()-.5)*.28,
+      r:Math.random()*1.2+.4
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(144,205,244,0.45)';
+      ctx.fill();
+    });
+    pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<90){
+        ctx.beginPath();
+        ctx.moveTo(a.x,a.y);
+        ctx.lineTo(b.x,b.y);
+        ctx.strokeStyle=`rgba(144,205,244,${.08*(1-d/90)})`;
+        ctx.lineWidth=.5;
+        ctx.stroke();
+      }
+    }));
+    requestAnimationFrame(draw);
+  }
+  init();
+  draw();
+  window.addEventListener('resize',init);
+})();
+
+// ============================================================
+//  PHYSICS SPEED LINES
+// ============================================================
+(function(){
+  const anim = document.getElementById('phAnim');
+  for(let i=0;i<8;i++){
+    const l = document.createElement('div');
+    l.className='spLine';
+    l.style.top = (10+i*11)+'%';
+    l.style.animationDuration = (1.5+Math.random()*2)+'s';
+    l.style.animationDelay = (Math.random()*3)+'s';
+    anim.appendChild(l);
+  }
+})();
+
+// ============================================================
+//  PHYSICS BURST RAYS
+// ============================================================
+(function(){
+  const wrap = document.getElementById('burstWrap');
+  const angles = [0,18,36,54,72,90,108,126,144,162];
+  angles.forEach((a,i)=>{
+    const r = document.createElement('div');
+    r.className='ray';
+    r.style.height=(50+Math.random()*80)+'px';
+    r.style.transform=`rotate(${a+220}deg)`;
+    r.style.animationDelay=(i*0.22)+'s';
+    r.style.animationDuration=(2+Math.random())+'s';
+    wrap.appendChild(r);
+  });
+})();
+
+// ============================================================
+//  BIOLOGY FEATHER RAYS
+// ============================================================
+(function(){
+  const wrap = document.getElementById('featherWrap');
+  const angles = [-80,-65,-50,-35,-20,-5,10,25,40,55,70];
+  angles.forEach((a,i)=>{
+    const r = document.createElement('div');
+    r.className='fRay';
+    r.style.height=(30+Math.random()*120)+'px';
+    r.style.transform=`rotate(${a}deg)`;
+    r.style.animationDelay=(i*0.25)+'s';
+    r.style.animationDuration=(2.2+Math.random()*1.5)+'s';
+    wrap.appendChild(r);
+  });
+})();
+
+// ============================================================
+//  BIOLOGY VINES
+// ============================================================
+(function(){
+  const wrap = document.getElementById('vineWrap');
+  for(let i=0;i<6;i++){
+    const v = document.createElement('div');
+    v.className='vine';
+    v.style.left=(5+i*18)+'%';
+    v.style.animationDelay=(i*0.7)+'s';
+    v.style.animationDuration=(4+Math.random()*2)+'s';
+    wrap.appendChild(v);
+  }
+})();
+
+// ============================================================
+//  BIOLOGY DNA CANVAS
+// ============================================================
+(function(){
+  const c = document.getElementById('dnaC');
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, rows = 38, H = rows * 9;
+  c.height = H;
+  let t = 0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<rows;i++){
+      const y = i*9+4;
+      const x1 = W/2 + Math.sin(i*0.38+t)*16;
+      const x2 = W/2 - Math.sin(i*0.38+t)*16;
+      ctx.beginPath();
+      ctx.moveTo(x1,y); ctx.lineTo(x2,y);
+      ctx.strokeStyle=`rgba(74,222,128,${0.18+Math.abs(Math.sin(i*0.38+t))*0.4})`;
+      ctx.lineWidth=1;
+      ctx.stroke();
+      const r=2;
+      ctx.beginPath(); ctx.arc(x1,y,r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(74,222,128,0.65)`; ctx.fill();
+      ctx.beginPath(); ctx.arc(x2,y,r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(74,222,128,0.65)`; ctx.fill();
+    }
+    t+=0.04;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// init on load
+document.addEventListener('DOMContentLoaded',()=>{
+  const out = document.getElementById('chatOut');
+  out.innerHTML = `<div class="msgAi"><span class="msgLabel">AI: </span>Hello! I'm your offline Science AI — Physics, Chemistry & Biology knowledge base loaded. Ask me anything, or select a subject tab. I understand Bengali too! 🔬⚛🧬</div>`;
+});
+</script>
+</body>
+</html>
