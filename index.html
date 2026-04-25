@@ -960,30 +960,63 @@
     <button class="ai-toggle-btn" id="aiToggleIcon">▼</button>
   </div>
   <div class="ai-body" id="aiBody">
-    <div id="chatOutput"><span class="lang-en">🤖 Science Engine v2.0 online.
-Ask me anything — Physics, Chemistry, Biology...<span class="blink">_</span></span><span class="lang-bn hidden">🤖 বিজ্ঞান ইঞ্জিন v2.0 অনলাইনে।
-যেকোনো প্রশ্ন জিজ্ঞাসা করুন...<span class="blink">_</span></span></div>
+    <div id="chatOutput">
+      <span class="lang-en">🤖 Science Engine v2.0 online. Ask me anything — Physics, Chemistry, Biology...<span class="blink">_</span></span>
+      <span class="lang-bn hidden">🤖 বিজ্ঞান ইঞ্জিন v2.0 অনলাইনে। যেকোনো প্রশ্ন জিজ্ঞাসা করুন...<span class="blink">_</span></span>
+    </div>
     <div class="ai-input-row">
       <input id="chatInput" placeholder="Ask about forces, atoms, DNA..." onkeydown="if(event.key==='Enter') askAI()">
       <button id="sendBtn" onclick="askAI()">▶ ASK</button>
     </div>
-    <div class="ai-hint"><span class="lang-en">💡 Backend API required for full functionality</span><span class="lang-bn hidden">💡 সম্পূর্ণ কার্যকারিতার জন্য ব্যাকএন্ড API প্রয়োজন</span></div>
+    <div class="ai-hint">
+        <span class="lang-en">💡 Powered by OpenAI GPT-4o-mini</span>
+        <span class="lang-bn hidden">💡 OpenAI GPT-4o-mini দ্বারা চালিত</span>
+    </div>
   </div>
 </div>
- 
+
+<canvas id="particleCanvas" style="position: fixed; top: 0; left: 0; z-index: -1;"></canvas>
+
 <script>
-  // === PARTICLE CANVAS ===
+  // === GLOBAL STATE & UI REFERENCES ===
+  let isTyping = false;
+  let aiMinimized = false;
+  let currentLang = 'en';
+  const output = document.getElementById('chatOutput');
+  const badge = document.getElementById('aiModeBadge');
   const canvas = document.getElementById('particleCanvas');
   const ctx = canvas.getContext('2d');
   let particles = [];
- 
+
+  // === UI HELPER FUNCTIONS ===
+  function setBadge(text, color) {
+    const colors = {
+      green: { text: '#10b981', bg: 'rgba(16,185,129,0.1)', border: 'rgba(16,185,129,0.35)' },
+      yellow: { text: '#fbbf24', bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.35)' },
+      red: { text: '#f87171', bg: 'rgba(248,113,113,0.08)', border: 'rgba(248,113,113,0.35)' },
+      blue: { text: '#90cdf4', bg: 'rgba(144,205,244,0.08)', border: 'rgba(144,205,244,0.35)' },
+    };
+    const c = colors[color] || colors.green;
+    badge.textContent = text;
+    badge.style.color = c.text;
+    badge.style.background = c.bg;
+    badge.style.borderColor = c.border;
+  }
+
+  function toggleAI() {
+    aiMinimized = !aiMinimized;
+    document.getElementById('aiBox').classList.toggle('minimized', aiMinimized);
+    document.getElementById('aiToggleIcon').textContent = aiMinimized ? '▲' : '▼';
+  }
+
+  // === PARTICLE CANVAS LOGIC ===
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
- 
+
   for (let i = 0; i < 55; i++) {
     particles.push({
       x: Math.random() * window.innerWidth,
@@ -994,7 +1027,7 @@ Ask me anything — Physics, Chemistry, Biology...<span class="blink">_</span></
       alpha: Math.random() * 0.45 + 0.08
     });
   }
- 
+
   (function animParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
@@ -1008,103 +1041,97 @@ Ask me anything — Physics, Chemistry, Biology...<span class="blink">_</span></
     });
     requestAnimationFrame(animParticles);
   })();
- 
-  // === LANGUAGE ===
-  let currentLang = 'en';
-  document.getElementById('languageToggle').addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'bn' : 'en';
-    document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', currentLang !== 'en'));
-    document.querySelectorAll('.lang-bn').forEach(el => el.classList.toggle('hidden', currentLang !== 'bn'));
-    document.body.classList.toggle('bangla', currentLang === 'bn');
-    document.getElementById('languageToggle').textContent = currentLang === 'en' ? 'বাংলা' : 'English';
-  });
- 
-  // === AI BOX MINIMIZE ===
-  let aiMinimized = false;
-  function toggleAI() {
-    aiMinimized = !aiMinimized;
-    document.getElementById('aiBox').classList.toggle('minimized', aiMinimized);
-    document.getElementById('aiToggleIcon').textContent = aiMinimized ? '▲' : '▼';
-  }
- 
-  async function askAI() {
-  if (isTyping) return;
-  const userInput = document.getElementById('chatInput').value.trim();
-  if (!userInput) return;
-  
-  // --- CONFIGURATION ---
-  const API_KEY = "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"; 
-  const model = "gpt-4o-mini"; 
-  
-  document.getElementById('chatInput').value = '';
-  document.getElementById('sendBtn').disabled = true;
-  isTyping = true;
-  
-  setBadge('THINKING...', 'yellow');
-  output.textContent = `> ${userInput}\n\n`;
 
-  // Loading animation
-  let dots = 0;
-  const dotInterval = setInterval(() => {
-    dots = (dots + 1) % 4;
-    output.textContent = `> ${userInput}\n\nProcessing${'.'.repeat(dots + 1)}`;
-  }, 350);
-
-  try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${API_KEY}`
-      },
-      body: JSON.stringify({
-        model: model,
-        messages: [
-          { role: "system", content: "You are a helpful, concise science assistant." },
-          { role: "user", content: userInput }
-        ],
-        temperature: 0.7
-      })
+  // === LANGUAGE TOGGLE (Assumes a button with id 'languageToggle' exists elsewhere) ===
+  const langBtn = document.getElementById('languageToggle');
+  if(langBtn) {
+    langBtn.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'bn' : 'en';
+        document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', currentLang !== 'en'));
+        document.querySelectorAll('.lang-bn').forEach(el => el.classList.toggle('hidden', currentLang !== 'bn'));
+        document.body.classList.toggle('bangla', currentLang === 'bn');
+        langBtn.textContent = currentLang === 'en' ? 'বাংলা' : 'English';
     });
-
-    const data = await response.json();
-    clearInterval(dotInterval);
-
-    if (data.error) throw new Error(data.error.message);
-    
-    const reply = data.choices[0].message.content;
-
-    // Science Mode Detection
-    const q = userInput.toLowerCase();
-    let mode = 'GENERAL';
-    if (/force|motion|physics|gravity|velocity|energy/.test(q)) mode = '⚛ PHYSICS';
-    else if (/atom|acid|base|chemi|element|molecule/.test(q)) mode = '🧪 CHEM';
-    else if (/cell|dna|bio|plant|animal|evolution/.test(q)) mode = '🧬 BIO';
-    
-    setBadge(mode, 'green');
-
-    // Typing Effect
-    const prefix = `> ${userInput}\n\n`;
-    let i = 0;
-    function typeChar() {
-      if (i < reply.length) {
-        output.textContent = prefix + reply.substring(0, i + 1);
-        output.scrollTop = output.scrollHeight;
-        i++;
-        setTimeout(typeChar, 10); 
-      } else {
-        isTyping = false;
-        document.getElementById('sendBtn').disabled = false;
-        setBadge(mode + ' ✓', 'green');
-      }
-    }
-    typeChar();
-
-  } catch (err) {
-    clearInterval(dotInterval);
-    output.textContent = `> ${userInput}\n\n⚠️ API ERROR\n${err.message}`;
-    setBadge('ERROR', 'red');
-    isTyping = false;
-    document.getElementById('sendBtn').disabled = false;
   }
-}
+
+  // === CORE AI LOGIC ===
+  async function askAI() {
+    if (isTyping) return;
+    const userInput = document.getElementById('chatInput').value.trim();
+    if (!userInput) return;
+
+    // Configuration
+    const API_KEY = "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"; 
+    const model = "gpt-4o-mini"; 
+
+    // UI Reset
+    document.getElementById('chatInput').value = '';
+    document.getElementById('sendBtn').disabled = true;
+    isTyping = true;
+    setBadge('THINKING...', 'yellow');
+    output.textContent = `> ${userInput}\n\n`;
+
+    // Loading Animation
+    let dots = 0;
+    const dotInterval = setInterval(() => {
+      dots = (dots + 1) % 4;
+      output.textContent = `> ${userInput}\n\nProcessing${'.'.repeat(dots + 1)}`;
+    }, 350);
+
+    try {
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${API_KEY}`
+        },
+        body: JSON.stringify({
+          model: model,
+          messages: [
+            { role: "system", content: "You are a helpful, concise science assistant." },
+            { role: "user", content: userInput }
+          ],
+          temperature: 0.7
+        })
+      });
+
+      const data = await response.json();
+      clearInterval(dotInterval);
+
+      if (data.error) throw new Error(data.error.message);
+      const reply = data.choices[0].message.content;
+
+      // Mode Detection
+      const q = userInput.toLowerCase();
+      let mode = 'GENERAL';
+      if (/force|motion|physics|gravity|velocity|energy/.test(q)) mode = '⚛ PHYSICS';
+      else if (/atom|acid|base|chemi|element|molecule/.test(q)) mode = '🧪 CHEM';
+      else if (/cell|dna|bio|plant|animal|evolution/.test(q)) mode = '🧬 BIO';
+      setBadge(mode, 'green');
+
+      // Typing Effect
+      const prefix = `> ${userInput}\n\n`;
+      let i = 0;
+      function typeChar() {
+        if (i < reply.length) {
+          output.textContent = prefix + reply.substring(0, i + 1);
+          output.scrollTop = output.scrollHeight;
+          i++;
+          setTimeout(typeChar, 10); 
+        } else {
+          isTyping = false;
+          document.getElementById('sendBtn').disabled = false;
+          setBadge(mode + ' ✓', 'green');
+        }
+      }
+      typeChar();
+
+    } catch (err) {
+      clearInterval(dotInterval);
+      output.textContent = `> ${userInput}\n\n⚠️ API ERROR\n${err.message}`;
+      setBadge('ERROR', 'red');
+      isTyping = false;
+      document.getElementById('sendBtn').disabled = false;
+    }
+  }
+</script>
