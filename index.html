@@ -125,8 +125,8 @@
     }
  
     .science-card:nth-child(1) { animation-delay: 0.1s; background: rgba(9,32,63,0.85); }
-    .science-card:nth-child(2) { animation-delay: 0.22s; background: rgba(5,46,22,0.85); }
-    .science-card:nth-child(3) { animation-delay: 0.34s; background: rgba(19,43,43,0.85); border-right: none; }
+    .science-card:nth-child(2) { animation-delay: 0.22s; background: rgba(15,10,20,0.95); }
+    .science-card:nth-child(3) { animation-delay: 0.34s; background: rgba(10,25,15,0.9); border-right: none; }
  
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
@@ -142,8 +142,8 @@
     }
  
     .science-card:nth-child(1)::before { background: radial-gradient(circle at 25% 25%, rgba(74,144,226,0.22), transparent 60%); }
-    .science-card:nth-child(2)::before { background: radial-gradient(circle at 25% 25%, rgba(16,185,129,0.18), transparent 60%); }
-    .science-card:nth-child(3)::before { background: radial-gradient(circle at 25% 25%, rgba(20,184,166,0.18), transparent 60%); }
+    .science-card:nth-child(2)::before { background: radial-gradient(circle at 25% 25%, rgba(255,105,180,0.15), transparent 60%); }
+    .science-card:nth-child(3)::before { background: radial-gradient(circle at 25% 25%, rgba(34,197,94,0.18), transparent 60%); }
  
     .science-card:hover::before { opacity: 1; }
     .science-card:hover {
@@ -152,6 +152,7 @@
       border-color: rgba(144,205,244,0.35);
     }
  
+    /* Physics Electron Orbit Animation */
     .card-orbit {
       position: absolute;
       top: -50px;
@@ -171,9 +172,101 @@
       border-radius: 50%;
       transform: translateX(-50%);
     }
-    .science-card:nth-child(1) .card-orbit::after { background: #90cdf4; box-shadow: 0 0 8px #90cdf4; }
-    .science-card:nth-child(2) .card-orbit::after { background: #10b981; box-shadow: 0 0 8px #10b981; animation-duration: 30s; }
-    .science-card:nth-child(3) .card-orbit::after { background: #14b8a6; box-shadow: 0 0 8px #14b8a6; }
+    .science-card:nth-child(1) .card-orbit::after { 
+      background: #90cdf4; 
+      box-shadow: 0 0 8px #90cdf4; 
+      animation: none;
+    }
+ 
+    /* Physics Wave Animation */
+    .physics-wave {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: 80px;
+      height: 40px;
+      border-radius: 50% 50% 0 0;
+      border: 2px solid #90cdf4;
+      border-bottom: none;
+      opacity: 0.4;
+      animation: wave-motion 2s ease-in-out infinite;
+    }
+    .physics-wave:nth-child(2) { 
+      left: 70px; 
+      animation-delay: 0.3s;
+      opacity: 0.25;
+    }
+    .physics-wave:nth-child(3) { 
+      left: 120px; 
+      animation-delay: 0.6s;
+      opacity: 0.15;
+    }
+ 
+    @keyframes wave-motion {
+      0%, 100% { transform: translateY(0) scaleY(1); }
+      50% { transform: translateY(-15px) scaleY(0.8); }
+    }
+ 
+    /* Chemistry Pulse/Glow Animation */
+    .chem-pulse {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .chem-pulse::before {
+      content: '';
+      position: absolute;
+      inset: 20%;
+      border: 2px solid rgba(255, 105, 180, 0.3);
+      border-radius: 50%;
+      animation: chem-pulse-anim 3s ease-out infinite;
+    }
+    .chem-pulse::after {
+      content: '';
+      position: absolute;
+      inset: 40%;
+      border: 1px solid rgba(255, 105, 180, 0.5);
+      border-radius: 50%;
+      animation: chem-pulse-anim 3s ease-out infinite 0.5s;
+    }
+ 
+    @keyframes chem-pulse-anim {
+      0% { 
+        transform: scale(0.3);
+        opacity: 1;
+      }
+      100% { 
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+ 
+    /* Biology Growth Animation */
+    .bio-growth {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      opacity: 0.5;
+    }
+    .bio-growth svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 6px rgba(34,197,94,0.6));
+    }
+    .bio-leaf {
+      animation: grow-leaf 4s ease-in-out infinite;
+    }
+    .bio-leaf:nth-child(2) { animation-delay: 0.5s; }
+    .bio-leaf:nth-child(3) { animation-delay: 1s; }
+ 
+    @keyframes grow-leaf {
+      0%, 100% { transform: translateY(0) scale(0.8); opacity: 0.4; }
+      50% { transform: translateY(-8px) scale(1.1); opacity: 0.8; }
+    }
  
     @keyframes spin { to { transform: rotate(360deg); } }
  
@@ -195,8 +288,8 @@
     }
  
     .science-card:nth-child(1) .card-title { color: #90cdf4; text-shadow: 0 0 30px rgba(144,205,244,0.35); }
-    .science-card:nth-child(2) .card-title { color: #6ee7b7; text-shadow: 0 0 30px rgba(110,231,183,0.35); }
-    .science-card:nth-child(3) .card-title { color: #99f6e4; text-shadow: 0 0 30px rgba(153,246,228,0.35); }
+    .science-card:nth-child(2) .card-title { color: #ff69b4; text-shadow: 0 0 30px rgba(255,105,180,0.35); }
+    .science-card:nth-child(3) .card-title { color: #22c55e; text-shadow: 0 0 30px rgba(34,197,94,0.35); }
  
     .card-desc { font-size: 0.88rem; opacity: 0.72; line-height: 1.65; flex-grow: 1; }
  
@@ -211,8 +304,8 @@
     }
  
     .science-card:nth-child(1) .card-highlight { border-color: #4a90e2; color: #90cdf4; }
-    .science-card:nth-child(2) .card-highlight { border-color: #10b981; color: #6ee7b7; }
-    .science-card:nth-child(3) .card-highlight { border-color: #14b8a6; color: #99f6e4; }
+    .science-card:nth-child(2) .card-highlight { border-color: #ff69b4; color: #ff69b4; }
+    .science-card:nth-child(3) .card-highlight { border-color: #22c55e; color: #22c55e; }
  
     .card-footer {
       margin-top: 2rem;
@@ -237,14 +330,19 @@
  
     #theory h1 { font-size: 1.75rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 2rem; }
  
-    .theory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .theory-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
  
     .theory-block {
       background: rgba(9,32,63,0.55);
       border: 1px solid rgba(144,205,244,0.13);
       border-radius: 12px;
       padding: 1.5rem;
+      max-height: 600px;
+      overflow-y: auto;
     }
+ 
+    .theory-block::-webkit-scrollbar { width: 4px; }
+    .theory-block::-webkit-scrollbar-thumb { background: rgba(144,205,244,0.25); border-radius: 2px; }
  
     .theory-block h2 {
       font-size: 1.05rem;
@@ -255,7 +353,8 @@
     }
  
     .physics-theory h2 { color: #90cdf4; }
-    .chemistry-theory h2 { color: #6ee7b7; }
+    .chemistry-theory h2 { color: #ff69b4; }
+    .biology-theory h2 { color: #22c55e; }
  
     .formula {
       font-family: 'Share Tech Mono', monospace;
@@ -268,8 +367,11 @@
       border-left: 2px solid #4a90e2;
     }
  
-    .chemistry-theory .formula { color: #6ee7b7; border-color: #10b981; }
+    .chemistry-theory .formula { color: #ff69b4; border-color: #ff69b4; }
+    .biology-theory .formula { color: #22c55e; border-color: #22c55e; }
+ 
     .theory-note { font-size: 0.83rem; opacity: 0.65; margin: 0.5rem 0; line-height: 1.55; }
+    .theory-history { font-size: 0.8rem; opacity: 0.5; font-style: italic; margin: 0.75rem 0; padding: 0.5rem 0; border-left: 2px solid rgba(255,255,255,0.15); padding-left: 0.5rem; }
  
     /* QR */
     #qr {
@@ -468,6 +570,9 @@
     <!-- PHYSICS -->
     <a href="https://stounchvicinity65.github.io/INTERACTIVE-MOTIONS/" class="science-card">
       <div class="card-orbit"></div>
+      <div class="physics-wave"></div>
+      <div class="physics-wave"></div>
+      <div class="physics-wave"></div>
       <div class="card-num">
         <span class="lang-en">Project 01 — Physics</span>
         <span class="lang-bn hidden">প্রকল্প ০১ — পদার্থবিজ্ঞান</span>
@@ -492,10 +597,10 @@
  
     <!-- CHEMISTRY -->
     <a href="https://antidominator.github.io/fair-project/" class="science-card">
-      <div class="card-orbit" style="animation-duration:30s;"></div>
+      <div class="chem-pulse"></div>
       <div class="card-num">
         <span class="lang-en">Project 02 — Chemistry</span>
-        <span class="lang-bn hidden">প্রকল্প ০২ — রসায়ন</span>
+        <span class="lang-bn hidden">প্রকল্প ০२ — রসায়ন</span>
       </div>
       <h1 class="card-title">
         <span class="lang-en">Chemistry</span>
@@ -517,10 +622,16 @@
  
     <!-- BIOLOGY -->
     <a href="#theory" class="science-card">
-      <div class="card-orbit" style="animation-duration:38s; animation-direction:reverse;"></div>
+      <div class="bio-growth">
+        <svg viewBox="0 0 100 100">
+          <path class="bio-leaf" d="M50,20 Q60,50 50,80 Q40,50 50,20" fill="rgba(34,197,94,0.4)" stroke="#22c55e" stroke-width="1.5"/>
+          <path class="bio-leaf" d="M30,40 Q20,60 30,80 Q45,60 30,40" fill="rgba(34,197,94,0.3)" stroke="#22c55e" stroke-width="1.5"/>
+          <path class="bio-leaf" d="M70,40 Q80,60 70,80 Q55,60 70,40" fill="rgba(34,197,94,0.3)" stroke="#22c55e" stroke-width="1.5"/>
+        </svg>
+      </div>
       <div class="card-num">
         <span class="lang-en">Project 03 — Biology</span>
-        <span class="lang-bn hidden">প্রকল্প ০৩ — জীববিজ্ঞান</span>
+        <span class="lang-bn hidden">প্রকল্প ०३ — জীববিজ্ঞান</span>
       </div>
       <h1 class="card-title">
         <span class="lang-en">Biology</span>
@@ -545,26 +656,58 @@
   <section id="theory">
     <h1>📚 <span class="lang-en">Theory & Formulas</span><span class="lang-bn hidden">তত্ত্ব ও সূত্রসমূহ</span></h1>
     <div class="theory-grid">
+      <!-- PHYSICS THEORY -->
       <div class="theory-block physics-theory">
         <h2>⚛️ <span class="lang-en">Physics — Motion</span><span class="lang-bn hidden">পদার্থবিজ্ঞান — গতি</span></h2>
-        <p class="theory-note"><span class="lang-en">Equations of motion under constant acceleration:</span><span class="lang-bn hidden">সমত্বরণে গতির সমীকরণ:</span></p>
+        
+        <p class="theory-note"><strong>Equations of motion under constant acceleration:</strong></p>
         <div class="formula">v = u + at</div>
         <div class="formula">s = ut + ½at²</div>
         <div class="formula">v² = u² + 2as</div>
-        <p class="theory-note" style="margin-top:0.6rem;">
-          <span class="lang-en">u = initial velocity · v = final velocity · a = acceleration · t = time · s = displacement</span>
-          <span class="lang-bn hidden">u = আদিবেগ · v = অন্তবেগ · a = ত্বরণ · t = সময় · s = সরণ</span>
-        </p>
+        <p class="theory-note">u=initial velocity · v=final velocity · a=acceleration · t=time · s=displacement</p>
+        
+        <p class="theory-history"><strong>📖 History:</strong> Galileo Galilei (1564-1642) revolutionized motion studies through experimentation with inclined planes. Newton's 3 laws (1687) unified terrestrial & celestial mechanics. Einstein later showed motion is relative to reference frames (1905).</p>
+        
+        <p class="theory-note"><strong>Key Concepts:</strong></p>
+        <p class="theory-note">• <strong>Projectile Motion:</strong> Objects under gravity follow parabolic paths. Horizontal & vertical motions are independent.</p>
+        <p class="theory-note">• <strong>Circular Motion:</strong> Centripetal force = mv²/r directs toward center. Angular velocity ω = 2π/T.</p>
+        <p class="theory-note">• <strong>Momentum:</strong> p = mv. Conservation: total momentum before = after collision.</p>
+        <p class="theory-note">• <strong>Energy:</strong> KE = ½mv². PE = mgh. Total mechanical energy conserved in closed systems.</p>
       </div>
+      
+      <!-- CHEMISTRY THEORY -->
       <div class="theory-block chemistry-theory">
         <h2>🧪 <span class="lang-en">Chemistry — Periodic Trends</span><span class="lang-bn hidden">রসায়ন — পর্যায়বৃত্ত প্রবণতা</span></h2>
-        <p class="theory-note"><span class="lang-en">Atomic radius, ionization energy and electronegativity:</span><span class="lang-bn hidden">পারমাণবিক ব্যাসার্ধ, আয়নিকরণ শক্তি ও তড়িৎঋণাত্মকতা:</span></p>
-        <div class="formula"><span class="lang-en">Across period → radius ↓, ionization ↑</span><span class="lang-bn hidden">পর্যায় বরাবর → ব্যাসার্ধ ↓, আয়নিকরণ ↑</span></div>
-        <div class="formula"><span class="lang-en">Down group → radius ↑, ionization ↓</span><span class="lang-bn hidden">গ্রুপ নিচে → ব্যাসার্ধ ↑, আয়নিকরণ ↓</span></div>
-        <p class="theory-note" style="margin-top:0.6rem;">
-          <span class="lang-en">Electronegativity increases toward the top-right of the periodic table.</span>
-          <span class="lang-bn hidden">তড়িৎঋণাত্মকতা পর্যায় সারণির উপর-ডান দিকে বৃদ্ধি পায়।</span>
-        </p>
+        
+        <p class="theory-note"><strong>Atomic Properties Across the Periodic Table:</strong></p>
+        <div class="formula"><span class="lang-en">Across period → radius ↓, ionization ↑, electronegativity ↑</span></div>
+        <div class="formula"><span class="lang-en">Down group → radius ↑, ionization ↓, electronegativity ↓</span></div>
+        <p class="theory-note">Effective nuclear charge increases left→right, shielding increases top→bottom.</p>
+        
+        <p class="theory-history"><strong>📖 History:</strong> Dmitri Mendeleev (1869) organized 63 known elements by atomic weight, leaving gaps for undiscovered elements. Modern periodic table (118 elements) reflects electron configuration. Moseley's X-ray work (1913) confirmed atomic number ordering.</p>
+        
+        <p class="theory-note"><strong>Key Concepts:</strong></p>
+        <p class="theory-note">• <strong>Oxidation States:</strong> Track electron transfer in reactions. Helps balance redox equations.</p>
+        <p class="theory-note">• <strong>Chemical Bonding:</strong> Ionic (electron transfer), Covalent (sharing), Metallic (electron sea).</p>
+        <p class="theory-note">• <strong>Stoichiometry:</strong> Mole ratios from balanced equations. Limiting reactant determines yield.</p>
+        <p class="theory-note">• <strong>Thermochemistry:</strong> ΔH = energy change. Exothermic (ΔH<0), Endothermic (ΔH>0).</p>
+      </div>
+      
+      <!-- BIOLOGY THEORY -->
+      <div class="theory-block biology-theory">
+        <h2>🧬 <span class="lang-en">Biology — Life & Evolution</span><span class="lang-bn hidden">জীববিজ্ঞান — জীবন ও বিবর্তন</span></h2>
+        
+        <p class="theory-note"><strong>Central Dogma of Molecular Biology:</strong></p>
+        <div class="formula">DNA → RNA → Protein</div>
+        <p class="theory-note">DNA replication ensures genetic continuity. mRNA transcription transfers info. tRNA translation builds proteins.</p>
+        
+        <p class="theory-history"><strong>📖 History:</strong> Darwin (1859) proposed natural selection as evolution's mechanism. Mendel (1860s) discovered inheritance laws through pea plants. Watson & Crick (1953) unveiled DNA's double helix. Modern synthesis combines genetics, population dynamics & evolutionary theory.</p>
+        
+        <p class="theory-note"><strong>Key Concepts:</strong></p>
+        <p class="theory-note">• <strong>Photosynthesis:</strong> 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂. Light reactions (thylakoid) & Calvin cycle (stroma).</p>
+        <p class="theory-note">• <strong>Cell Cycle:</strong> Interphase (G1, S, G2) → Mitosis → Cytokinesis. Checkpoints prevent errors.</p>
+        <p class="theory-note">• <strong>Protein Synthesis:</strong> 64 codons encode 20 amino acids. Ribosomes read mRNA triplets.</p>
+        <p class="theory-note">• <strong>Evolution:</strong> Mutation, selection & drift drive allele frequency changes. Speciation via reproductive isolation.</p>
       </div>
     </div>
   </section>
@@ -580,7 +723,7 @@
     <h1>👤 <span class="lang-en">About</span><span class="lang-bn hidden">পরিচয়</span></h1>
     <p><span class="lang-en">Science Fair Project: Interactive Science Learning Portal</span><span class="lang-bn hidden">বিজ্ঞান মেলা প্রকল্প: ইন্টারেক্টিভ বিজ্ঞান শিক্ষা পোর্টাল</span></p>
     <p class="team">Nafis Islam &amp; Khandoker Shafowan Wafa</p>
-    <p class="batch"><span class="lang-en">SSC 2027 Batch</span><span class="lang-bn hidden">এসএসসি ২০২৭ ব্যাচ</span></p>
+    <p class="batch"><span class="lang-en">SSC 2027 Batch</span><span class="lang-bn hidden">এসএসসি २०२७ ব্যাচ</span></p>
   </section>
 </div>
  
@@ -693,7 +836,6 @@ Ask me anything — Physics, Chemistry, Biology...<span class="blink">_</span></
     output.textContent = `> ${input}\n\n`;
     output.scrollTop = output.scrollHeight;
  
-    // Dots animation while waiting
     let dots = 0;
     const dotInterval = setInterval(() => {
       dots = (dots + 1) % 4;
@@ -715,7 +857,7 @@ Rules:
 - Structure with short paragraphs or simple bullet lines using "-".
 - Include a key formula or fact when relevant.
 - Be encouraging toward students.
-- Topics: motion physics, kinematics, periodic trends, chemical bonding, cell biology, DNA, photosynthesis, evolution.`,
+- Topics: motion physics, kinematics, periodic trends, chemical bonding, cell biology, DNA, photosynthesis, evolution, thermodynamics, orbital mechanics.`,
           messages: [{ role: 'user', content: input }]
         })
       });
@@ -727,16 +869,14 @@ Rules:
  
       const reply = data.content?.map(b => b.text || '').join('') || 'No response.';
  
-      // Detect subject for badge
       const q = input.toLowerCase();
       let mode = 'GENERAL';
-      if (/force|motion|velocity|speed|accel|newton|gravity|energy|kinetic|momentum|physics|projectile|oscillat|harmonic|circular/.test(q)) mode = '⚛ PHYSICS';
-      else if (/atom|ph|acid|base|element|compound|react|periodic|bond|mole|ion|chemi|electron/.test(q)) mode = '🧪 CHEM';
-      else if (/cell|dna|rna|gene|evolut|photosyn|bio|organ|plant|animal|mitosis|meiosis/.test(q)) mode = '🧬 BIO';
+      if (/force|motion|velocity|speed|accel|newton|gravity|energy|kinetic|momentum|physics|projectile|oscillat|harmonic|circular|wave/.test(q)) mode = '⚛ PHYSICS';
+      else if (/atom|ph|acid|base|element|compound|react|periodic|bond|mole|ion|chemi|electron|oxidation|redox/.test(q)) mode = '🧪 CHEM';
+      else if (/cell|dna|rna|gene|evolut|photosyn|bio|organ|plant|animal|mitosis|meiosis|protein/.test(q)) mode = '🧬 BIO';
  
       setBadge(mode, 'green');
  
-      // Typewriter
       const prefix = `> ${input}\n\n`;
       output.textContent = prefix;
       let i = 0;
