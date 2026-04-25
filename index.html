@@ -1093,8 +1093,14 @@ document.getElementById('bioPopup').addEventListener('click', e=>{
 // ============================================================
 //  AI BOX
 // ============================================================
-let aiMinimized = true;
+// ============================================================
+//  AI BOX LOGIC - UPDATED FOR TYPEWRITER & MINIMIZED
+// ============================================================
+let aiMinimized = true; 
 let currentSubject = 'ph';
+
+// Apply default minimized state immediately on load
+document.getElementById('aiBox').classList.add('minimized');
 
 document.getElementById('aiHdrToggle').addEventListener('click', ()=>{
   aiMinimized = !aiMinimized;
@@ -1117,8 +1123,34 @@ function appendMsg(who, text){
   const out = document.getElementById('chatOut');
   const cls = who==='user' ? 'msgUser' : 'msgAi';
   const label = who==='user' ? (lang==='bn' ? 'তুমি:' : 'You:') : 'AI:';
-  out.innerHTML += `<div class="${cls}"><span class="msgLabel">${label} </span>${text}</div>`;
-  out.scrollTop = out.scrollHeight;
+  
+  // Create message container
+  const msgDiv = document.createElement('div');
+  msgDiv.className = cls;
+  msgDiv.innerHTML = `<span class="msgLabel">${label} </span><span class="textContent"></span>`;
+  out.appendChild(msgDiv);
+  
+  const textSpan = msgDiv.querySelector('.textContent');
+
+  if(who === 'user') {
+    textSpan.textContent = text;
+    out.scrollTop = out.scrollHeight;
+  } else {
+    // START TYPEWRITER EFFECT
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        textSpan.textContent += text.charAt(i);
+        out.scrollTop = out.scrollHeight;
+        i++;
+        setTimeout(type, 25); // Speed: 25ms per character
+      } else {
+        // Only re-enable the button once typing is completely finished
+        document.getElementById('askBtn').disabled = false;
+      }
+    }
+    type();
+  }
 }
 
 function sendMsg(){
@@ -1126,13 +1158,15 @@ function sendMsg(){
   const q = input.value.trim();
   if(!q) return;
   input.value = '';
+  
+  // Disable button so user can't spam messages while AI is "typing"
   document.getElementById('askBtn').disabled = true;
   appendMsg('user', q);
-  // short delay for feel
+
   setTimeout(()=>{
     const answer = resolveQuery(q.toLowerCase(), currentSubject);
     appendMsg('ai', answer);
-    document.getElementById('askBtn').disabled = false;
+    // Note: Re-enabling the button is now handled inside appendMsg's typewriter loop
   }, 180);
 }
 
