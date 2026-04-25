@@ -256,25 +256,121 @@ nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:transl
 @keyframes bl{50%{opacity:0;}}
 
 /* UNIT CONVERTER PANEL */
-.ucPanel{display:none;background:rgba(0,0,0,.48);border-radius:8px;padding:10px;margin-bottom:10px;border:1px solid rgba(250,204,21,.14);}
-.ucPanel.show{display:block;}
-.ucTitle{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:#facc15;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
-.ucCatRow{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
-.ucCatBtn{padding:3px 8px;border:1px solid rgba(250,204,21,.2);border-radius:4px;background:rgba(250,204,21,.04);color:#9a8a40;font-family:'Share Tech Mono',monospace;font-size:.55rem;cursor:pointer;transition:all .18s;letter-spacing:.04em;}
-.ucCatBtn.active{border-color:rgba(250,204,21,.5);background:rgba(250,204,21,.1);color:#facc15;}
-.ucRow{display:flex;gap:5px;align-items:center;margin-bottom:6px;flex-wrap:wrap;}
-.ucSel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.13);color:#fff;font-family:'Share Tech Mono',monospace;font-size:9.5px;border-radius:4px;outline:none;padding:4px 6px;cursor:pointer;min-width:90px;}
-.ucIn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.13);color:#fff;font-family:'Share Tech Mono',monospace;font-size:9.5px;border-radius:4px;outline:none;padding:4px 6px;width:75px;}
-.ucArrow{color:#facc15;opacity:.6;font-size:.8rem;}
-.ucOut{font-family:'Share Tech Mono',monospace;font-size:10.5px;color:#facc15;margin-top:5px;min-height:18px;padding:4px 6px;background:rgba(250,204,21,.04);border-radius:4px;border:1px solid rgba(250,204,21,.1);}
+/* UNIT CONVERTER PANEL - FIXED */
+.ucPanel {
+  display: none;
+  background: rgba(0, 0, 0, .85); /* Slightly darker for better contrast */
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(250, 204, 21, .14);
+}
+
+.ucPanel.show {
+  display: block;
+}
+
+.ucTitle {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .6rem;
+  color: #facc15;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.ucCatRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.ucCatBtn {
+  padding: 3px 8px;
+  border: 1px solid rgba(250, 204, 21, .2);
+  border-radius: 4px;
+  background: rgba(250, 204, 21, .04);
+  color: #9a8a40;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .55rem;
+  cursor: pointer;
+  transition: all .18s;
+  letter-spacing: .04em;
+}
+
+.ucCatBtn.active {
+  border-color: rgba(250, 204, 21, .5);
+  background: rgba(250, 204, 21, .1);
+  color: #facc15;
+}
+
+.ucRow {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+/* FIXED: Changed to solid background to prevent white-on-white bug */
+.ucSel {
+  background: #111 !important; 
+  border: 1px solid rgba(255, 255, 255, .2);
+  color: #fff;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9.5px;
+  border-radius: 4px;
+  outline: none;
+  padding: 4px 6px;
+  cursor: pointer;
+  min-width: 90px;
+  appearance: none; /* Modern look */
+}
+
+/* FIXED: Explicitly style the dropdown options */
+.ucSel option {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.ucIn {
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, .2);
+  color: #fff;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9.5px;
+  border-radius: 4px;
+  outline: none;
+  padding: 4px 6px;
+  width: 75px;
+}
+
+.ucArrow {
+  color: #facc15;
+  opacity: .6;
+  font-size: .8rem;
+}
+
+.ucOut {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10.5px;
+  color: #facc15;
+  margin-top: 5px;
+  min-height: 18px;
+  padding: 4px 6px;
+  background: rgba(250, 204, 21, .08);
+  border-radius: 4px;
+  border: 1px solid rgba(250, 204, 21, .2);
+}
 
 @media(max-width:960px){
-  #home{grid-template-columns:1fr;min-height:auto;}
-  .sCard{border-right:none;border-bottom:1px solid rgba(255,255,255,.04);min-height:68vh;}
-  .tGrid{grid-template-columns:1fr;}
-  .tFull{grid-column:1;}
-  nav{padding:.55rem 1rem;}
-  .aiBox{width:295px;right:8px;bottom:8px;}
+  #home { grid-template-columns: 1fr; min-height: auto; }
+  .sCard { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, .04); min-height: 68vh; }
+  .tGrid { grid-template-columns: 1fr; }
+  .tFull { grid-column: 1; }
+  nav { padding: .55rem 1rem; }
+  .aiBox { width: 295px; right: 8px; bottom: 8px; }
 }
 </style>
 </head>
