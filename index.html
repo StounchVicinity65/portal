@@ -1,247 +1,767 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Science Fair Web Portal</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-        /* CARD SYSTEM */
-        .science-card {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            text-decoration: none;
-        }
-        .science-card:hover {
-            transform: translateY(-10px);
-            filter: brightness(1.1);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
-        }
-
-        /* smooth scroll */
-        html { scroll-behavior: smooth; }
-
-        /* AI BOX ENHANCED STYLING */
-        .ai-box {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 280px;
-            background: #111827; /* Darker terminal look */
-            border: 2px solid #374151;
-            border-radius: 12px;
-            padding: 15px;
-            color: #10b981; /* Emerald Green */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            z-index: 100;
-        }
-
-        #chatOutput {
-            height: 150px;
-            overflow-y: auto;
-            font-size: 12px;
-            background: #000;
-            font-family: 'Courier New', monospace;
-            padding: 10px;
-            border: 1px solid #1f2937;
-            border-radius: 6px;
-            margin-bottom: 8px;
-            white-space: pre-wrap; /* Crucial for \n formatting */
-            color: #34d399;
-        }
-
-        .ai-box input {
-            width: 100%;
-            background: #1f2937;
-            border: 1px solid #374151;
-            color: white;
-            padding: 8px;
-            font-size: 12px;
-            border-radius: 4px;
-            outline: none;
-        }
-
-        .ai-box button {
-            width: 100%;
-            margin-top: 6px;
-            background: #10b981;
-            color: white;
-            padding: 6px;
-            font-weight: bold;
-            border-radius: 4px;
-            transition: opacity 0.2s;
-        }
-
-        .ai-box button:hover { opacity: 0.9; }
-
-        /* Blinking Cursor */
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Science Fair Web Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;700&family=Share+Tech+Mono&family=Exo+2:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nav-bg: rgba(0,0,0,0.6);
+      --nav-hover-bg: #4a90e2;
+      --nav-text: #ccc;
+      --accent-blue: #90cdf4;
+    }
+ 
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    body {
+      font-family: 'Exo 2', sans-serif;
+      background: #050d1a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+ 
+    body.bangla { font-family: 'Noto Serif Bengali', sans-serif; }
+ 
+    .bg-anim {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: url('https://i.pinimg.com/originals/54/f8/e3/54f8e332b488dfdb2d3cc2efce8a536a.gif') no-repeat center center;
+      background-size: cover;
+      opacity: 0.18;
+    }
+ 
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(135deg, rgba(9,32,63,0.93) 0%, rgba(5,25,50,0.9) 50%, rgba(9,32,63,0.93) 100%);
+    }
+ 
+    #particleCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+ 
+    .wrapper { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 100vh; }
+ 
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(144,205,244,0.15);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 2rem;
+      gap: 0.4rem;
+    }
+ 
+    .nav-logo { font-size: 1.6rem; margin-right: 0.4rem; filter: drop-shadow(0 0 8px #4a90e2); }
+ 
+    .nav-title {
+      font-size: 0.9rem;
+      color: var(--accent-blue);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-right: auto;
+    }
+ 
+    nav a {
+      color: var(--nav-text);
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+ 
+    nav a:hover { background: var(--nav-hover-bg); color: white; font-weight: 700; }
+ 
+    .nav-divider { width: 1px; height: 20px; background: rgba(255,255,255,0.15); margin: 0 0.4rem; }
+ 
+    .lang-btn {
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: 1px solid rgba(144,205,244,0.4);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .lang-btn:hover { background: var(--nav-hover-bg); border-color: transparent; }
+ 
+    .hidden { display: none !important; }
+ 
+    /* HERO CARDS */
+    #home {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      min-height: calc(100vh - 56px);
+    }
+ 
+    .science-card {
+      position: relative;
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: #e2e8f0;
+      border-right: 1px solid rgba(144,205,244,0.1);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: fadeInUp 0.6s ease both;
+    }
+ 
+    .science-card:nth-child(1) { animation-delay: 0.1s; background: rgba(9,32,63,0.85); }
+    .science-card:nth-child(2) { animation-delay: 0.22s; background: rgba(5,46,22,0.85); }
+    .science-card:nth-child(3) { animation-delay: 0.34s; background: rgba(19,43,43,0.85); border-right: none; }
+ 
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+ 
+    .science-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+ 
+    .science-card:nth-child(1)::before { background: radial-gradient(circle at 25% 25%, rgba(74,144,226,0.22), transparent 60%); }
+    .science-card:nth-child(2)::before { background: radial-gradient(circle at 25% 25%, rgba(16,185,129,0.18), transparent 60%); }
+    .science-card:nth-child(3)::before { background: radial-gradient(circle at 25% 25%, rgba(20,184,166,0.18), transparent 60%); }
+ 
+    .science-card:hover::before { opacity: 1; }
+    .science-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+      border-color: rgba(144,205,244,0.35);
+    }
+ 
+    .card-orbit {
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,255,255,0.09);
+      animation: spin 22s linear infinite;
+    }
+    .card-orbit::after {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+    .science-card:nth-child(1) .card-orbit::after { background: #90cdf4; box-shadow: 0 0 8px #90cdf4; }
+    .science-card:nth-child(2) .card-orbit::after { background: #10b981; box-shadow: 0 0 8px #10b981; animation-duration: 30s; }
+    .science-card:nth-child(3) .card-orbit::after { background: #14b8a6; box-shadow: 0 0 8px #14b8a6; }
+ 
+    @keyframes spin { to { transform: rotate(360deg); } }
+ 
+    .card-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      opacity: 0.45;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+ 
+    .card-title {
+      font-size: 3.2rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+ 
+    .science-card:nth-child(1) .card-title { color: #90cdf4; text-shadow: 0 0 30px rgba(144,205,244,0.35); }
+    .science-card:nth-child(2) .card-title { color: #6ee7b7; text-shadow: 0 0 30px rgba(110,231,183,0.35); }
+    .science-card:nth-child(3) .card-title { color: #99f6e4; text-shadow: 0 0 30px rgba(153,246,228,0.35); }
+ 
+    .card-desc { font-size: 0.88rem; opacity: 0.72; line-height: 1.65; flex-grow: 1; }
+ 
+    .card-highlight {
+      margin-top: 1.5rem;
+      font-size: 0.83rem;
+      font-weight: 700;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      border-left: 3px solid;
+      background: rgba(255,255,255,0.04);
+    }
+ 
+    .science-card:nth-child(1) .card-highlight { border-color: #4a90e2; color: #90cdf4; }
+    .science-card:nth-child(2) .card-highlight { border-color: #10b981; color: #6ee7b7; }
+    .science-card:nth-child(3) .card-highlight { border-color: #14b8a6; color: #99f6e4; }
+ 
+    .card-footer {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .science-card:hover .card-footer { opacity: 1; }
+ 
+    /* THEORY */
+    #theory {
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(144,205,244,0.12);
+      padding: 4rem 3rem;
+    }
+ 
+    #theory h1 { font-size: 1.75rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 2rem; }
+ 
+    .theory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+ 
+    .theory-block {
+      background: rgba(9,32,63,0.55);
+      border: 1px solid rgba(144,205,244,0.13);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+ 
+    .theory-block h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+ 
+    .physics-theory h2 { color: #90cdf4; }
+    .chemistry-theory h2 { color: #6ee7b7; }
+ 
+    .formula {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.88rem;
+      color: #90cdf4;
+      background: rgba(0,0,0,0.4);
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      margin: 0.4rem 0;
+      border-left: 2px solid #4a90e2;
+    }
+ 
+    .chemistry-theory .formula { color: #6ee7b7; border-color: #10b981; }
+    .theory-note { font-size: 0.83rem; opacity: 0.65; margin: 0.5rem 0; line-height: 1.55; }
+ 
+    /* QR */
+    #qr {
+      text-align: center;
+      padding: 3rem;
+      background: rgba(0,0,0,0.3);
+      border-top: 1px solid rgba(144,205,244,0.08);
+    }
+    #qr h1 { font-size: 1.4rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 1.5rem; }
+    #qr img {
+      border-radius: 8px;
+      border: 3px solid rgba(144,205,244,0.25);
+      box-shadow: 0 0 20px rgba(74,144,226,0.25);
+    }
+ 
+    /* ABOUT */
+    #about {
+      text-align: center;
+      padding: 3rem;
+      background: rgba(0,0,0,0.5);
+      border-top: 1px solid rgba(144,205,244,0.08);
+    }
+    #about h1 { font-size: 1.4rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 0.75rem; }
+    #about p { opacity: 0.72; margin: 0.35rem 0; font-size: 0.92rem; }
+    #about .team { color: #6ee7b7; font-weight: 700; font-size: 1rem; margin-top: 0.75rem; opacity: 1; }
+    #about .batch { color: #90cdf4; opacity: 0.55; font-size: 0.83rem; font-style: italic; }
+ 
+    /* AI BOX */
+    .ai-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      background: rgba(4, 12, 30, 0.97);
+      border: 1px solid rgba(144,205,244,0.32);
+      border-radius: 14px;
+      box-shadow: 0 0 30px rgba(74,144,226,0.2), 0 20px 40px rgba(0,0,0,0.7);
+      z-index: 200;
+      overflow: hidden;
+    }
+ 
+    .ai-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: rgba(0,0,0,0.45);
+      border-bottom: 1px solid rgba(144,205,244,0.12);
+      cursor: pointer;
+      user-select: none;
+    }
+ 
+    .ai-header-left { display: flex; align-items: center; gap: 8px; }
+ 
+    .ai-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 6px #10b981;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+ 
+    .ai-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      color: #90cdf4;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+ 
+    .ai-mode-badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      color: #10b981;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.3);
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.07em;
+      transition: all 0.3s;
+    }
+ 
+    .ai-toggle-btn {
+      background: none; border: none;
+      color: #90cdf4; cursor: pointer;
+      font-size: 0.75rem; opacity: 0.6;
+      transition: opacity 0.2s; line-height: 1;
+    }
+    .ai-toggle-btn:hover { opacity: 1; }
+ 
+    .ai-body { padding: 12px 14px 14px; }
+ 
+    #chatOutput {
+      height: 190px;
+      overflow-y: auto;
+      font-size: 11.5px;
+      background: rgba(0,0,0,0.65);
+      font-family: 'Share Tech Mono', monospace;
+      padding: 10px 12px;
+      border: 1px solid rgba(144,205,244,0.1);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      white-space: pre-wrap;
+      color: #34d399;
+      line-height: 1.65;
+      scroll-behavior: smooth;
+    }
+    #chatOutput::-webkit-scrollbar { width: 3px; }
+    #chatOutput::-webkit-scrollbar-thumb { background: rgba(144,205,244,0.25); border-radius: 2px; }
+ 
+    .ai-input-row { display: flex; gap: 6px; }
+ 
+    #chatInput {
+      flex: 1;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(144,205,244,0.22);
+      color: white;
+      padding: 8px 10px;
+      font-size: 11px;
+      border-radius: 6px;
+      outline: none;
+      font-family: 'Share Tech Mono', monospace;
+      transition: border-color 0.2s;
+    }
+    #chatInput:focus { border-color: rgba(144,205,244,0.55); }
+    #chatInput::placeholder { color: rgba(255,255,255,0.25); }
+ 
+    #sendBtn {
+      background: linear-gradient(135deg, #4a90e2, #1d4ed8);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      font-family: 'Share Tech Mono', monospace;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    #sendBtn:hover:not(:disabled) { filter: brightness(1.15); transform: translateY(-1px); }
+    #sendBtn:disabled { opacity: 0.45; cursor: not-allowed; }
+ 
+    .ai-hint {
+      margin-top: 7px;
+      font-size: 9.5px;
+      color: rgba(144,205,244,0.35);
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
+    }
+ 
+    .ai-box.minimized .ai-body { display: none; }
+ 
+    .blink { animation: blinker 1s linear infinite; display: inline; }
+    @keyframes blinker { 50% { opacity: 0; } }
+ 
+    /* Responsive */
+    @media (max-width: 900px) {
+      #home { grid-template-columns: 1fr; min-height: auto; }
+      .science-card { border-right: none; border-bottom: 1px solid rgba(144,205,244,0.08); }
+      .theory-grid { grid-template-columns: 1fr; }
+      .ai-box { width: 285px; right: 10px; bottom: 10px; }
+      nav { padding: 0.6rem 1rem; flex-wrap: wrap; gap: 0.3rem; }
+    }
+ 
+    html { scroll-behavior: smooth; }
+  </style>
 </head>
-
-<body class="bg-slate-900 text-white font-sans overflow-x-hidden">
-
-<div class="fixed top-0 w-full bg-black/60 backdrop-blur-md z-50 p-3 text-center">
-    <a href="#home" class="mx-3">Home</a>
-    <a href="#theory" class="mx-3">Theory</a>
-    <a href="#qr" class="mx-3">QR</a>
-    <a href="#about" class="mx-3">About</a>
-</div>
-
-<div class="fixed top-14 right-4 z-50">
-    <button onclick="setLang('en')" class="bg-white text-black px-2 text-xs font-bold rounded">EN</button>
-    <button onclick="setLang('bn')" class="bg-white text-black px-2 text-xs font-bold rounded">BN</button>
-</div>
-
-<div id="home" class="flex flex-col md:flex-row min-h-screen w-full pt-10">
-
-    <a href="https://stounchvicinity65.github.io/INTERACTIVE-MOTIONS/" 
-       class="science-card flex-1 p-10 bg-blue-700 border-b md:border-b-0 md:border-r border-blue-900 flex flex-col">
-        <div class="flex-grow">
-            <span class="text-xs opacity-70">Project 01</span>
-            <h1 class="text-4xl font-black mb-4">Physics</h1>
-            <p data-en="Physics is the natural science that studies matter, energy, motion and forces." 
-               data-bn="পদার্থবিজ্ঞান হলো পদার্থ, শক্তি, গতি ও বল নিয়ে অধ্যয়নকারী বিজ্ঞান।"></p>
-            <p class="mt-3 text-sm opacity-80">Developed through Newton, Maxwell and Einstein.</p>
-            <p class="mt-4 text-blue-200 font-bold">Motion is central to physics.</p>
-        </div>
-        <div class="mt-6 border-t border-white/20 pt-4">
-            <p class="text-xs mt-2 opacity-70 font-bold uppercase tracking-widest">Open Interactive Lab →</p>
-        </div>
+<body>
+ 
+<canvas id="particleCanvas"></canvas>
+<div class="bg-anim"></div>
+<div class="bg-overlay"></div>
+ 
+<div class="wrapper">
+  <nav>
+    <span class="nav-logo">⚛</span>
+    <span class="nav-title">
+      <span class="lang-en">• Science Portal •</span>
+      <span class="lang-bn hidden">• বিজ্ঞান পোর্টাল •</span>
+    </span>
+    <a href="#home"><span class="lang-en">Home</span><span class="lang-bn hidden">হোম</span></a>
+    <a href="#theory"><span class="lang-en">Theory</span><span class="lang-bn hidden">তত্ত্ব</span></a>
+    <a href="#qr">QR</a>
+    <a href="#about"><span class="lang-en">About</span><span class="lang-bn hidden">পরিচয়</span></a>
+    <div class="nav-divider"></div>
+    <button class="lang-btn" id="languageToggle">বাংলা / English</button>
+  </nav>
+ 
+  <div id="home">
+    <!-- PHYSICS -->
+    <a href="https://stounchvicinity65.github.io/INTERACTIVE-MOTIONS/" class="science-card">
+      <div class="card-orbit"></div>
+      <div class="card-num">
+        <span class="lang-en">Project 01 — Physics</span>
+        <span class="lang-bn hidden">প্রকল্প ০১ — পদার্থবিজ্ঞান</span>
+      </div>
+      <h1 class="card-title">
+        <span class="lang-en">Physics</span>
+        <span class="lang-bn hidden">পদার্থ<br>বিজ্ঞান</span>
+      </h1>
+      <p class="card-desc">
+        <span class="lang-en">The natural science of matter, energy, motion and fundamental forces. From Newton's laws to modern mechanics.</span>
+        <span class="lang-bn hidden">পদার্থ, শক্তি, গতি ও মৌলিক বল নিয়ে প্রাকৃতিক বিজ্ঞান। নিউটনের সূত্র থেকে আধুনিক বলবিদ্যা।</span>
+      </p>
+      <div class="card-highlight">
+        <span class="lang-en">⚡ Motion is the foundation of physics</span>
+        <span class="lang-bn hidden">⚡ গতি পদার্থবিজ্ঞানের ভিত্তি</span>
+      </div>
+      <div class="card-footer">
+        <span class="lang-en">Open Interactive Lab →</span>
+        <span class="lang-bn hidden">ইন্টারেক্টিভ ল্যাব খুলুন →</span>
+      </div>
     </a>
-
-    <a href="https://antidominator.github.io/fair-project/" 
-       class="science-card flex-1 p-10 bg-emerald-700 border-b md:border-b-0 md:border-r border-emerald-900 flex flex-col">
-        <div class="flex-grow">
-            <span class="text-xs opacity-70">Project 02</span>
-            <h1 class="text-4xl font-black mb-4">Chemistry</h1>
-            <p data-en="Chemistry studies elements, compounds, structure and reactions." 
-               data-bn="রসায়ন পদার্থ, যৌগ, গঠন ও বিক্রিয়া নিয়ে অধ্যয়ন করে।"></p>
-            <p class="mt-3 text-sm opacity-80">Developed from alchemy to modern atomic theory.</p>
-            <p class="mt-4 text-emerald-200 font-bold">Periodic table is fundamental.</p>
-        </div>
-        <div class="mt-6 border-t border-white/20 pt-4">
-            <p class="text-xs mt-2 opacity-70 font-bold uppercase tracking-widest">Open Interactive Lab →</p>
-        </div>
+ 
+    <!-- CHEMISTRY -->
+    <a href="https://antidominator.github.io/fair-project/" class="science-card">
+      <div class="card-orbit" style="animation-duration:30s;"></div>
+      <div class="card-num">
+        <span class="lang-en">Project 02 — Chemistry</span>
+        <span class="lang-bn hidden">প্রকল্প ০২ — রসায়ন</span>
+      </div>
+      <h1 class="card-title">
+        <span class="lang-en">Chemistry</span>
+        <span class="lang-bn hidden">রসায়ন</span>
+      </h1>
+      <p class="card-desc">
+        <span class="lang-en">The science of matter's composition, structure and reactions. From alchemy to modern atomic theory.</span>
+        <span class="lang-bn hidden">পদার্থের গঠন, বৈশিষ্ট্য ও বিক্রিয়ার বিজ্ঞান। আলকেমি থেকে আধুনিক পারমাণবিক তত্ত্ব।</span>
+      </p>
+      <div class="card-highlight">
+        <span class="lang-en">🧪 The periodic table unifies all matter</span>
+        <span class="lang-bn hidden">🧪 পর্যায় সারণি সকল পদার্থকে একত্রিত করে</span>
+      </div>
+      <div class="card-footer">
+        <span class="lang-en">Open Interactive Lab →</span>
+        <span class="lang-bn hidden">ইন্টারেক্টিভ ল্যাব খুলুন →</span>
+      </div>
     </a>
-
-    <a href="#theory" class="science-card flex-1 p-10 bg-teal-700 flex flex-col">
-        <div class="flex-grow">
-            <span class="text-xs opacity-70">Project 03</span>
-            <h1 class="text-4xl font-black mb-4">Biology</h1>
-            <p data-en="Biology studies life and living organisms." 
-               data-bn="জীববিজ্ঞান জীবিত প্রাণী ও জীবন প্রক্রিয়া নিয়ে অধ্যয়ন করে।"></p>
-            <p class="mt-3 text-sm opacity-80">Advanced by Darwin, Mendel and Pasteur.</p>
-            <p class="mt-4 text-teal-200 font-bold">Cell theory is fundamental.</p>
-        </div>
-        <div class="mt-6 border-t border-white/20 pt-4">
-            <p class="text-xs mt-2 opacity-70 font-bold uppercase tracking-widest">Click to Theory →</p>
-        </div>
+ 
+    <!-- BIOLOGY -->
+    <a href="#theory" class="science-card">
+      <div class="card-orbit" style="animation-duration:38s; animation-direction:reverse;"></div>
+      <div class="card-num">
+        <span class="lang-en">Project 03 — Biology</span>
+        <span class="lang-bn hidden">প্রকল্প ০৩ — জীববিজ্ঞান</span>
+      </div>
+      <h1 class="card-title">
+        <span class="lang-en">Biology</span>
+        <span class="lang-bn hidden">জীব<br>বিজ্ঞান</span>
+      </h1>
+      <p class="card-desc">
+        <span class="lang-en">The science of life and living organisms. Advanced by Darwin, Mendel and Pasteur across centuries of discovery.</span>
+        <span class="lang-bn hidden">জীবন ও জীবিত প্রাণীর বিজ্ঞান। ডারউইন, মেন্ডেল ও পাস্তুর এটিকে এগিয়ে নিয়েছেন।</span>
+      </p>
+      <div class="card-highlight">
+        <span class="lang-en">🧬 Cell theory is fundamental to all life</span>
+        <span class="lang-bn hidden">🧬 কোষ তত্ত্ব সকল জীবনের ভিত্তি</span>
+      </div>
+      <div class="card-footer">
+        <span class="lang-en">View Theory →</span>
+        <span class="lang-bn hidden">তত্ত্ব দেখুন →</span>
+      </div>
     </a>
+  </div>
+ 
+  <!-- THEORY -->
+  <section id="theory">
+    <h1>📚 <span class="lang-en">Theory & Formulas</span><span class="lang-bn hidden">তত্ত্ব ও সূত্রসমূহ</span></h1>
+    <div class="theory-grid">
+      <div class="theory-block physics-theory">
+        <h2>⚛️ <span class="lang-en">Physics — Motion</span><span class="lang-bn hidden">পদার্থবিজ্ঞান — গতি</span></h2>
+        <p class="theory-note"><span class="lang-en">Equations of motion under constant acceleration:</span><span class="lang-bn hidden">সমত্বরণে গতির সমীকরণ:</span></p>
+        <div class="formula">v = u + at</div>
+        <div class="formula">s = ut + ½at²</div>
+        <div class="formula">v² = u² + 2as</div>
+        <p class="theory-note" style="margin-top:0.6rem;">
+          <span class="lang-en">u = initial velocity · v = final velocity · a = acceleration · t = time · s = displacement</span>
+          <span class="lang-bn hidden">u = আদিবেগ · v = অন্তবেগ · a = ত্বরণ · t = সময় · s = সরণ</span>
+        </p>
+      </div>
+      <div class="theory-block chemistry-theory">
+        <h2>🧪 <span class="lang-en">Chemistry — Periodic Trends</span><span class="lang-bn hidden">রসায়ন — পর্যায়বৃত্ত প্রবণতা</span></h2>
+        <p class="theory-note"><span class="lang-en">Atomic radius, ionization energy and electronegativity:</span><span class="lang-bn hidden">পারমাণবিক ব্যাসার্ধ, আয়নিকরণ শক্তি ও তড়িৎঋণাত্মকতা:</span></p>
+        <div class="formula"><span class="lang-en">Across period → radius ↓, ionization ↑</span><span class="lang-bn hidden">পর্যায় বরাবর → ব্যাসার্ধ ↓, আয়নিকরণ ↑</span></div>
+        <div class="formula"><span class="lang-en">Down group → radius ↑, ionization ↓</span><span class="lang-bn hidden">গ্রুপ নিচে → ব্যাসার্ধ ↑, আয়নিকরণ ↓</span></div>
+        <p class="theory-note" style="margin-top:0.6rem;">
+          <span class="lang-en">Electronegativity increases toward the top-right of the periodic table.</span>
+          <span class="lang-bn hidden">তড়িৎঋণাত্মকতা পর্যায় সারণির উপর-ডান দিকে বৃদ্ধি পায়।</span>
+        </p>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- QR -->
+  <section id="qr">
+    <h1>📱 <span class="lang-en">QR Access</span><span class="lang-bn hidden">QR প্রবেশাধিকার</span></h1>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://stounchvicinity65.github.io/portal/" alt="QR Code">
+  </section>
+ 
+  <!-- ABOUT -->
+  <section id="about">
+    <h1>👤 <span class="lang-en">About</span><span class="lang-bn hidden">পরিচয়</span></h1>
+    <p><span class="lang-en">Science Fair Project: Interactive Science Learning Portal</span><span class="lang-bn hidden">বিজ্ঞান মেলা প্রকল্প: ইন্টারেক্টিভ বিজ্ঞান শিক্ষা পোর্টাল</span></p>
+    <p class="team">Nafis Islam &amp; Khandoker Shafowan Wafa</p>
+    <p class="batch"><span class="lang-en">SSC 2027 Batch</span><span class="lang-bn hidden">এসএসসি ২০২৭ ব্যাচ</span></p>
+  </section>
 </div>
-
-<section id="theory" class="p-10 bg-slate-800">
-    <h1 class="text-3xl font-bold mb-6">📚 Theory & Formulas</h1>
-    <h2 class="text-xl font-bold mt-6">⚛️ Physics (Motion)</h2>
-    <p class="mt-2">Equations of motion under constant acceleration:</p>
-    <p class="font-mono text-blue-300">v = u + at</p>
-    <p class="font-mono text-blue-300">s = ut + 1/2 at²</p>
-    <p class="font-mono text-blue-300">v² = u² + 2as</p>
-
-    <h2 class="text-xl font-bold mt-8 text-emerald-300">🧪 Chemistry (Periodic Trends)</h2>
-    <p>Atomic radius, ionization energy, and electronegativity trends:</p>
-    <p class="mt-2"><b>Across period:</b> radius ↓, ionization ↑</p>
-    <p><b>Down group:</b> radius ↑, ionization ↓</p>
-</section>
-
-<section id="qr" class="text-center p-10 bg-slate-900 border-t border-white/10">
-    <h1 class="text-2xl font-bold mb-4">📱 QR Access</h1>
-    <img class="mx-auto rounded-lg shadow-lg border-4 border-white/10" 
-         src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com/StounchVicinity65/portal/">
-</section>
-
-<section id="about" class="p-10 bg-black text-center">
-    <h1 class="text-2xl font-bold">👤 About</h1>
-    <p class="mt-3">Science Fair Project: Interactive Science Learning Portal</p>
-    <p class="mt-4 font-bold text-emerald-400">Team: Nafis Islam & Khandoker Shafowan Wafa</p>
-    <p class="mt-2 text-gray-400 italic">SSC 2027 Batch</p>
-</section>
-
-<div class="ai-box">
-    <div id="aiMode" style="font-size:10px; opacity:0.7; margin-bottom:5px; font-weight:bold; letter-spacing:1px;">SYSTEM IDLE</div>
-    <div id="chatOutput">Science Engine Ready...</div>
-    <input id="chatInput" placeholder="Ask about Force, DNA, pH...">
-    <button onclick="askAI()">ANALYZE</button>
+ 
+<!-- AI BOX -->
+<div class="ai-box" id="aiBox">
+  <div class="ai-header" onclick="toggleAI()">
+    <div class="ai-header-left">
+      <div class="ai-dot"></div>
+      <span class="ai-label">Science AI</span>
+    </div>
+    <div id="aiModeBadge" class="ai-mode-badge">READY</div>
+    <button class="ai-toggle-btn" id="aiToggleIcon">▼</button>
+  </div>
+  <div class="ai-body" id="aiBody">
+    <div id="chatOutput">Science Engine v2.0 online.
+Ask me anything — Physics, Chemistry, Biology...<span class="blink">_</span></div>
+    <div class="ai-input-row">
+      <input id="chatInput" placeholder="Ask about force, DNA, pH..." onkeydown="if(event.key==='Enter') askAI()">
+      <button id="sendBtn" onclick="askAI()">▶ ASK</button>
+    </div>
+    <div class="ai-hint">Powered by Claude AI · Physics · Chemistry · Biology</div>
+  </div>
 </div>
-
+ 
 <script>
-    // --- Language Logic ---
-    function setLang(lang) {
-        document.querySelectorAll('[data-en]').forEach(el => {
-            el.innerText = el.getAttribute('data-' + lang);
-        });
+  // === PARTICLE CANVAS ===
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+ 
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+ 
+  for (let i = 0; i < 55; i++) {
+    particles.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 1.4 + 0.3,
+      dx: (Math.random() - 0.5) * 0.28,
+      dy: (Math.random() - 0.5) * 0.28,
+      alpha: Math.random() * 0.45 + 0.08
+    });
+  }
+ 
+  (function animParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(144, 205, 244, ${p.alpha})`;
+      ctx.fill();
+      p.x += p.dx; p.y += p.dy;
+      if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+      if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(animParticles);
+  })();
+ 
+  // === LANGUAGE ===
+  let currentLang = 'en';
+  document.getElementById('languageToggle').addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'bn' : 'en';
+    document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', currentLang !== 'en'));
+    document.querySelectorAll('.lang-bn').forEach(el => el.classList.toggle('hidden', currentLang !== 'bn'));
+    document.body.classList.toggle('bangla', currentLang === 'bn');
+    document.getElementById('languageToggle').textContent = currentLang === 'en' ? 'বাংলা' : 'English';
+  });
+ 
+  // === AI BOX MINIMIZE ===
+  let aiMinimized = false;
+  function toggleAI() {
+    aiMinimized = !aiMinimized;
+    document.getElementById('aiBox').classList.toggle('minimized', aiMinimized);
+    document.getElementById('aiToggleIcon').textContent = aiMinimized ? '▲' : '▼';
+  }
+ 
+  // === CLAUDE AI ===
+  let isTyping = false;
+  const output = document.getElementById('chatOutput');
+  const badge = document.getElementById('aiModeBadge');
+ 
+  function setBadge(text, color) {
+    const colors = {
+      green: { text: '#10b981', bg: 'rgba(16,185,129,0.1)', border: 'rgba(16,185,129,0.35)' },
+      yellow: { text: '#fbbf24', bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.35)' },
+      red: { text: '#f87171', bg: 'rgba(248,113,113,0.08)', border: 'rgba(248,113,113,0.35)' },
+      blue: { text: '#90cdf4', bg: 'rgba(144,205,244,0.08)', border: 'rgba(144,205,244,0.35)' },
+    };
+    const c = colors[color] || colors.green;
+    badge.textContent = text;
+    badge.style.color = c.text;
+    badge.style.background = c.bg;
+    badge.style.borderColor = c.border;
+  }
+ 
+  async function askAI() {
+    if (isTyping) return;
+    const input = document.getElementById('chatInput').value.trim();
+    if (!input) return;
+    document.getElementById('chatInput').value = '';
+ 
+    document.getElementById('sendBtn').disabled = true;
+    isTyping = true;
+    setBadge('THINKING...', 'yellow');
+ 
+    output.textContent = `> ${input}\n\n`;
+    output.scrollTop = output.scrollHeight;
+ 
+    // Dots animation while waiting
+    let dots = 0;
+    const dotInterval = setInterval(() => {
+      dots = (dots + 1) % 4;
+      const snap = output.textContent.split('\n\nAnalyzing')[0];
+      output.textContent = `> ${input}\n\nAnalyzing${'.'.repeat(dots + 1)}`;
+    }, 280);
+ 
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: `You are a compact science assistant embedded in a science fair portal (Physics, Chemistry, Biology).
+Rules:
+- Keep responses under 180 words.
+- Use plain text only — no **, no ##, no markdown.
+- Structure with short paragraphs or simple bullet lines using "-".
+- Include a key formula or fact when relevant.
+- Be encouraging toward students.
+- Topics: motion physics, kinematics, periodic trends, chemical bonding, cell biology, DNA, photosynthesis, evolution.`,
+          messages: [{ role: 'user', content: input }]
+        })
+      });
+ 
+      clearInterval(dotInterval);
+      const data = await res.json();
+ 
+      if (data.error) throw new Error(data.error.message);
+ 
+      const reply = data.content?.map(b => b.text || '').join('') || 'No response.';
+ 
+      // Detect subject for badge
+      const q = input.toLowerCase();
+      let mode = 'GENERAL';
+      if (/force|motion|velocity|speed|accel|newton|gravity|energy|kinetic|momentum|physics|projectile|oscillat|harmonic|circular/.test(q)) mode = '⚛ PHYSICS';
+      else if (/atom|ph|acid|base|element|compound|react|periodic|bond|mole|ion|chemi|electron/.test(q)) mode = '🧪 CHEM';
+      else if (/cell|dna|rna|gene|evolut|photosyn|bio|organ|plant|animal|mitosis|meiosis/.test(q)) mode = '🧬 BIO';
+ 
+      setBadge(mode, 'green');
+ 
+      // Typewriter
+      const prefix = `> ${input}\n\n`;
+      output.textContent = prefix;
+      let i = 0;
+      function typeChar() {
+        if (i < reply.length) {
+          output.textContent = prefix + reply.substring(0, i + 1);
+          output.scrollTop = output.scrollHeight;
+          i++;
+          setTimeout(typeChar, 11);
+        } else {
+          isTyping = false;
+          document.getElementById('sendBtn').disabled = false;
+          setBadge(mode + ' ✓', 'green');
+        }
+      }
+      typeChar();
+ 
+    } catch (err) {
+      clearInterval(dotInterval);
+      output.textContent = `> ${input}\n\n[ERROR] Could not connect.\n${err.message || 'Check connection.'}`;
+      setBadge('ERROR', 'red');
+      isTyping = false;
+      document.getElementById('sendBtn').disabled = false;
     }
-    setLang('en'); // Default
-
-    // --- AI Engine Logic ---
-    let isTyping = false;
-
-    function typeWriter(text, i, fnCallback) {
-        if (i < text.length) {
-            document.getElementById("chatOutput").innerHTML = text.substring(0, i + 1) + '<span aria-hidden="true" class="blink">_</span>';
-            setTimeout(function() {
-                typeWriter(text, i + 1, fnCallback)
-            }, 15);
-        } else if (typeof fnCallback == 'function') {
-            setTimeout(fnCallback, 700);
-        }
-    }
-
-    function askAI() {
-        if (isTyping) return;
-        
-        let input = document.getElementById("chatInput").value.toLowerCase();
-        let output = "";
-        let mode = "SYSTEM IDLE";
-        let nums = input.match(/\d+(\.\d+)?/g);
-
-        if (input.includes("force") || input.includes("newton") || input.includes("speed") || input.includes("gravity") || input.includes("energy")) {
-            mode = "⚛️ PHYSICS_CORE_v4";
-            if (nums && nums.length >= 2) {
-                if (input.includes("force")) {
-                    output = `[SUCCESS]\nF = m * a\nMass: ${nums[0]}kg | Accel: ${nums[1]}m/s²\nResult: ${nums[0] * nums[1]} N\n\nNewton's 2nd Law applied.`;
-                } else if (input.includes("speed") || input.includes("velocity")) {
-                    output = `[SUCCESS]\nv = d / t\nDist: ${nums[0]}m | Time: ${nums[1]}s\nResult: ${(nums[0] / nums[1]).toFixed(2)} m/s`;
-                }
-            } else {
-                output = `⚛️ PHYSICS DATA:\n- Laws: Inertia, F=ma, Action/Reaction.\n- Gravity: 9.8m/s².\n- Light: 299,792,458 m/s.`;
-            }
-        }
-        else if (input.includes("atom") || input.includes("ph") || input.includes("reaction") || input.includes("table") || input.includes("water") || input.includes("molar")) {
-            mode = "🧪 CHEM_SYNTAX_v4";
-            if (input.includes("ph")) {
-                output = `🧪 pH ANALYSIS:\n- Acidic < 7 | Neutral = 7 | Basic > 7.\n- Logarithmic scale: 10x diff per step.`;
-            } else {
-                output = `🧪 CHEMISTRY DATA:\n- Trends: Electronegativity increases Top-Right.\n- Bonding: Ionic (Transfer), Covalent (Share).`;
-            }
-        }
-        else if (input.includes("cell") || input.includes("dna") || input.includes("evolution") || input.includes("plant")) {
-            mode = "🧬 BIO_LOGIC_v4";
-            output = `🧬 BIOLOGY DATA:\n- DNA: Double Helix (A-T, C-G).\n- Mitochondria: ATP production.\n- Photosynthesis: CO2 + H2O -> O2 + C6H12O6.`;
-        }
-        else {
-            mode = "⚠️ UNKNOWN_QUERY";
-            output = "Try: 'Calculate force 10 5', 'pH scale', or 'DNA'.";
-        }
-
-        document.getElementById("aiMode").innerText = mode;
-        isTyping = true;
-        typeWriter(output, 0, function() { isTyping = false; });
-    }
+  }
 </script>
-
 </body>
 </html>
