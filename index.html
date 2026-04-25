@@ -1027,93 +1027,84 @@ Ask me anything — Physics, Chemistry, Biology...<span class="blink">_</span></
     document.getElementById('aiToggleIcon').textContent = aiMinimized ? '▲' : '▼';
   }
  
-  // === CLAUDE AI ===
-  let isTyping = false;
-  const output = document.getElementById('chatOutput');
-  const badge = document.getElementById('aiModeBadge');
- 
-  function setBadge(text, color) {
-    const colors = {
-      green: { text: '#10b981', bg: 'rgba(16,185,129,0.1)', border: 'rgba(16,185,129,0.35)' },
-      yellow: { text: '#fbbf24', bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.35)' },
-      red: { text: '#f87171', bg: 'rgba(248,113,113,0.08)', border: 'rgba(248,113,113,0.35)' },
-      blue: { text: '#90cdf4', bg: 'rgba(144,205,244,0.08)', border: 'rgba(144,205,244,0.35)' },
-    };
-    const c = colors[color] || colors.green;
-    badge.textContent = text;
-    badge.style.color = c.text;
-    badge.style.background = c.bg;
-    badge.style.borderColor = c.border;
-  }
- 
   async function askAI() {
-    if (isTyping) return;
-    const input = document.getElementById('chatInput').value.trim();
-    if (!input) return;
-    document.getElementById('chatInput').value = '';
- 
-    document.getElementById('sendBtn').disabled = true;
-    isTyping = true;
-    setBadge('THINKING...', 'yellow');
- 
-    output.textContent = `> ${input}\n\n`;
-    output.scrollTop = output.scrollHeight;
- 
-    let dots = 0;
-    const dotInterval = setInterval(() => {
-      dots = (dots + 1) % 4;
-      output.textContent = `> ${input}\n\nProcessing${'.'.repeat(dots + 1)}`;
-    }, 350);
- 
-    try {
-      const res = await fetch('/api/science-ai', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: input })
-      });
- 
-      clearInterval(dotInterval);
-      
-      if (!res.ok) {
-        throw new Error('Backend API not configured. Set up /api/science-ai endpoint with ANTHROPIC_API_KEY.');
+  if (isTyping) return;
+  const userInput = document.getElementById('chatInput').value.trim();
+  if (!userInput) return;
+  
+  // --- CONFIGURATION ---
+  const API_KEY = "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"; 
+  const model = "gpt-4o-mini"; 
+  
+  document.getElementById('chatInput').value = '';
+  document.getElementById('sendBtn').disabled = true;
+  isTyping = true;
+  
+  setBadge('THINKING...', 'yellow');
+  output.textContent = `> ${userInput}\n\n`;
+
+  // Loading animation
+  let dots = 0;
+  const dotInterval = setInterval(() => {
+    dots = (dots + 1) % 4;
+    output.textContent = `> ${userInput}\n\nProcessing${'.'.repeat(dots + 1)}`;
+  }, 350);
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: [
+          { role: "system", content: "You are a helpful, concise science assistant." },
+          { role: "user", content: userInput }
+        ],
+        temperature: 0.7
+      })
+    });
+
+    const data = await response.json();
+    clearInterval(dotInterval);
+
+    if (data.error) throw new Error(data.error.message);
+    
+    const reply = data.choices[0].message.content;
+
+    // Science Mode Detection
+    const q = userInput.toLowerCase();
+    let mode = 'GENERAL';
+    if (/force|motion|physics|gravity|velocity|energy/.test(q)) mode = '⚛ PHYSICS';
+    else if (/atom|acid|base|chemi|element|molecule/.test(q)) mode = '🧪 CHEM';
+    else if (/cell|dna|bio|plant|animal|evolution/.test(q)) mode = '🧬 BIO';
+    
+    setBadge(mode, 'green');
+
+    // Typing Effect
+    const prefix = `> ${userInput}\n\n`;
+    let i = 0;
+    function typeChar() {
+      if (i < reply.length) {
+        output.textContent = prefix + reply.substring(0, i + 1);
+        output.scrollTop = output.scrollHeight;
+        i++;
+        setTimeout(typeChar, 10); 
+      } else {
+        isTyping = false;
+        document.getElementById('sendBtn').disabled = false;
+        setBadge(mode + ' ✓', 'green');
       }
-      
-      const data = await res.json();
-      const reply = data.reply || 'No response received.';
- 
-      const q = input.toLowerCase();
-      let mode = 'GENERAL';
-      if (/force|motion|velocity|speed|accel|newton|gravity|energy|kinetic|momentum|physics|projectile|oscillat|harmonic|circular|wave|orbit/.test(q)) mode = '⚛ PHYSICS';
-      else if (/atom|ph|acid|base|element|compound|react|periodic|bond|mole|ion|chemi|electron|oxidation|redox|molecule/.test(q)) mode = '🧪 CHEM';
-      else if (/cell|dna|rna|gene|evolut|photosyn|bio|organ|plant|animal|mitosis|meiosis|protein|heredity/.test(q)) mode = '🧬 BIO';
- 
-      setBadge(mode, 'green');
- 
-      const prefix = `> ${input}\n\n`;
-      output.textContent = prefix;
-      let i = 0;
-      function typeChar() {
-        if (i < reply.length) {
-          output.textContent = prefix + reply.substring(0, i + 1);
-          output.scrollTop = output.scrollHeight;
-          i++;
-          setTimeout(typeChar, 8);
-        } else {
-          isTyping = false;
-          document.getElementById('sendBtn').disabled = false;
-          setBadge(mode + ' ✓', 'green');
-        }
-      }
-      typeChar();
- 
-    } catch (err) {
-      clearInterval(dotInterval);
-      output.textContent = `> ${input}\n\n⚠️ API ERROR\n${err.message}`;
-      setBadge('CONFIG NEEDED', 'red');
-      isTyping = false;
-      document.getElementById('sendBtn').disabled = false;
     }
+    typeChar();
+
+  } catch (err) {
+    clearInterval(dotInterval);
+    output.textContent = `> ${userInput}\n\n⚠️ API ERROR\n${err.message}`;
+    setBadge('ERROR', 'red');
+    isTyping = false;
+    document.getElementById('sendBtn').disabled = false;
   }
-</script>
-</body>
-</html>
+}
