@@ -1226,8 +1226,8 @@ function resolveQuery(q, sub){
   }
 
   // greeting / general
-  if(/hello|hi|hey|হ্যালো|হেই|নমস্কার|সালাম/.test(q)){
-    return l==='bn' ? 'নমস্কার! আমি বিজ্ঞান AI। পদার্থবিজ্ঞান, রসায়ন বা জীববিজ্ঞান সম্পর্কে যেকোনো প্রশ্ন করুন।' : 'Hello! I\'m Science AI. Ask me anything about Physics, Chemistry, or Biology!';
+  if(/hello|হ্যালো/.test(q)){
+    return l==='bn' ? 'আমি বিজ্ঞান AI। পদার্থবিজ্ঞান, রসায়ন বা জীববিজ্ঞান সম্পর্কে যেকোনো প্রশ্ন করুন।' : 'Hello! I\'m Science AI. Ask me anything about Physics, Chemistry, or Biology!';
   }
   if(/what is|what are|কি|কী/.test(q)){
     return l==='bn' ? 'আরেকটু নির্দিষ্ট করুন — কোন বিষয়ে জানতে চাইছেন? (গতি, পর্যায় সারণি, কোষ?)' : 'Could you be more specific? (motion, periodic table, cell biology, etc.)';
