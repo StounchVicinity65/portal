@@ -780,8 +780,20 @@ nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:transl
 </div><!-- /wrap -->
 
 <!-- ===== AI BOX ===== -->
-  <script>
 
+    
+    <!-- Unit Converter Panel -->
+    
+    <div id="chatOut"></div>
+    <div class="aiInRow">
+      <input id="chatIn" type="text" placeholder="Ask physics, chem, bio..." autocomplete="off" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button id="askBtn" onclick="sendMsg()">ASK</button>
+    </div>
+    <div class="aiHint">offline · knowledge base (experimental) · bilingual</div>
+  </div>
+</div>
+
+<script>
 // ============================================================
 //  KNOWLEDGE BANK (PHYSICS + CHEM + BIO)
 // ============================================================
