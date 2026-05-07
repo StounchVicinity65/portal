@@ -780,44 +780,7 @@ nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:transl
 </div><!-- /wrap -->
 
 <!-- ===== AI BOX ===== -->
-<div class="aiBox" id="aiBox">
-  <div class="aiHdr" id="aiHdrToggle">
-    <div class="aiHdrL">
-      <div class="aiDot"></div>
-      <span class="aiLbl">SCIENCE·AI</span>
-      <span class="aiBadge">OFFLINE</span>
-    </div>
-    <button class="aiTog" id="aiTogBtn">▼</button>
-  </div>
-  <div class="aiBody" id="aiBodyEl">
-    <div class="aiSubjectBar">
-      <button class="subBtn active-ph" onclick="setSubject('ph')">⚡ PHY</button>
-      <button class="subBtn" onclick="setSubject('ch')">🧪 CHEM</button>
-      <button class="subBtn" onclick="setSubject('bi')">🧬 BIO</button>
-      <button class="subBtn" onclick="setSubject('uc')">📐 UNITS</button>
-    </div>
-    <!-- Unit Converter Panel -->
-    <div class="ucPanel" id="ucPanel">
-      <div class="ucTitle">⚙ UNIT CONVERTER</div>
-      <div class="ucCatRow" id="ucCatRow"></div>
-      <div class="ucRow">
-        <input class="ucIn" id="ucVal" type="number" placeholder="value" oninput="convertUnit()">
-        <select class="ucSel" id="ucFrom" onchange="convertUnit()"></select>
-        <span class="ucArrow">→</span>
-        <select class="ucSel" id="ucTo" onchange="convertUnit()"></select>
-      </div>
-      <div class="ucOut" id="ucOut">Enter a value to convert</div>
-    </div>
-    <div id="chatOut"></div>
-    <div class="aiInRow">
-      <input id="chatIn" type="text" placeholder="Ask physics, chem, bio..." autocomplete="off" onkeydown="if(event.key==='Enter')sendMsg()">
-      <button id="askBtn" onclick="sendMsg()">ASK</button>
-    </div>
-    <div class="aiHint">offline · knowledge base (experimental) · bilingual</div>
-  </div>
-</div>
 
-<script>
 // ============================================================
 //  KNOWLEDGE BANK (PHYSICS + CHEM + BIO)
 // ============================================================
