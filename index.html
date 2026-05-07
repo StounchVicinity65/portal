@@ -780,10 +780,34 @@ nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:transl
 </div><!-- /wrap -->
 
 <!-- ===== AI BOX ===== -->
-
-    
+<div class="aiBox" id="aiBox">
+  <div class="aiHdr" id="aiHdrToggle">
+    <div class="aiHdrL">
+      <div class="aiDot"></div>
+      <span class="aiLbl">SCIENCE·AI</span>
+      <span class="aiBadge">OFFLINE</span>
+    </div>
+    <button class="aiTog" id="aiTogBtn">▼</button>
+  </div>
+  <div class="aiBody" id="aiBodyEl">
+    <div class="aiSubjectBar">
+      <button class="subBtn active-ph" onclick="setSubject('ph')">⚡ PHY</button>
+      <button class="subBtn" onclick="setSubject('ch')">🧪 CHEM</button>
+      <button class="subBtn" onclick="setSubject('bi')">🧬 BIO</button>
+      <button class="subBtn" onclick="setSubject('uc')">📐 UNITS</button>
+    </div>
     <!-- Unit Converter Panel -->
-    
+    <div class="ucPanel" id="ucPanel">
+      <div class="ucTitle">⚙ UNIT CONVERTER</div>
+      <div class="ucCatRow" id="ucCatRow"></div>
+      <div class="ucRow">
+        <input class="ucIn" id="ucVal" type="number" placeholder="value" oninput="convertUnit()">
+        <select class="ucSel" id="ucFrom" onchange="convertUnit()"></select>
+        <span class="ucArrow">→</span>
+        <select class="ucSel" id="ucTo" onchange="convertUnit()"></select>
+      </div>
+      <div class="ucOut" id="ucOut">Enter a value to convert</div>
+    </div>
     <div id="chatOut"></div>
     <div class="aiInRow">
       <input id="chatIn" type="text" placeholder="Ask physics, chem, bio..." autocomplete="off" onkeydown="if(event.key==='Enter')sendMsg()">
@@ -1073,62 +1097,7 @@ document.getElementById('bioPopup').addEventListener('click', e=>{
 // ============================================================
 //  AI BOX LOGIC - UPDATED FOR TYPEWRITER & MINIMIZED
 // ============================================================
-let aiMinimized = true; 
-let currentSubject = 'ph';
 
-// Apply default minimized state immediately on load
-document.getElementById('aiBox').classList.add('minimized');
-
-document.getElementById('aiHdrToggle').addEventListener('click', ()=>{
-  aiMinimized = !aiMinimized;
-  document.getElementById('aiBox').classList.toggle('minimized', aiMinimized);
-  document.getElementById('aiTogBtn').textContent = aiMinimized ? '▲' : '▼';
-});
-
-function setSubject(s){
-  currentSubject = s;
-  document.querySelectorAll('.subBtn').forEach(b=>b.className='subBtn');
-  const btns = document.querySelectorAll('.subBtn');
-  const map = ['ph','ch','bi','uc'];
-  map.forEach((sub,i)=>{ if(sub===s) btns[i].classList.add('active-'+s); });
-  const ucPanel = document.getElementById('ucPanel');
-  if(s==='uc'){ ucPanel.classList.add('show'); initUC(); }
-  else { ucPanel.classList.remove('show'); }
-}
-
-function appendMsg(who, text){
-  const out = document.getElementById('chatOut');
-  const cls = who==='user' ? 'msgUser' : 'msgAi';
-  const label = who==='user' ? (lang==='bn' ? 'তুমি:' : 'You:') : 'AI:';
-  
-  // Create message container
-  const msgDiv = document.createElement('div');
-  msgDiv.className = cls;
-  msgDiv.innerHTML = `<span class="msgLabel">${label} </span><span class="textContent"></span>`;
-  out.appendChild(msgDiv);
-  
-  const textSpan = msgDiv.querySelector('.textContent');
-
-  if(who === 'user') {
-    textSpan.textContent = text;
-    out.scrollTop = out.scrollHeight;
-  } else {
-    // START TYPEWRITER EFFECT
-    let i = 0;
-    function type() {
-      if (i < text.length) {
-        textSpan.textContent += text.charAt(i);
-        out.scrollTop = out.scrollHeight;
-        i++;
-        setTimeout(type, 25); // Speed: 25ms per character
-      } else {
-        // Only re-enable the button once typing is completely finished
-        document.getElementById('askBtn').disabled = false;
-      }
-    }
-    type();
-  }
-}
 
 function sendMsg(){
   const input = document.getElementById('chatIn');
@@ -1150,175 +1119,7 @@ function sendMsg(){
 // ============================================================
 //  AI LOGIC — QUERY RESOLVER
 // ============================================================
-function resolveQuery(q, sub){
-  const isBn = /[\u0980-\u09FF]/.test(q);
-  const l = isBn ? 'bn' : lang;
 
-  // subject override detection
-  if(/physics|পদার্থ|motion|গতি|force|বল|velocity|বেগ|newton|নিউটন|kinematic|গতিবিদ্যা/.test(q)) sub='ph';
-  if(/chemistry|রসায়ন|periodic|পর্যায়|element|মৌল|bond|বন্ধন|acid|অম্ল|ph|electron|ইলেকট্রন/.test(q)) sub='ch';
-  if(/biology|জীববিজ্ঞান|cell|কোষ|dna|evolution|বিবর্তন|photo|photosynthesis|gene|জিন|mendel/.test(q)) sub='bi';
-
-  // unit conversion shortcut
-  const convMatch = q.match(/(\d+\.?\d*)\s*([a-zA-Z₂°/·⁻²³]+)\s+(to|থেকে|in|এ)\s+([a-zA-Z₂°/·⁻²³]+)/);
-  if(convMatch){
-    const val = parseFloat(convMatch[1]);
-    const from = convMatch[2];
-    const to = convMatch[4];
-    const result = convertText(val, from, to);
-    return result || (l==='bn' ? `রূপান্তর খুঁজে পাওয়া যায়নি: ${from} → ${to}` : `Conversion not found: ${from} → ${to}`);
-  }
-
-  // formula detection
-  const fmls = sub === 'ph' ? KB.ph.formulas : sub === 'ch' ? KB.ch.formulas : {};
-  for(const [key, val] of Object.entries(fmls)){
-    if(q.includes(key.toLowerCase())){
-      return val;
-    }
-  }
-
-  // math solver: "calculate" / "হিসাব"
-  const calcPh = solveMath(q);
-  if(calcPh) return calcPh;
-
-  // topic lookup
-  const bank = sub==='ph' ? KB.ph.topics : sub==='ch' ? KB.ch.topics : KB.bi.topics;
-  let best = null, bestScore = 0;
-  for(const [key, content] of Object.entries(bank)){
-    const keywords = key.split(' ');
-    const score = keywords.reduce((acc, kw) => acc + (q.includes(kw) ? 1 : 0), 0);
-    if(score > bestScore){ bestScore = score; best = content; }
-    // also check within the content keys
-    if(q.includes(key)) { best = content; bestScore = 999; break; }
-  }
-
-  if(best && bestScore > 0) return l==='bn' ? best.bn : best.en;
-
-  // cross-subject fallback
-  const allBanks = [KB.ph.topics, KB.ch.topics, KB.bi.topics];
-  for(const b of allBanks){
-    for(const [key, content] of Object.entries(b)){
-      if(q.includes(key)) return l==='bn' ? content.bn : content.en;
-    }
-  }
-
-  // greeting / general
-  if(/hello|হ্যালো/.test(q)){
-    return l==='bn' ? 'আমি বিজ্ঞান AI। পদার্থবিজ্ঞান, রসায়ন বা জীববিজ্ঞান সম্পর্কে যেকোনো প্রশ্ন করুন।' : 'Hello! I\'m Science AI. Ask me anything about Physics, Chemistry, or Biology!';
-  }
-  if(/what is|what are|কি|কী/.test(q)){
-    return l==='bn' ? 'আরেকটু নির্দিষ্ট করুন — কোন বিষয়ে জানতে চাইছেন? (গতি, পর্যায় সারণি, কোষ?)' : 'Could you be more specific? (motion, periodic table, cell biology, etc.)';
-  }
-  if(/define|definition|সংজ্ঞা/.test(q)){
-    return l==='bn' ? 'কীসের সংজ্ঞা চাই? বিষয়টি উল্লেখ করুন।' : 'What definition are you looking for? Please mention the topic.';
-  }
-
-  return l==='bn' ?
-    `"${q.slice(0,30)}" সম্পর্কে নির্দিষ্ট তথ্য নেই। তবে ${sub==='ph'?'পদার্থবিজ্ঞানের গতি, নিউটনের সূত্র, শক্তি':sub==='ch'?'পর্যায় সারণি, বন্ধন, pH, গ্যাসের সূত্র':'কোষ, DNA, বিবর্তন, সালোকসংশ্লেষণ'} সম্পর্কে জিজ্ঞেস করতে পারেন।` :
-    `I don't have specific info on "${q.slice(0,30)}". Try asking about ${sub==='ph'?'kinematics, Newton\'s laws, energy, gravity':sub==='ch'?'periodic trends, bonding, pH, gas laws':'cells, DNA, evolution, photosynthesis'}.`;
-}
-
-// ============================================================
-//  MATH SOLVER
-// ============================================================
-function solveMath(q){
-  // v=u+at
-  let m;
-  m = q.match(/u\s*=\s*([\d.]+).*a\s*=\s*([\d.]+).*t\s*=\s*([\d.]+)/);
-  if(m) return `v = u + at = ${+m[1]} + ${+m[2]}×${+m[3]} = ${(+m[1] + +m[2] * +m[3]).toFixed(4)} m/s`;
-
-  // F=ma
-  m = q.match(/m(?:ass)?\s*=\s*([\d.]+).*a(?:cc)?\s*=\s*([\d.]+)/);
-  if(m) return `F = ma = ${+m[1]} × ${+m[2]} = ${(+m[1] * +m[2]).toFixed(4)} N`;
-
-  m = q.match(/f(?:orce)?\s*=\s*([\d.]+).*a(?:cc)?\s*=\s*([\d.]+)/);
-  if(m) return `m = F/a = ${+m[1]} / ${+m[2]} = ${(+m[1] / +m[2]).toFixed(4)} kg`;
-
-  // KE = ½mv²
-  m = q.match(/ke.*m\s*=\s*([\d.]+).*v\s*=\s*([\d.]+)/);
-  if(!m) m = q.match(/kinetic.*m\s*=\s*([\d.]+).*v\s*=\s*([\d.]+)/);
-  if(m) return `KE = ½mv² = ½ × ${+m[1]} × ${+m[2]}² = ${(0.5 * +m[1] * +m[2] * +m[2]).toFixed(4)} J`;
-
-  // pH = -log[H+]
-  m = q.match(/ph.*h\+?\s*[=:]\s*([\d.e\-]+)/i);
-  if(m) return `pH = -log(${+m[1]}) = ${(-Math.log10(+m[1])).toFixed(4)}`;
-
-  // PV=nRT
-  m = q.match(/p\s*=\s*([\d.]+).*v\s*=\s*([\d.]+).*t\s*=\s*([\d.]+)/i);
-  if(q.includes('mol') && m) return `n = PV/RT = (${+m[1]} × ${+m[2]}) / (8.314 × ${+m[3]}) = ${((+m[1] * +m[2])/(8.314 * +m[3])).toFixed(4)} mol`;
-
-  return null;
-}
-
-// ============================================================
-//  UNIT CONVERTER UI
-// ============================================================
-let ucCurrentCat = Object.keys(UC)[0];
-
-function initUC(){
-  const catRow = document.getElementById('ucCatRow');
-  catRow.innerHTML = '';
-  Object.keys(UC).forEach(cat=>{
-    const btn = document.createElement('button');
-    btn.className = 'ucCatBtn' + (cat===ucCurrentCat ? ' active' : '');
-    btn.textContent = cat;
-    btn.onclick = ()=>{ ucCurrentCat = cat; initUC(); };
-    catRow.appendChild(btn);
-  });
-  populateSelects(ucCurrentCat);
-  convertUnit();
-}
-
-function populateSelects(cat){
-  const units = Object.keys(UC[cat]);
-  const from = document.getElementById('ucFrom');
-  const to = document.getElementById('ucTo');
-  from.innerHTML = to.innerHTML = '';
-  units.forEach(u=>{
-    from.add(new Option(u,u));
-    to.add(new Option(u,u));
-  });
-  if(units.length > 1) to.selectedIndex = 1;
-}
-
-function convertUnit(){
-  const val = parseFloat(document.getElementById('ucVal').value);
-  const from = document.getElementById('ucFrom').value;
-  const to = document.getElementById('ucTo').value;
-  const out = document.getElementById('ucOut');
-  if(isNaN(val)){ out.textContent = 'Enter a value'; return; }
-  const result = convertText(val, from, to);
-  out.textContent = result || 'N/A';
-}
-
-function convertText(val, fromU, toU){
-  for(const [cat, units] of Object.entries(UC)){
-    const keys = Object.keys(units);
-    const fromKey = keys.find(k=>k.toLowerCase()===fromU.toLowerCase());
-    const toKey = keys.find(k=>k.toLowerCase()===toU.toLowerCase());
-    if(!fromKey || !toKey) continue;
-
-    // Temperature special case
-    if(cat.includes('Temperature')){
-      const c = units[fromKey], t = units[toKey];
-      let celsius;
-      if(c==='c') celsius=val;
-      else if(c==='f') celsius=(val-32)*5/9;
-      else celsius=val-273.15;
-      let result;
-      if(t==='c') result=celsius;
-      else if(t==='f') result=celsius*9/5+32;
-      else result=celsius+273.15;
-      return `${val} ${fromKey} = ${result.toFixed(4)} ${toKey}`;
-    }
-
-    const base = val * units[fromKey];
-    const result = base / units[toKey];
-    const fmt = result > 1e6 || (result < 1e-4 && result !== 0) ? result.toExponential(4) : result.toPrecision(6);
-    return `${val} ${fromKey} = ${fmt} ${toKey}`;
-  }
-  return null;
-}
 
 // ============================================================
 //  PARTICLES (background)
