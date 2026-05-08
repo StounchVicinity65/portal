@@ -780,14 +780,316 @@ nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:transl
 </div><!-- /wrap -->
 
 <!-- ===== AI BOX ===== -->
-
-
+<div class="aiBox" id="aiBox">
+  <div class="aiHdr" id="aiHdrToggle">
+    <div class="aiHdrL">
+      <div class="aiDot"></div>
+      <span class="aiLbl">SCIENCE·AI</span>
+      <span class="aiBadge">OFFLINE</span>
+    </div>
+    <button class="aiTog" id="aiTogBtn">▼</button>
+  </div>
+  <div class="aiBody" id="aiBodyEl">
+    <div class="aiSubjectBar">
+      <button class="subBtn active-ph" onclick="setSubject('ph')">⚡ PHY</button>
+      <button class="subBtn" onclick="setSubject('ch')">🧪 CHEM</button>
+      <button class="subBtn" onclick="setSubject('bi')">🧬 BIO</button>
+      <button class="subBtn" onclick="setSubject('uc')">📐 UNITS</button>
+    </div>
+    <!-- Unit Converter Panel -->
+    <div class="ucPanel" id="ucPanel">
+      <div class="ucTitle">⚙ UNIT CONVERTER</div>
+      <div class="ucCatRow" id="ucCatRow"></div>
+      <div class="ucRow">
+        <input class="ucIn" id="ucVal" type="number" placeholder="value" oninput="convertUnit()">
+        <select class="ucSel" id="ucFrom" onchange="convertUnit()"></select>
+        <span class="ucArrow">→</span>
+        <select class="ucSel" id="ucTo" onchange="convertUnit()"></select>
+      </div>
+      <div class="ucOut" id="ucOut">Enter a value to convert</div>
+    </div>
+    <div id="chatOut"></div>
+    <div class="aiInRow">
+      <input id="chatIn" type="text" placeholder="Ask physics, chem, bio..." autocomplete="off" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button id="askBtn" onclick="sendMsg()">ASK</button>
+    </div>
+    <div class="aiHint">offline · knowledge base (experimental) · bilingual</div>
+  </div>
+</div>
 
 <script>
 // ============================================================
 //  KNOWLEDGE BANK (PHYSICS + CHEM + BIO)
 // ============================================================
+const KB = {
+  ph: {
+    // === PHYSICS KNOWLEDGE ===
+    topics: {
+      "velocity": {
+        en: "Velocity is the rate of change of displacement. v = Δs/Δt. It is a vector quantity (has both magnitude and direction). Average velocity = total displacement / total time. Instantaneous velocity = dx/dt. Units: m/s.",
+        bn: "বেগ হলো সরণের পরিবর্তনের হার। v = Δs/Δt। এটি ভেক্টর রাশি। গড় বেগ = মোট সরণ / মোট সময়। একক: m/s।"
+      },
+      "acceleration": {
+        en: "Acceleration is the rate of change of velocity. a = Δv/Δt. Vector quantity. Uniform acceleration: constant change. Free fall: a = g = 9.8 m/s² downward. Centripetal acceleration: a = v²/r. Units: m/s².",
+        bn: "ত্বরণ হলো বেগের পরিবর্তনের হার। a = Δv/Δt। ভেক্টর রাশি। মুক্তপতনে a = g = 9.8 m/s²। কেন্দ্রমুখী ত্বরণ: a = v²/r।"
+      },
+      "newton": {
+        en: "Newton's Laws: 1st (Inertia): object stays at rest or constant velocity without net force. 2nd: F = ma (net force = mass × acceleration). 3rd: Every action has equal opposite reaction. All three together explain all classical motion.",
+        bn: "নিউটনের সূত্র: ১ম (জড়তা): বল না লাগলে বস্তু স্থির বা সমবেগে থাকে। ২য়: F = ma। ৩য়: প্রতিটি ক্রিয়ার সমান ও বিপরীত প্রতিক্রিয়া।"
+      },
+      "kinematics": {
+        en: "Kinematic equations (constant acceleration): v = u + at | s = ut + ½at² | v² = u² + 2as | s = (u+v)/2 × t. u=initial velocity, v=final, a=acceleration, t=time, s=displacement.",
+        bn: "গতিবিদ্যার সমীকরণ (সমত্বরণ): v = u + at | s = ut + ½at² | v² = u² + 2as | s = (u+v)/2 × t।"
+      },
+      "projectile": {
+        en: "Projectile motion: Horizontal (no force): x = u·cosθ·t. Vertical (gravity): y = u·sinθ·t - ½gt². Range = u²sin(2θ)/g. Max height = u²sin²θ/(2g). Flight time = 2u·sinθ/g. Max range at θ=45°.",
+        bn: "প্রাসের গতি: পরিসর = u²sin(2θ)/g। সর্বোচ্চ উচ্চতা = u²sin²θ/(2g)। উড্ডয়নকাল = 2u·sinθ/g। θ=45°-এ সর্বোচ্চ পরিসর।"
+      },
+      "momentum": {
+        en: "Momentum p = mv. Impulse J = FΔt = Δp. Conservation of momentum: in a closed system, total momentum before = total momentum after any collision. Elastic collision: both momentum and KE conserved. Inelastic: only momentum conserved.",
+        bn: "ভরবেগ p = mv। আবেগ J = FΔt = Δp। ভরবেগের সংরক্ষণ সূত্র: বদ্ধ তন্ত্রে সংঘর্ষের আগে ও পরে মোট ভরবেগ সমান।"
+      },
+      "energy": {
+        en: "Kinetic energy KE = ½mv². Gravitational PE = mgh. Elastic PE = ½kx². Work W = F·d·cosθ. Power P = W/t = F·v. Conservation of energy: total energy in a closed system remains constant (KE + PE = constant if no friction).",
+        bn: "গতিশক্তি KE = ½mv²। অভিকর্ষজ বিভব শক্তি PE = mgh। কার্য W = F·d·cosθ। ক্ষমতা P = W/t। শক্তির সংরক্ষণ সূত্র।"
+      },
+      "gravity": {
+        en: "Universal Gravitation: F = Gm₁m₂/r². G = 6.674×10⁻¹¹ N·m²/kg². Surface gravity g = GM/R². Earth: g = 9.8 m/s². Escape velocity = √(2GM/R) = 11.2 km/s for Earth. Kepler's 3rd law: T² ∝ r³.",
+        bn: "সার্বজনীন মহাকর্ষ: F = Gm₁m₂/r²। G = 6.674×10⁻¹¹। পৃথিবীতে g = 9.8 m/s²। মুক্তিবেগ = √(2GM/R) = 11.2 km/s।"
+      },
+      "circular": {
+        en: "Circular motion: centripetal force Fc = mv²/r toward center. Centripetal acceleration a = v²/r = ω²r. Angular velocity ω = v/r = 2π/T. Period T = 2πr/v. Linear velocity v = rω.",
+        bn: "বৃত্তাকার গতি: কেন্দ্রমুখী বল Fc = mv²/r। কেন্দ্রমুখী ত্বরণ a = v²/r। কৌণিক বেগ ω = v/r = 2π/T।"
+      },
+      "shm": {
+        en: "Simple Harmonic Motion: restoring force F = -kx. Acceleration a = -ω²x. Spring: T = 2π√(m/k). Simple pendulum: T = 2π√(L/g). Energy oscillates: KE = ½mω²(A²-x²), PE = ½mω²x². Max KE at equilibrium, max PE at amplitude.",
+        bn: "সরল স্পন্দন গতি: পুনরুদ্ধারকারী বল F = -kx। স্প্রিং: T = 2π√(m/k)। সরল দোলক: T = 2π√(L/g)।"
+      },
+      "waves": {
+        en: "Wave speed v = fλ. Frequency f = 1/T. For sound in air at 20°C: v ≈ 343 m/s. Light in vacuum: c = 3×10⁸ m/s. Transverse waves: oscillation perpendicular to propagation (light). Longitudinal: parallel (sound).",
+        bn: "তরঙ্গ বেগ v = fλ। কম্পাঙ্ক f = 1/T। বায়ুতে শব্দের বেগ ≈ 343 m/s। শূন্যে আলোর বেগ c = 3×10⁸ m/s।"
+      },
+      "relativity": {
+        en: "Special Relativity (Einstein, 1905): E = mc². Time dilation: moving clocks run slower. Length contraction: moving objects are shorter. Nothing with mass can reach speed of light. Mass increases with velocity. General Relativity: gravity = curvature of spacetime.",
+        bn: "বিশেষ আপেক্ষিকতা (আইনস্টাইন, ১৯০৫): E = mc²। কাল প্রসারণ: গতিশীল ঘড়ি ধীরে চলে। ভরযুক্ত কোনো বস্তু আলোর বেগে পৌঁছাতে পারে না।"
+      },
+      "friction": {
+        en: "Friction opposes relative motion. Static friction: fs ≤ μs·N (object still). Kinetic friction: fk = μk·N (object sliding). μs > μk always. Normal force N = mg·cosθ on incline. Net force on incline: F = mgsinθ - μk·mgcosθ.",
+        bn: "ঘর্ষণ আপেক্ষিক গতির বিরোধিতা করে। স্থিতি ঘর্ষণ: fs ≤ μs·N। গতি ঘর্ষণ: fk = μk·N। সবসময় μs > μk।"
+      },
+      "pressure": {
+        en: "Pressure P = F/A. Units: Pascal (Pa) = N/m². Fluid pressure: P = ρgh. Atmospheric pressure at sea level: 101,325 Pa ≈ 1 atm ≈ 760 mmHg. Archimedes' principle: buoyant force = weight of fluid displaced.",
+        bn: "চাপ P = F/A। একক: Pa = N/m²। তরলে চাপ P = ρgh। আর্কিমিডিসের নীতি: প্লাবিকা বল = অপসারিত তরলের ওজন।"
+      }
+    },
+    formulas: {
+      "F=ma": "Newton's 2nd Law: F = ma. Force (N) = mass (kg) × acceleration (m/s²).",
+      "v=u+at": "1st kinematic equation: final velocity = initial velocity + acceleration × time.",
+      "s=ut+½at²": "2nd kinematic equation: displacement = initial velocity × time + ½ × acceleration × time².",
+      "v²=u²+2as": "3rd kinematic equation: v² = u² + 2as (no time needed).",
+      "ke": "Kinetic energy KE = ½mv². Units: Joules (J).",
+      "pe": "Gravitational potential energy PE = mgh. Units: Joules (J).",
+      "momentum": "Momentum p = mv. Units: kg·m/s. Conserved in closed systems.",
+      "gravity": "F = Gm₁m₂/r². G = 6.674×10⁻¹¹ N·m²/kg².",
+      "range": "Projectile range R = u²·sin(2θ)/g. Maximum at θ = 45°.",
+      "power": "Power P = Work/time = F·v. Units: Watts (W)."
+    }
+  },
+  ch: {
+    topics: {
+      "periodic table": {
+        en: "The periodic table has 118 confirmed elements arranged by increasing atomic number (Z). Rows = periods (same electron shells). Columns = groups (same valence electrons, similar properties). Mendeleev (1869) created first version, leaving gaps for undiscovered elements.",
+        bn: "পর্যায় সারণিতে ১১৮টি মৌল পারমাণবিক সংখ্যা অনুযায়ী সজ্জিত। সারি = পর্যায়। স্তম্ভ = গ্রুপ। মেন্ডেলিভ ১৮৬৯ সালে প্রথম সংস্করণ তৈরি করেন।"
+      },
+      "atomic radius": {
+        en: "Atomic radius: decreases left→right across period (more protons, same shells — stronger pull). Increases top→bottom in group (adding new electron shells). Period 2: Li (152 pm) → F (64 pm). Largest: Cs. Smallest: He (non-metal) or F (if only reactive elements).",
+        bn: "পারমাণবিক ব্যাসার্ধ: পর্যায়ে বাম→ডান হ্রাস পায় (বেশি প্রোটন, একই শেল → শক্তিশালী টান)। গ্রুপে উপর→নিচে বৃদ্ধি পায় (নতুন শেল)। সবচেয়ে বড়: Cs।"
+      },
+      "ionization energy": {
+        en: "Ionization energy (IE): energy to remove outermost electron. IE increases left→right (stronger nuclear attraction). IE decreases top→bottom (outer electrons more shielded). Anomalies: IE(O) < IE(N) [pairing in 2p]; IE(Al) < IE(Mg) [3p vs 3s]. Highest IE: He (2372 kJ/mol). Lowest: Cs (376 kJ/mol).",
+        bn: "আয়নিকরণ শক্তি: সর্ববাহ্য ইলেকট্রন সরাতে শক্তি। পর্যায়ে বৃদ্ধি, গ্রুপে হ্রাস। ব্যতিক্রম: IE(O) < IE(N)। সর্বোচ্চ: He। সর্বনিম্ন: Cs।"
+      },
+      "electronegativity": {
+        en: "Electronegativity: ability to attract electrons in a bond. Increases toward top-right. F = 3.98 (highest). Fr ≈ 0.7 (lowest). ΔEN > 1.7: ionic bond. 0.4–1.7: polar covalent. < 0.4: non-polar covalent. Determines bond type and molecular polarity.",
+        bn: "তড়িৎঋণাত্মকতা: বন্ধনে ইলেকট্রন আকর্ষণের ক্ষমতা। উপর-ডানে বৃদ্ধি। F = 3.98 (সর্বোচ্চ)। ΔEN > 1.7: আয়নিক। 0.4-1.7: মেরু সমযোজী।"
+      },
+      "electron affinity": {
+        en: "Electron affinity: energy released when a neutral gaseous atom gains one electron. Generally increases left→right. Cl has highest EA (-349 kJ/mol) — higher than F due to smaller atomic size causing more e-e repulsion in F. Halogens and chalcogens have high EAs.",
+        bn: "ইলেকট্রন আসক্তি: গ্যাসীয় পরমাণু একটি ইলেকট্রন গ্রহণে নির্গত শক্তি। সাধারণত পর্যায়ে বৃদ্ধি। Cl-এর সর্বোচ্চ (-349 kJ/mol)।"
+      },
+      "bonding": {
+        en: "Three main bond types: 1) Ionic: electron transfer metal→non-metal. High mp, conducts when dissolved. 2) Covalent: electron sharing non-metal + non-metal. Polar if ΔEN>0.4. 3) Metallic: delocalized electron sea — explains conductivity and malleability. IMFs: London < dipole-dipole < H-bonds.",
+        bn: "তিনটি মূল বন্ধন: ১) আয়নিক: ধাতু→অধাতু ইলেকট্রন স্থানান্তর। ২) সমযোজী: ইলেকট্রন ভাগাভাগি। ৩) ধাতব: ডিলোকালাইজড ইলেকট্রন সমুদ্র।"
+      },
+      "ph": {
+        en: "pH = -log[H⁺]. pH + pOH = 14 at 25°C. pH < 7: acidic. pH = 7: neutral. pH > 7: basic. Each unit = 10× [H⁺] change. Kw = [H⁺][OH⁻] = 10⁻¹⁴. Stomach: pH 1.5, blood: pH 7.4, seawater: pH 8.1, bleach: pH 12.5.",
+        bn: "pH = -log[H⁺]। pH + pOH = 14। pH < 7: অম্লীয়। pH = 7: নিরপেক্ষ। pH > 7: ক্ষারীয়। প্রতি একক = ১০ গুণ পরিবর্তন।"
+      },
+      "acid base": {
+        en: "Arrhenius: acids release H⁺, bases release OH⁻ (only in water). Brønsted-Lowry: acids donate protons, bases accept protons (broader). Lewis: acids accept electron pairs, bases donate (broadest — no H needed). Each theory is a superset of previous.",
+        bn: "অ্যারেনিয়াস: অম্ল H⁺ মুক্ত করে, ক্ষার OH⁻। ব্রনস্টেড-লাউরি: প্রোটন দাতা/গ্রহীতা (আরও ব্যাপক)। লুইস: ইলেকট্রন যুগল গ্রহীতা/দাতা (সবচেয়ে ব্যাপক)।"
+      },
+      "gas laws": {
+        en: "Boyle's: P₁V₁ = P₂V₂ (constant T). Charles's: V₁/T₁ = V₂/T₂ (constant P). Gay-Lussac's: P₁/T₁ = P₂/T₂ (constant V). Ideal Gas: PV = nRT (R = 8.314 J/mol·K). At STP (0°C, 1 atm): 1 mol ideal gas = 22.4 L. Avogadro: 6.022×10²³ particles/mol.",
+        bn: "বয়েলের সূত্র: P₁V₁ = P₂V₂। চার্লসের: V₁/T₁ = V₂/T₂। আদর্শ গ্যাস: PV = nRT। STP-তে 1 mol = 22.4 L।"
+      },
+      "atomic structure": {
+        en: "Atom: nucleus (protons + neutrons) + electrons. Atomic number Z = protons. Mass number A = Z + N. Isotopes: same Z, different N. Electron config: 1s²2s²2p⁶3s²3p⁶... Aufbau: fill lowest energy first. Pauli: max 2e/orbital. Hund: max unpaired e in degenerate orbitals.",
+        bn: "পরমাণু: নিউক্লিয়াস (প্রোটন + নিউট্রন) + ইলেকট্রন। Z = প্রোটন সংখ্যা। A = Z + N। আইসোটোপ: একই Z, ভিন্ন N। ইলেকট্রন বিন্যাস: আউফবাউ, পাউলি, হুন্ড।"
+      },
+      "oxidation": {
+        en: "Oxidation state rules: free element = 0. Monatomic ion = charge. O usually -2 (except peroxide: -1). H usually +1 (except metal hydrides: -1). Sum of oxidation states = overall charge. Redox: oxidation = lose e⁻ (OIL). Reduction = gain e⁻ (RIG). OIL RIG mnemonic.",
+        bn: "জারণ অবস্থার নিয়ম: মুক্ত মৌল = 0। একক পারমাণবিক আয়ন = চার্জ। O সাধারণত -2। H সাধারণত +1। জারণ = ইলেকট্রন হারানো। বিজারণ = ইলেকট্রন লাভ।"
+      },
+      "mole": {
+        en: "Mole: n = m/M. Avogadro's number NA = 6.022×10²³. 1 mol contains 6.022×10²³ particles. Molar mass M = sum of atomic masses (g/mol). % yield = (actual yield / theoretical yield) × 100. Limiting reagent determines max product.",
+        bn: "মোল: n = m/M। অ্যাভোগাড্রো সংখ্যা NA = 6.022×10²³। 1 mol-এ 6.022×10²³ কণা থাকে। % ফলন = (প্রকৃত / তাত্ত্বিক) × 100।"
+      }
+    },
+    formulas: {
+      "pH": "pH = -log[H⁺]. pH + pOH = 14 at 25°C.",
+      "pv=nrt": "Ideal Gas Law: PV = nRT. R = 8.314 J/(mol·K).",
+      "boyle": "Boyle's Law: P₁V₁ = P₂V₂ (constant temperature).",
+      "charles": "Charles's Law: V₁/T₁ = V₂/T₂ (constant pressure, T in Kelvin).",
+      "mole": "n = m/M. n=moles, m=mass(g), M=molar mass(g/mol).",
+      "electronegativity": "F=3.98 (highest), Fr≈0.7 (lowest). ΔEN>1.7: ionic. 0.4-1.7: polar covalent."
+    }
+  },
+  bi: {
+    topics: {
+      "cell": {
+        en: "Cell Theory (Schleiden & Schwann, 1838-39; Virchow 1855): 1) All living things made of cells. 2) Cell is the basic unit of life. 3) All cells from pre-existing cells. Prokaryotic (no nucleus — bacteria, archaea) vs Eukaryotic (nucleus + organelles — plants, animals, fungi). Size: prokaryotes 1-10 μm, eukaryotes 10-100 μm.",
+        bn: "কোষ তত্ত্ব (শ্লাইডেন ও শোয়ান, ১৮৩৮-৩৯; ভার্চো ১৮৫৫): ১) সব জীব কোষ দিয়ে তৈরি। ২) কোষ জীবনের মৌলিক একক। ৩) সব কোষ পূর্ববর্তী কোষ থেকে। আদিকোষী (নিউক্লিয়াস নেই) বনাম সুকোষী (নিউক্লিয়াস + অঙ্গাণু)।"
+      },
+      "dna": {
+        en: "DNA (deoxyribonucleic acid): double helix. Watson & Crick (1953), aided by Franklin's X-ray data. Bases: A-T (2 H-bonds), G-C (3 H-bonds). Each strand is antiparallel (5'→3'). DNA → transcription → mRNA → translation (ribosomes) → protein. 3 nucleotides (codon) = 1 amino acid. Genetic code is universal.",
+        bn: "DNA: দ্বিসূত্রক সর্পিল। ওয়াটসন ও ক্রিক (১৯৫৩)। ক্ষার: A-T (২ H-বন্ধন), G-C (৩ H-বন্ধন)। DNA → লিখান্তর → mRNA → অনুবাদ (রাইবোসোম) → প্রোটিন। ৩ নিউক্লিওটাইড (কোডন) = ১ অ্যামিনো অ্যাসিড।"
+      },
+      "evolution": {
+        en: "Natural selection (Darwin, 1859): variation exists, it's heritable, more offspring than survive, favourable traits increase → allele frequency changes over generations. Evidence: fossils, homologous structures, DNA similarity (humans 98.7% with chimps, 60% with bananas). Speciation = reproductive isolation.",
+        bn: "প্রাকৃতিক নির্বাচন (ডারউইন, ১৮৫৯): প্রকরণ বিদ্যমান, বংশগত, অনুকূল বৈশিষ্ট্য বেশি টিকে থাকে → প্রজন্মে অ্যালিল কম্পাঙ্ক পরিবর্তিত হয়। প্রমাণ: জীবাশ্ম, সমসংস্থ অঙ্গ, DNA সাদৃশ্য।"
+      },
+      "photosynthesis": {
+        en: "Photosynthesis: 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂. In chloroplasts. Light reactions (thylakoid): water splitting, ATP + NADPH production. Calvin cycle (stroma): CO₂ fixation into glucose using ATP + NADPH. Chlorophyll absorbs red (~680nm) and blue (~430nm) light.",
+        bn: "সালোকসংশ্লেষণ: 6CO₂ + 6H₂O + আলো → C₆H₁₂O₆ + 6O₂। ক্লোরোপ্লাস্টে। আলোক বিক্রিয়া: জল বিভাজন, ATP ও NADPH উৎপন্ন। ক্যালভিন চক্র: CO₂ গ্লুকোজে রূপান্তর।"
+      },
+      "respiration": {
+        en: "Aerobic respiration: C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ~38 ATP. Stages: 1) Glycolysis (cytoplasm, 2 ATP net) 2) Pyruvate oxidation 3) Krebs cycle (mitochondria matrix, 2 ATP) 4) Electron transport chain (inner mitochondrial membrane, ~34 ATP). Anaerobic: only 2 ATP. Lactic acid in muscles, ethanol in yeast.",
+        bn: "বায়বীয় শ্বসন: গ্লুকোজ + O₂ → CO₂ + H₂O + ~৩৮ ATP। ধাপ: গ্লাইকোলাইসিস (২ ATP) → পাইরুভেট জারণ → ক্রেবস চক্র (২ ATP) → ইলেকট্রন পরিবহন শৃঙ্খল (~৩৪ ATP)। অবায়বীয়: মাত্র ২ ATP।"
+      },
+      "genetics": {
+        en: "Mendel's Laws: 1) Segregation: alleles separate during meiosis. 2) Independent Assortment: genes on different chromosomes sort randomly. Dominant (A) masks recessive (a). Punnett square predicts ratios. Aa × Aa: 1 AA : 2 Aa : 1 aa (phenotype ratio 3:1). Incomplete dominance, codominance are exceptions.",
+        bn: "মেন্ডেলের সূত্র: ১) পৃথকীভবন: মিয়োসিসে অ্যালিল আলাদা হয়। ২) স্বাধীন বিন্যাস। প্রকট (A) প্রচ্ছন্ন (a)-কে ঢেকে রাখে। Aa × Aa: ফিনোটাইপ অনুপাত ৩:১।"
+      },
+      "mitosis": {
+        en: "Mitosis: cell division for growth/repair. Produces 2 identical daughter cells (diploid 2n). Phases: Prophase (chromosomes condense), Metaphase (line up at plate), Anaphase (chromosomes pull apart), Telophase (two nuclei form) + Cytokinesis. Meiosis: 4 haploid (n) gametes, enables sexual reproduction, introduces variation via crossing over.",
+        bn: "মাইটোসিস: বৃদ্ধি ও ক্ষতিপূরণের জন্য কোষ বিভাজন। ২টি অভিন্ন দ্বিগুণ (2n) কন্যা কোষ উৎপন্ন করে। ধাপ: প্রোফেজ, মেটাফেজ, অ্যানাফেজ, টেলোফেজ। মিয়োসিস: ৪টি অর্ধ (n) গ্যামেট।"
+      },
+      "ecosystem": {
+        en: "Ecosystem = biotic (living) + abiotic (non-living) factors. Energy flow: sun → producers (photosynthesis) → primary consumers → secondary consumers → tertiary (only ~10% energy transferred per level). Food chain vs food web. Carbon cycle, nitrogen cycle, water cycle are key biogeochemical cycles.",
+        bn: "বাস্তুতন্ত্র = জৈব (জীবন্ত) + অজৈব (নির্জীব) উপাদান। শক্তি প্রবাহ: সূর্য → উৎপাদক → প্রাথমিক ভোক্তা → দ্বিতীয় ভোক্তা (প্রতি স্তরে মাত্র ~১০% শক্তি স্থানান্তর)।"
+      },
+      "enzyme": {
+        en: "Enzymes are biological catalysts (proteins). They lower activation energy without being consumed. Active site binds substrate (lock-and-key model or induced fit). Factors affecting enzyme activity: temperature (optimum ~37°C in humans), pH (pepsin pH 2, amylase pH 7), substrate concentration, inhibitors (competitive/non-competitive).",
+        bn: "এনজাইম জৈবিক অনুঘটক (প্রোটিন)। সক্রিয়করণ শক্তি কমায়, নিজে পরিবর্তিত হয় না। সক্রিয় স্থান সাবস্ট্রেটের সাথে যুক্ত হয়। প্রভাবক: তাপমাত্রা (~৩৭°C সর্বোত্তম), pH, সাবস্ট্রেট ঘনমাত্রা।"
+      },
+      "immunity": {
+        en: "Immune system: Innate (non-specific, fast — skin, phagocytes, inflammation, fever) + Adaptive (specific, slower). B-cells produce antibodies (humoral immunity). T-cells: helper T (coordinate response), cytotoxic T (kill infected cells), memory T (long-term). Vaccines train adaptive immunity safely.",
+        bn: "প্রতিরোধ ব্যবস্থা: সহজাত (অনির্দিষ্ট — ত্বক, ফ্যাগোসাইট) + অভিযোজিত (নির্দিষ্ট)। B-কোষ অ্যান্টিবডি তৈরি করে। T-কোষ: সহায়ক, সাইটোটক্সিক, স্মৃতি। টিকা অভিযোজিত অনাক্রম্যতা প্রশিক্ষণ দেয়।"
+      }
+    }
+  }
+};
 
+// ============================================================
+//  UNIT CONVERTER DATA
+// ============================================================
+const UC = {
+  "Length / দৈর্ঘ্য": {
+    m: 1, km: 1000, cm: 0.01, mm: 0.001, nm: 1e-9, μm: 1e-6,
+    mile: 1609.344, yard: 0.9144, foot: 0.3048, inch: 0.0254,
+    "light-year": 9.461e15, au: 1.496e11, nautical_mi: 1852
+  },
+  "Mass / ভর": {
+    kg: 1, g: 0.001, mg: 1e-6, μg: 1e-9, tonne: 1000,
+    lb: 0.453592, oz: 0.0283495, grain: 6.47989e-5,
+    stone: 6.35029, "short ton": 907.185, "long ton": 1016.05, slug: 14.5939
+  },
+  "Time / সময়": {
+    s: 1, ms: 0.001, μs: 1e-6, ns: 1e-9, min: 60, hr: 3600,
+    day: 86400, week: 604800, month: 2.628e6, year: 3.156e7, decade: 3.156e8
+  },
+  "Temperature / তাপমাত্রা": { "°C": "c", "°F": "f", K: "k" },
+  "Speed / বেগ": {
+    "m/s": 1, "km/h": 1/3.6, "mph": 0.44704, knot: 0.514444,
+    "ft/s": 0.3048, "mi/min": 26.8224, "km/min": 1000/60
+  },
+  "Force / বল": {
+    N: 1, kN: 1000, MN: 1e6, dyne: 1e-5, lbf: 4.44822, kgf: 9.80665
+  },
+  "Energy / শক্তি": {
+    J: 1, kJ: 1000, MJ: 1e6, cal: 4.184, kcal: 4184,
+    kWh: 3.6e6, eV: 1.602e-19, BTU: 1055.06, erg: 1e-7
+  },
+  "Power / ক্ষমতা": {
+    W: 1, kW: 1000, MW: 1e6, hp: 745.7, BTU_h: 0.29307, "ft·lb/s": 1.35582
+  },
+  "Pressure / চাপ": {
+    Pa: 1, kPa: 1000, MPa: 1e6, bar: 1e5, atm: 101325,
+    psi: 6894.76, torr: 133.322, mmHg: 133.322, inHg: 3386.39
+  },
+  "Area / ক্ষেত্রফল": {
+    "m²": 1, "km²": 1e6, "cm²": 1e-4, "mm²": 1e-6,
+    hectare: 1e4, acre: 4046.86, "ft²": 0.0929, "in²": 6.452e-4, "mile²": 2.59e6
+  },
+  "Volume / আয়তন": {
+    "m³": 1, L: 0.001, mL: 1e-6, "cm³": 1e-6, "ft³": 0.0283168,
+    "in³": 1.638e-5, gallon_US: 0.003785, gallon_UK: 0.004546,
+    quart: 9.464e-4, pint: 4.732e-4, cup: 2.366e-4, fl_oz: 2.957e-5, tsp: 4.929e-6, tbsp: 1.479e-5
+  },
+  "Data / ডেটা": {
+    bit: 1, Byte: 8, KB: 8192, MB: 8.389e6, GB: 8.59e9,
+    TB: 8.796e12, PB: 9.007e15, Kib: 1024, Mib: 1.049e6, Gib: 1.074e9
+  },
+  "Angle / কোণ": {
+    rad: 1, deg: Math.PI/180, grad: Math.PI/200,
+    rev: 2*Math.PI, arcmin: Math.PI/10800, arcsec: Math.PI/648000
+  },
+  "Frequency / কম্পাঙ্ক": { Hz: 1, kHz: 1000, MHz: 1e6, GHz: 1e9, THz: 1e12 },
+  "Current / বিদ্যুৎ প্রবাহ": { A: 1, mA: 0.001, μA: 1e-6, kA: 1000 },
+  "Voltage / বিভব": { V: 1, mV: 0.001, kV: 1000, MV: 1e6 },
+  "Luminosity / দীপ্তি": { cd: 1, lm: 1, lx: 1 }
+};
+
+// ============================================================
+//  LANGUAGE
+// ============================================================
+let lang = 'en';
+function toggleLang(){
+  lang = lang === 'en' ? 'bn' : 'en';
+  document.querySelectorAll('.lang-en').forEach(el=>{
+    el.classList.toggle('hidden', lang!=='en');
+  });
+  document.querySelectorAll('.lang-bn').forEach(el=>{
+    el.classList.toggle('hidden', lang!=='bn');
+  });
+  document.body.classList.toggle('bangla', lang==='bn');
+  // update chatIn placeholder
+  document.getElementById('chatIn').placeholder = lang==='en' ? 'Ask physics, chem, bio...' : 'পদার্থ, রসায়ন বা জীববিজ্ঞান জিজ্ঞেস করুন...';
+}
+document.getElementById('langToggle').addEventListener('click', toggleLang);
+
+// ============================================================
+//  POPUP
+// ============================================================
+document.getElementById('biCardLink').addEventListener('click', e=>{
+  e.preventDefault();
+  document.getElementById('bioPopup').classList.remove('hidden');
+});
+function closeBioPopup(){ document.getElementById('bioPopup').classList.add('hidden'); }
+document.getElementById('bioPopup').addEventListener('click', e=>{
+  if(e.target === document.getElementById('bioPopup')) closeBioPopup();
+});
 
 // ============================================================
 //  AI BOX
@@ -795,7 +1097,62 @@ nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:transl
 // ============================================================
 //  AI BOX LOGIC - UPDATED FOR TYPEWRITER & MINIMIZED
 // ============================================================
+let aiMinimized = true; 
+let currentSubject = 'ph';
 
+// Apply default minimized state immediately on load
+document.getElementById('aiBox').classList.add('minimized');
+
+document.getElementById('aiHdrToggle').addEventListener('click', ()=>{
+  aiMinimized = !aiMinimized;
+  document.getElementById('aiBox').classList.toggle('minimized', aiMinimized);
+  document.getElementById('aiTogBtn').textContent = aiMinimized ? '▲' : '▼';
+});
+
+function setSubject(s){
+  currentSubject = s;
+  document.querySelectorAll('.subBtn').forEach(b=>b.className='subBtn');
+  const btns = document.querySelectorAll('.subBtn');
+  const map = ['ph','ch','bi','uc'];
+  map.forEach((sub,i)=>{ if(sub===s) btns[i].classList.add('active-'+s); });
+  const ucPanel = document.getElementById('ucPanel');
+  if(s==='uc'){ ucPanel.classList.add('show'); initUC(); }
+  else { ucPanel.classList.remove('show'); }
+}
+
+function appendMsg(who, text){
+  const out = document.getElementById('chatOut');
+  const cls = who==='user' ? 'msgUser' : 'msgAi';
+  const label = who==='user' ? (lang==='bn' ? 'তুমি:' : 'You:') : 'AI:';
+  
+  // Create message container
+  const msgDiv = document.createElement('div');
+  msgDiv.className = cls;
+  msgDiv.innerHTML = `<span class="msgLabel">${label} </span><span class="textContent"></span>`;
+  out.appendChild(msgDiv);
+  
+  const textSpan = msgDiv.querySelector('.textContent');
+
+  if(who === 'user') {
+    textSpan.textContent = text;
+    out.scrollTop = out.scrollHeight;
+  } else {
+    // START TYPEWRITER EFFECT
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        textSpan.textContent += text.charAt(i);
+        out.scrollTop = out.scrollHeight;
+        i++;
+        setTimeout(type, 25); // Speed: 25ms per character
+      } else {
+        // Only re-enable the button once typing is completely finished
+        document.getElementById('askBtn').disabled = false;
+      }
+    }
+    type();
+  }
+}
 
 function sendMsg(){
   const input = document.getElementById('chatIn');
@@ -817,7 +1174,175 @@ function sendMsg(){
 // ============================================================
 //  AI LOGIC — QUERY RESOLVER
 // ============================================================
+function resolveQuery(q, sub){
+  const isBn = /[\u0980-\u09FF]/.test(q);
+  const l = isBn ? 'bn' : lang;
 
+  // subject override detection
+  if(/physics|পদার্থ|motion|গতি|force|বল|velocity|বেগ|newton|নিউটন|kinematic|গতিবিদ্যা/.test(q)) sub='ph';
+  if(/chemistry|রসায়ন|periodic|পর্যায়|element|মৌল|bond|বন্ধন|acid|অম্ল|ph|electron|ইলেকট্রন/.test(q)) sub='ch';
+  if(/biology|জীববিজ্ঞান|cell|কোষ|dna|evolution|বিবর্তন|photo|photosynthesis|gene|জিন|mendel/.test(q)) sub='bi';
+
+  // unit conversion shortcut
+  const convMatch = q.match(/(\d+\.?\d*)\s*([a-zA-Z₂°/·⁻²³]+)\s+(to|থেকে|in|এ)\s+([a-zA-Z₂°/·⁻²³]+)/);
+  if(convMatch){
+    const val = parseFloat(convMatch[1]);
+    const from = convMatch[2];
+    const to = convMatch[4];
+    const result = convertText(val, from, to);
+    return result || (l==='bn' ? `রূপান্তর খুঁজে পাওয়া যায়নি: ${from} → ${to}` : `Conversion not found: ${from} → ${to}`);
+  }
+
+  // formula detection
+  const fmls = sub === 'ph' ? KB.ph.formulas : sub === 'ch' ? KB.ch.formulas : {};
+  for(const [key, val] of Object.entries(fmls)){
+    if(q.includes(key.toLowerCase())){
+      return val;
+    }
+  }
+
+  // math solver: "calculate" / "হিসাব"
+  const calcPh = solveMath(q);
+  if(calcPh) return calcPh;
+
+  // topic lookup
+  const bank = sub==='ph' ? KB.ph.topics : sub==='ch' ? KB.ch.topics : KB.bi.topics;
+  let best = null, bestScore = 0;
+  for(const [key, content] of Object.entries(bank)){
+    const keywords = key.split(' ');
+    const score = keywords.reduce((acc, kw) => acc + (q.includes(kw) ? 1 : 0), 0);
+    if(score > bestScore){ bestScore = score; best = content; }
+    // also check within the content keys
+    if(q.includes(key)) { best = content; bestScore = 999; break; }
+  }
+
+  if(best && bestScore > 0) return l==='bn' ? best.bn : best.en;
+
+  // cross-subject fallback
+  const allBanks = [KB.ph.topics, KB.ch.topics, KB.bi.topics];
+  for(const b of allBanks){
+    for(const [key, content] of Object.entries(b)){
+      if(q.includes(key)) return l==='bn' ? content.bn : content.en;
+    }
+  }
+
+  // greeting / general
+  if(/hello|হ্যালো/.test(q)){
+    return l==='bn' ? 'আমি বিজ্ঞান AI। পদার্থবিজ্ঞান, রসায়ন বা জীববিজ্ঞান সম্পর্কে যেকোনো প্রশ্ন করুন।' : 'Hello! I\'m Science AI. Ask me anything about Physics, Chemistry, or Biology!';
+  }
+  if(/what is|what are|কি|কী/.test(q)){
+    return l==='bn' ? 'আরেকটু নির্দিষ্ট করুন — কোন বিষয়ে জানতে চাইছেন? (গতি, পর্যায় সারণি, কোষ?)' : 'Could you be more specific? (motion, periodic table, cell biology, etc.)';
+  }
+  if(/define|definition|সংজ্ঞা/.test(q)){
+    return l==='bn' ? 'কীসের সংজ্ঞা চাই? বিষয়টি উল্লেখ করুন।' : 'What definition are you looking for? Please mention the topic.';
+  }
+
+  return l==='bn' ?
+    `"${q.slice(0,30)}" সম্পর্কে নির্দিষ্ট তথ্য নেই। তবে ${sub==='ph'?'পদার্থবিজ্ঞানের গতি, নিউটনের সূত্র, শক্তি':sub==='ch'?'পর্যায় সারণি, বন্ধন, pH, গ্যাসের সূত্র':'কোষ, DNA, বিবর্তন, সালোকসংশ্লেষণ'} সম্পর্কে জিজ্ঞেস করতে পারেন।` :
+    `I don't have specific info on "${q.slice(0,30)}". Try asking about ${sub==='ph'?'kinematics, Newton\'s laws, energy, gravity':sub==='ch'?'periodic trends, bonding, pH, gas laws':'cells, DNA, evolution, photosynthesis'}.`;
+}
+
+// ============================================================
+//  MATH SOLVER
+// ============================================================
+function solveMath(q){
+  // v=u+at
+  let m;
+  m = q.match(/u\s*=\s*([\d.]+).*a\s*=\s*([\d.]+).*t\s*=\s*([\d.]+)/);
+  if(m) return `v = u + at = ${+m[1]} + ${+m[2]}×${+m[3]} = ${(+m[1] + +m[2] * +m[3]).toFixed(4)} m/s`;
+
+  // F=ma
+  m = q.match(/m(?:ass)?\s*=\s*([\d.]+).*a(?:cc)?\s*=\s*([\d.]+)/);
+  if(m) return `F = ma = ${+m[1]} × ${+m[2]} = ${(+m[1] * +m[2]).toFixed(4)} N`;
+
+  m = q.match(/f(?:orce)?\s*=\s*([\d.]+).*a(?:cc)?\s*=\s*([\d.]+)/);
+  if(m) return `m = F/a = ${+m[1]} / ${+m[2]} = ${(+m[1] / +m[2]).toFixed(4)} kg`;
+
+  // KE = ½mv²
+  m = q.match(/ke.*m\s*=\s*([\d.]+).*v\s*=\s*([\d.]+)/);
+  if(!m) m = q.match(/kinetic.*m\s*=\s*([\d.]+).*v\s*=\s*([\d.]+)/);
+  if(m) return `KE = ½mv² = ½ × ${+m[1]} × ${+m[2]}² = ${(0.5 * +m[1] * +m[2] * +m[2]).toFixed(4)} J`;
+
+  // pH = -log[H+]
+  m = q.match(/ph.*h\+?\s*[=:]\s*([\d.e\-]+)/i);
+  if(m) return `pH = -log(${+m[1]}) = ${(-Math.log10(+m[1])).toFixed(4)}`;
+
+  // PV=nRT
+  m = q.match(/p\s*=\s*([\d.]+).*v\s*=\s*([\d.]+).*t\s*=\s*([\d.]+)/i);
+  if(q.includes('mol') && m) return `n = PV/RT = (${+m[1]} × ${+m[2]}) / (8.314 × ${+m[3]}) = ${((+m[1] * +m[2])/(8.314 * +m[3])).toFixed(4)} mol`;
+
+  return null;
+}
+
+// ============================================================
+//  UNIT CONVERTER UI
+// ============================================================
+let ucCurrentCat = Object.keys(UC)[0];
+
+function initUC(){
+  const catRow = document.getElementById('ucCatRow');
+  catRow.innerHTML = '';
+  Object.keys(UC).forEach(cat=>{
+    const btn = document.createElement('button');
+    btn.className = 'ucCatBtn' + (cat===ucCurrentCat ? ' active' : '');
+    btn.textContent = cat;
+    btn.onclick = ()=>{ ucCurrentCat = cat; initUC(); };
+    catRow.appendChild(btn);
+  });
+  populateSelects(ucCurrentCat);
+  convertUnit();
+}
+
+function populateSelects(cat){
+  const units = Object.keys(UC[cat]);
+  const from = document.getElementById('ucFrom');
+  const to = document.getElementById('ucTo');
+  from.innerHTML = to.innerHTML = '';
+  units.forEach(u=>{
+    from.add(new Option(u,u));
+    to.add(new Option(u,u));
+  });
+  if(units.length > 1) to.selectedIndex = 1;
+}
+
+function convertUnit(){
+  const val = parseFloat(document.getElementById('ucVal').value);
+  const from = document.getElementById('ucFrom').value;
+  const to = document.getElementById('ucTo').value;
+  const out = document.getElementById('ucOut');
+  if(isNaN(val)){ out.textContent = 'Enter a value'; return; }
+  const result = convertText(val, from, to);
+  out.textContent = result || 'N/A';
+}
+
+function convertText(val, fromU, toU){
+  for(const [cat, units] of Object.entries(UC)){
+    const keys = Object.keys(units);
+    const fromKey = keys.find(k=>k.toLowerCase()===fromU.toLowerCase());
+    const toKey = keys.find(k=>k.toLowerCase()===toU.toLowerCase());
+    if(!fromKey || !toKey) continue;
+
+    // Temperature special case
+    if(cat.includes('Temperature')){
+      const c = units[fromKey], t = units[toKey];
+      let celsius;
+      if(c==='c') celsius=val;
+      else if(c==='f') celsius=(val-32)*5/9;
+      else celsius=val-273.15;
+      let result;
+      if(t==='c') result=celsius;
+      else if(t==='f') result=celsius*9/5+32;
+      else result=celsius+273.15;
+      return `${val} ${fromKey} = ${result.toFixed(4)} ${toKey}`;
+    }
+
+    const base = val * units[fromKey];
+    const result = base / units[toKey];
+    const fmt = result > 1e6 || (result < 1e-4 && result !== 0) ? result.toExponential(4) : result.toPrecision(6);
+    return `${val} ${fromKey} = ${fmt} ${toKey}`;
+  }
+  return null;
+}
 
 // ============================================================
 //  PARTICLES (background)
