@@ -452,7 +452,7 @@ nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:transl
 </a>
 
 <!-- BIOLOGY -->
-<a href="https://stounchvicinity65.github.io/biology/" class="sCard biCard" id="biCardLink">
+<a href="#" class="sCard biCard" id="biCardLink">
   <div class="bioWing"><div class="wingSlash"></div><div class="wingSlash wingSlash2"></div></div>
   <div class="featherWrap" id="featherWrap"></div>
   <div class="cellRings">
@@ -478,8 +478,17 @@ nav a:hover{background:var(--blue-d);color:#fff;font-weight:700;transform:transl
 </div>
 
 <!-- BIOLOGY POPUP -->
+<div class="popup-overlay hidden" id="bioPopup">
+  <div class="popup-box">
+    <span class="emoji">🚧</span>
+    <h3><span class="lang-en">Sorry, not available yet!</span><span class="lang-bn hidden">দুঃখিত, এখনও উপলব্ধ নয়!</span></h3>
+    <p>
+      <span class="lang-en">The Biology interactive lab is still under construction. Check back soon — it's going to be amazing! Meanwhile, you can ask our AI assistant or browse the Biology theory below.</span>
+      <span class="lang-bn hidden">জীববিজ্ঞান ইন্টারেক্টিভ ল্যাব নির্মাণাধীন। শীঘ্রই আসছে! এর মধ্যে আমাদের AI সহকারী ব্যবহার করুন অথবা নিচের তত্ত্ব দেখুন।</span>
+    </p>
+    <button class="popup-close" onclick="closeBioPopup()"><span class="lang-en">Got it!</span><span class="lang-bn hidden">বুঝেছি!</span></button>
+  </div>
 </div>
-
 
 <!-- ===== THEORY SECTIONS ===== -->
 <div id="theory">
