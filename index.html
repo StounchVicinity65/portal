@@ -8,8 +8,8 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <style>
 :root{
-  --bg:#020509;
-  --panel:#05090f;
+  --bg:#010306;
+  --panel:#03060b;
   --blue:#90cdf4;--blue-d:#4a90e2;
   --pink:#f472b6;--pink-d:#ec4899;
   --green:#4ade80;--green-d:#22c55e;
@@ -31,8 +31,11 @@ body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
   background:rgba(2,4,8,.92);backdrop-filter:blur(16px);
   border-right:1px solid rgba(144,205,244,.14);
   z-index:300;display:flex;flex-direction:column;padding:1.4rem 1.1rem;
+  overflow:hidden;
 }
-.sbLogo{display:flex;align-items:center;gap:.55rem;margin-bottom:2.1rem;}
+.sbNav{flex:1 1 auto;overflow-y:auto;padding-right:.2rem;}
+.sbBottom{flex-shrink:0;margin-top:.8rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.06);}
+.sbLogo{display:flex;align-items:center;gap:.55rem;margin-bottom:2.1rem;flex-shrink:0;}
 .sbLogo .ic{font-size:1.5rem;filter:drop-shadow(0 0 8px var(--blue-d));animation:logoPulse 1.8s ease-in-out infinite;}
 @keyframes logoPulse{0%,100%{transform:scale(1) rotate(0);}50%{transform:scale(1.15) rotate(8deg);}}
 .sbLogo .tx{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.06em;color:#fff;}
@@ -43,7 +46,6 @@ body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
 .sbLink.active{background:rgba(74,144,226,.14);color:var(--blue);border-left-color:var(--blue-d);}
 .sbLink.pink:hover{background:rgba(236,72,153,.1);color:var(--pink);}
 .sbLink.green:hover{background:rgba(34,197,94,.1);color:var(--green);}
-.sbSpace{flex-grow:1;}
 .langBtn{background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(144,205,244,.3);padding:.5rem .7rem;border-radius:8px;font-size:.74rem;font-weight:700;cursor:pointer;transition:all .18s;font-family:inherit;width:100%;margin-bottom:.9rem;}
 .langBtn:hover{background:var(--blue-d);border-color:transparent;}
 .sbQR{text-align:center;margin-top:.3rem;}
@@ -57,10 +59,11 @@ body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
 #hero{padding:3.6rem 3.2rem 3rem;position:relative;overflow:hidden;}
 .heroTag{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);background:rgba(74,144,226,.1);border:1px solid rgba(144,205,244,.28);padding:.35rem .85rem;border-radius:20px;margin-bottom:1.3rem;animation:tagIn .5s ease both;}
 @keyframes tagIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
-.heroTitle{font-family:'Bebas Neue',sans-serif;font-size:5.6rem;line-height:.92;letter-spacing:.02em;margin-bottom:1.2rem;animation:heroIn .6s .1s ease both;}
+.heroTitle{font-family:'Bebas Neue',sans-serif;font-size:4.4rem;line-height:1.12;letter-spacing:.02em;margin-bottom:1.2rem;animation:heroIn .6s .1s ease both;max-width:780px;}
 .heroTitle .g1{color:var(--blue);text-shadow:0 0 40px rgba(144,205,244,.35);}
 .heroTitle .g2{color:var(--pink);text-shadow:0 0 40px rgba(244,114,182,.35);}
 .heroTitle .g3{color:var(--green);text-shadow:0 0 40px rgba(74,222,128,.32);}
+body.bangla .heroTitle{font-family:'Noto Serif Bengali',sans-serif;font-size:2.5rem;line-height:1.55;font-weight:700;letter-spacing:0;}
 @keyframes heroIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 .heroSub{max-width:640px;font-size:1rem;line-height:1.7;opacity:.68;margin-bottom:1.9rem;animation:heroIn .6s .2s ease both;}
 .heroBtns{display:flex;gap:.85rem;flex-wrap:wrap;animation:heroIn .6s .3s ease both;}
@@ -84,14 +87,15 @@ body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
 .subCard:nth-child(3){animation-delay:.25s;}
 @keyframes cardUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 .subCard:hover{transform:translateY(-6px) scale(1.012);}
-.phCard{background:linear-gradient(160deg,#020a16 0%,#04101f 60%,#020814 100%);}
-.phCard:hover{box-shadow:0 22px 50px rgba(0,0,0,.6),0 0 40px rgba(144,205,244,.14);border-color:rgba(144,205,244,.3);}
-.chCard{background:linear-gradient(160deg,#060004 0%,#0a0009 60%,#050003 100%);}
-.chCard:hover{box-shadow:0 22px 50px rgba(0,0,0,.6),0 0 40px rgba(244,114,182,.14);border-color:rgba(244,114,182,.3);}
-.biCard{background:linear-gradient(160deg,#010702 0%,#021206 60%,#010601 100%);}
-.biCard:hover{box-shadow:0 22px 50px rgba(0,0,0,.6),0 0 40px rgba(74,222,128,.14);border-color:rgba(74,222,128,.3);}
+.phCard{background:linear-gradient(160deg,#010509 0%,#020a13 60%,#01060d 100%);}
+.phCard:hover{box-shadow:0 22px 50px rgba(0,0,0,.7),0 0 40px rgba(144,205,244,.14);border-color:rgba(144,205,244,.3);}
+.chCard{background:linear-gradient(160deg,#030001 0%,#050002 60%,#020001 100%);}
+.chCard:hover{box-shadow:0 22px 50px rgba(0,0,0,.7),0 0 40px rgba(244,114,182,.14);border-color:rgba(244,114,182,.3);}
+.biCard{background:linear-gradient(160deg,#000401 0%,#010902 60%,#000401 100%);}
+.biCard:hover{box-shadow:0 22px 50px rgba(0,0,0,.7),0 0 40px rgba(74,222,128,.14);border-color:rgba(74,222,128,.3);}
 
 .cIconRow{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem;}
+.cIconRow,.cTitle,.cDesc,.cFml,.cOpen{position:relative;z-index:2;}
 .cIcon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;position:relative;}
 .phCard .cIcon{background:rgba(74,144,226,.15);}
 .chCard .cIcon{background:rgba(236,72,153,.15);}
@@ -116,19 +120,32 @@ body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
 .miniAnim{position:absolute;top:0;right:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:0;}
 .phCard .miniAnim .spark{position:absolute;height:1px;background:linear-gradient(to right,transparent,rgba(144,205,244,.55),transparent);animation:sparkRush linear infinite;}
 @keyframes sparkRush{0%{left:-50%;width:30%;opacity:0;}10%{opacity:1;}85%{opacity:.3;}100%{left:120%;width:45%;opacity:0;}}
-.chCard .miniAnim .orbit{position:absolute;border-radius:50%;border:1px solid rgba(244,114,182,.28);top:18%;right:12%;animation:orbitSpin linear infinite;}
-@keyframes orbitSpin{to{transform:rotate(360deg);}}
-.chCard .miniAnim .nuc{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink);top:calc(18% + 38px);right:calc(12% + 38px);animation:nucGlow 1.4s ease-in-out infinite;}
-@keyframes nucGlow{0%,100%{opacity:.6;}50%{opacity:1;}}
-.biCard .miniAnim .ring{position:absolute;border-radius:50%;border:1px solid rgba(74,222,128,.32);top:14%;right:10%;animation:ringGrow 2.2s ease-out infinite;}
+.chAtom{position:absolute;top:-26px;right:-26px;width:170px;height:170px;pointer-events:none;z-index:0;}
+.chAtom .nucleus{position:absolute;top:50%;left:50%;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle,#f9a8d4,var(--pink-d));box-shadow:0 0 14px var(--pink-d),0 0 26px rgba(236,72,153,.5);transform:translate(-50%,-50%);animation:nucPulse 1.3s ease-in-out infinite;}
+@keyframes nucPulse{0%,100%{box-shadow:0 0 12px var(--pink-d),0 0 22px rgba(236,72,153,.4);transform:translate(-50%,-50%) scale(1);}50%{box-shadow:0 0 20px var(--pink),0 0 40px rgba(244,114,182,.6);transform:translate(-50%,-50%) scale(1.22);}}
+.chAtom .orb{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid;}
+.chAtom .orb1{width:60px;height:60px;border-color:rgba(244,114,182,.55);animation:orbSpin1 1.6s linear infinite;transform:translate(-50%,-50%);}
+.chAtom .orb2{width:102px;height:102px;border-color:rgba(236,72,153,.3);animation:orbSpin2 2.5s linear infinite;transform:translate(-50%,-50%) rotateX(60deg);}
+.chAtom .orb3{width:142px;height:142px;border-color:rgba(249,168,212,.16);animation:orbSpin3 3.6s linear infinite;transform:translate(-50%,-50%) rotateX(35deg) rotateY(50deg);}
+@keyframes orbSpin1{to{transform:translate(-50%,-50%) rotate(360deg);}}
+@keyframes orbSpin2{to{transform:translate(-50%,-50%) rotateX(60deg) rotateZ(360deg);}}
+@keyframes orbSpin3{to{transform:translate(-50%,-50%) rotateX(35deg) rotateY(50deg) rotateZ(360deg);}}
+.chAtom .elec{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px var(--pink),0 0 12px rgba(244,114,182,.5);}
+.chAtom .e1{top:-2px;left:50%;transform:translateX(-50%);}
+.chAtom .e2{top:50%;right:-2px;transform:translateY(-50%);}
+.chAtom .e3{bottom:-2px;left:24%;}
+
+/* Biology mini DNA helix */
+#biDna{position:absolute;top:4px;right:16px;pointer-events:none;opacity:.55;z-index:0;}
+.biCard .miniAnim .ring{position:absolute;border-radius:50%;border:1px solid rgba(74,222,128,.32);top:14%;right:10%;animation:ringGrow 1.9s ease-out infinite;}
 @keyframes ringGrow{0%{width:10px;height:10px;opacity:.9;}100%{width:90px;height:90px;opacity:0;}}
 
 /* ============ THEORY ============ */
 #theory-wrap{position:relative;z-index:1;}
 .tSec{padding:3.2rem 3.2rem;border-top:1px solid rgba(255,255,255,.06);scroll-margin-top:1rem;}
-.tPh{background:linear-gradient(180deg,#03080f,#040a12);}
-.tCh{background:linear-gradient(180deg,#050003,#060004);}
-.tBi{background:linear-gradient(180deg,#010602,#020803);}
+.tPh{background:linear-gradient(180deg,#010408,#02060b);}
+.tCh{background:linear-gradient(180deg,#030001,#040002);}
+.tBi{background:linear-gradient(180deg,#000301,#010502);}
 .tHdr{display:flex;align-items:flex-start;gap:1rem;margin-bottom:2.1rem;}
 .tHdrIcon{font-size:1.9rem;flex-shrink:0;margin-top:.18rem;}
 .tHdrTitle{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.04em;line-height:1;}
@@ -187,24 +204,26 @@ body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
 <div id="sidebar">
   <div class="sbLogo"><span class="ic">⚛</span><span class="tx">Science Portal</span></div>
 
-  <div class="sbSec">Navigate</div>
-  <a href="#hero" class="sbLink active"><span class="em">🏠</span><span class="lang-en">Home</span><span class="lang-bn hidden">হোম</span></a>
-  <a href="#subjects" class="sbLink"><span class="em">🧭</span><span class="lang-en">Subjects</span><span class="lang-bn hidden">বিষয়সমূহ</span></a>
+  <div class="sbNav">
+    <div class="sbSec">Navigate</div>
+    <a href="#hero" class="sbLink active"><span class="em">🏠</span><span class="lang-en">Home</span><span class="lang-bn hidden">হোম</span></a>
+    <a href="#subjects" class="sbLink"><span class="em">🧭</span><span class="lang-en">Subjects</span><span class="lang-bn hidden">বিষয়সমূহ</span></a>
 
-  <div class="sbSec">Theory</div>
-  <a href="#theory-physics" class="sbLink"><span class="em">⚛️</span><span class="lang-en">Physics</span><span class="lang-bn hidden">পদার্থবিজ্ঞান</span></a>
-  <a href="#theory-chemistry" class="sbLink pink"><span class="em">🧪</span><span class="lang-en">Chemistry</span><span class="lang-bn hidden">রসায়ন</span></a>
-  <a href="#theory-biology" class="sbLink green"><span class="em">🧬</span><span class="lang-en">Biology</span><span class="lang-bn hidden">জীববিজ্ঞান</span></a>
+    <div class="sbSec">Theory</div>
+    <a href="#theory-physics" class="sbLink"><span class="em">⚛️</span><span class="lang-en">Physics</span><span class="lang-bn hidden">পদার্থবিজ্ঞান</span></a>
+    <a href="#theory-chemistry" class="sbLink pink"><span class="em">🧪</span><span class="lang-en">Chemistry</span><span class="lang-bn hidden">রসায়ন</span></a>
+    <a href="#theory-biology" class="sbLink green"><span class="em">🧬</span><span class="lang-en">Biology</span><span class="lang-bn hidden">জীববিজ্ঞান</span></a>
 
-  <div class="sbSec">Info</div>
-  <a href="#qr" class="sbLink"><span class="em">▦</span>QR</a>
-  <a href="https://stounchvicinity65.github.io/portal/about.html" class="sbLink"><span class="em">ℹ</span><span class="lang-en">About Us</span><span class="lang-bn hidden">পরিচয়</span></a>
+    <div class="sbSec">Info</div>
+    <a href="https://stounchvicinity65.github.io/portal/about.html" class="sbLink"><span class="em">ℹ</span><span class="lang-en">About Us</span><span class="lang-bn hidden">পরিচয়</span></a>
+  </div>
 
-  <div class="sbSpace"></div>
-  <button class="langBtn" id="langToggle">বাংলা / EN</button>
-  <div class="sbQR" id="qr">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://stounchvicinity65.github.io/portal/" alt="QR Code">
-    <p><span class="lang-en">Scan to open</span><span class="lang-bn hidden">স্ক্যান করুন</span></p>
+  <div class="sbBottom">
+    <button class="langBtn" id="langToggle">বাংলা / EN</button>
+    <div class="sbQR" id="qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://stounchvicinity65.github.io/portal/" alt="QR Code">
+      <p><span class="lang-en">Scan to open</span><span class="lang-bn hidden">স্ক্যান করুন</span></p>
+    </div>
   </div>
 </div>
 
@@ -216,12 +235,12 @@ body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
     <div class="heroDots" id="heroDots"></div>
     <div class="heroTag">⚡ <span class="lang-en">Physics · Chemistry · Biology</span><span class="lang-bn hidden">পদার্থ · রসায়ন · জীববিজ্ঞান</span></div>
     <h1 class="heroTitle">
-      <span class="lang-en"><span class="g1">Explore</span> Science,<br><span class="g2">One Reaction,</span> <span class="g3">One Law</span><br>at a Time.</span>
-      <span class="lang-bn hidden"><span class="g1">বিজ্ঞান</span> অন্বেষণ করো,<br><span class="g2">একটি বিক্রিয়া,</span> <span class="g3">একটি সূত্র</span><br>প্রতিবার।</span>
+      <span class="lang-en">Your Journey Into <span class="g1">Science</span> Starts Here!</span>
+      <span class="lang-bn hidden">বিজ্ঞানের দুনিয়ায় আপনার যাত্রার সূচনা এখানেই!</span>
     </h1>
     <p class="heroSub">
-      <span class="lang-en">An interactive portal spanning three sciences — motion and gravity, atoms and reactions, cells and evolution. Dive into live labs and deep theory notes, in English or বাংলা.</span>
-      <span class="lang-bn hidden">তিনটি বিজ্ঞান নিয়ে একটি ইন্টারেক্টিভ পোর্টাল — গতি ও মহাকর্ষ, পরমাণু ও বিক্রিয়া, কোষ ও বিবর্তন। ইংরেজি বা বাংলায় লাইভ ল্যাব ও গভীর তত্ত্ব অন্বেষণ করো।</span>
+      <span class="lang-en">Discover the wonder of motion, atoms, and life itself. Try interactive experiments and read clear, simple notes in English or বাংলা.</span>
+      <span class="lang-bn hidden">গতিবিদ্যা, পরমাণু এবং জীবনের গল্প আবিষ্কার করুন এক সাথেই। ইন্টারেক্টিভ ল্যাবে নিজে চেষ্টা করুন আর শিখুন বাংলা বা ইংরেজি ভাষায়।</span>
     </p>
     <div class="heroBtns">
       <a href="#subjects" class="btnPrime"><span class="lang-en">Choose a Subject</span><span class="lang-bn hidden">বিষয় বেছে নিন</span> →</a>
@@ -249,7 +268,12 @@ body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
 
       <!-- CHEMISTRY -->
       <a href="https://antidominator.github.io/fair-project/" class="subCard chCard">
-        <div class="miniAnim" id="chMini"><div class="orbit" style="width:70px;height:70px;"></div><div class="nuc"></div></div>
+        <div class="miniAnim chAtom" id="chMini">
+          <div class="nucleus"></div>
+          <div class="orb orb1"><div class="elec e1"></div></div>
+          <div class="orb orb2"><div class="elec e2"></div></div>
+          <div class="orb orb3"><div class="elec e3"></div></div>
+        </div>
         <div class="cIconRow">
           <div class="cIcon">🧪</div>
           <span class="cNumTag" style="color:var(--pink);"><span class="lang-en">LAB 02</span><span class="lang-bn hidden">ল্যাব ০২</span></span>
@@ -262,7 +286,7 @@ body.bangla{font-family:'Noto Serif Bengali',sans-serif;}
 
       <!-- BIOLOGY -->
       <a href="https://stounchvicinity65.github.io/biology/" class="subCard biCard">
-        <div class="miniAnim" id="biMini"></div>
+        <div class="miniAnim" id="biMini"><canvas id="biDna" width="46"></canvas></div>
         <div class="cIconRow">
           <div class="cIcon">🧬</div>
           <span class="cNumTag" style="color:var(--green);"><span class="lang-en">LAB 03</span><span class="lang-bn hidden">ল্যাব ০৩</span></span>
@@ -670,35 +694,48 @@ document.getElementById('langToggle').addEventListener('click', toggleLang);
 })();
 
 // ============================================================
-//  CHEMISTRY CARD — orbit ring (extra rings)
+//  BIOLOGY CARD — DNA helix canvas + pulse rings
 // ============================================================
 (function(){
-  const anim = document.getElementById('chMini');
-  const sizes=[100,130];
-  sizes.forEach((s,i)=>{
-    const o=document.createElement('div');
-    o.className='orbit';
-    o.style.width=s+'px'; o.style.height=s+'px';
-    o.style.top='18%'; o.style.right='12%';
-    o.style.animationDuration=(1.4+i*.8)+'s';
-    o.style.opacity=.5-(i*.15);
-    anim.appendChild(o);
-  });
+  const c = document.getElementById('biDna');
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, rows = 22, H = rows * 8;
+  c.height = H;
+  let t = 0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<rows;i++){
+      const y = i*8+4;
+      const x1 = W/2 + Math.sin(i*0.42+t)*13;
+      const x2 = W/2 - Math.sin(i*0.42+t)*13;
+      ctx.beginPath();
+      ctx.moveTo(x1,y); ctx.lineTo(x2,y);
+      ctx.strokeStyle=`rgba(74,222,128,${0.18+Math.abs(Math.sin(i*0.42+t))*0.4})`;
+      ctx.lineWidth=1;
+      ctx.stroke();
+      ctx.beginPath(); ctx.arc(x1,y,1.8,0,Math.PI*2);
+      ctx.fillStyle='rgba(74,222,128,0.7)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(x2,y,1.8,0,Math.PI*2);
+      ctx.fillStyle='rgba(74,222,128,0.7)'; ctx.fill();
+    }
+    t+=0.065;
+    requestAnimationFrame(draw);
+  }
+  draw();
 })();
 
-// ============================================================
-//  BIOLOGY CARD — pulse rings
-// ============================================================
 (function(){
   const anim = document.getElementById('biMini');
   for(let i=0;i<3;i++){
     const r=document.createElement('div');
     r.className='ring';
-    r.style.animationDelay=(i*.7)+'s';
-    r.style.animationDuration='1.8s';
+    r.style.animationDelay=(i*.6)+'s';
+    r.style.animationDuration='1.9s';
     anim.appendChild(r);
   }
 })();
 </script>
 </body>
+
 </html>
